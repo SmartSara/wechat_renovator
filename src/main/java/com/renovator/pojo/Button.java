@@ -9,6 +9,7 @@ package com.renovator.pojo;
  */
 public class Button {
     public static final String TYPE_CLICK = "click";
+    public static final String TYPE_VIEW = "view";
     private String name;
 
     public String getName() {

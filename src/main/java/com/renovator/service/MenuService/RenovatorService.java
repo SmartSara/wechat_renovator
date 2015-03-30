@@ -91,30 +91,36 @@ public class RenovatorService {
                     // 事件KEY值，与创建自定义菜单时指定的KEY值对应
                     String eventKey = requestMap.get("EventKey");
 
-                    if (eventKey.equals("11")) {
-                        respContent = "天气预报菜单项被点击！";
-                    } else if (eventKey.equals("12")) {
-                        respContent = "公交查询菜单项被点击！";
-                    } else if (eventKey.equals("13")) {
-                        respContent = "周边搜索菜单项被点击！";
-                    } else if (eventKey.equals("14")) {
-                        respContent = "历史上的今天菜单项被点击！";
-                    } else if (eventKey.equals("21")) {
-                        respContent = "歌曲点播菜单项被点击！";
-                    } else if (eventKey.equals("22")) {
-                        respContent = "经典游戏菜单项被点击！";
-                    } else if (eventKey.equals("23")) {
-                        respContent = "美女电台菜单项被点击！";
-                    } else if (eventKey.equals("24")) {
-                        respContent = "人脸识别菜单项被点击！";
-                    } else if (eventKey.equals("25")) {
-                        respContent = "聊天唠嗑菜单项被点击！";
-                    } else if (eventKey.equals("31")) {
-                        respContent = "Q友圈菜单项被点击！";
-                    } else if (eventKey.equals("32")) {
-                        respContent = "电影排行榜菜单项被点击！";
-                    } else if (eventKey.equals("33")) {
-                        respContent = "幽默笑话菜单项被点击！";
+                    if (eventKey.equals(PropertyHolder.MENU_MEMBERSHIP_BALANCE)) {
+                        respContent = PropertyHolder.MENU_MEMBERSHIP_BALANCE;
+                    } else if (eventKey.equals(PropertyHolder.MENU_MEMBERSHIP_EXPENSE)) {
+                        respContent = PropertyHolder.MENU_MEMBERSHIP_EXPENSE;
+                    } else if (eventKey.equals(PropertyHolder.MENU_MEMBERSHIP_BIRTH_NOTIFICATION)) {
+                        respContent = PropertyHolder.MENU_MEMBERSHIP_BIRTH_NOTIFICATION;
+                    } else if (eventKey.equals(PropertyHolder.MENU_MEMBERSHIP_CARD_EXPIRATION)) {
+                        respContent = PropertyHolder.MENU_MEMBERSHIP_CARD_EXPIRATION;
+                    } else if (eventKey.equals(PropertyHolder.MENU_MEMBERSHIP_CARD_BALANCE_NOTIFICATION)) {
+                        respContent = PropertyHolder.MENU_MEMBERSHIP_CARD_BALANCE_NOTIFICATION;
+                    } else if (eventKey.equals(PropertyHolder.MENU_CURRENT_ORDER_STATUS)) {
+                        respContent = PropertyHolder.MENU_CURRENT_ORDER_STATUS;
+                    } else if (eventKey.equals(PropertyHolder.MENU_APPOINTMENT_RECEIVE)) {
+                        respContent = PropertyHolder.MENU_APPOINTMENT_RECEIVE;
+                    } else if (eventKey.equals(PropertyHolder.MENU_APPOINTMENT_FETCH)) {
+                        respContent = PropertyHolder.MENU_APPOINTMENT_FETCH;
+                    } else if (eventKey.equals(PropertyHolder.MENU_PRODUCT_SHOWCASE)) {
+                        respContent = PropertyHolder.MENU_PRODUCT_SHOWCASE;
+                    } else if (eventKey.equals(PropertyHolder.MENU_PRODUCT_INQUIRY)) {
+                        respContent = PropertyHolder.MENU_PRODUCT_INQUIRY;
+                    } else if (eventKey.equals(PropertyHolder.MENU_SERVICE_PRICE_INQUIRY)) {
+                        respContent = PropertyHolder.MENU_SERVICE_PRICE_INQUIRY;
+                    } else if (eventKey.equals(PropertyHolder.MENU_CURRENT_SHOP_ACTIVITY)) {
+                        respContent = PropertyHolder.MENU_CURRENT_SHOP_ACTIVITY;
+                    } else if (eventKey.equals(PropertyHolder.MENU_COOPERATION)) {
+                        respContent = PropertyHolder.MENU_COOPERATION;
+                    } else if (eventKey.equals(PropertyHolder.MENU_ABOUT_US)) {
+                        respContent = PropertyHolder.MENU_ABOUT_US;
+                    } else if (eventKey.equals(PropertyHolder.MENU_MORE_INFO)) {
+                        respContent = PropertyHolder.MENU_MORE_INFO;
                     }
                 }
             }

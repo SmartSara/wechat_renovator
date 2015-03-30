@@ -5,7 +5,7 @@ package com.renovator.util;
  */
 
 import com.renovator.pojo.AccessToken;
-import com.renovator.pojo.Menu;
+import com.renovator.pojo.button.Menu;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;

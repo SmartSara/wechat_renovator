@@ -1,12 +1,12 @@
 package com.renovator.util;
 
-import com.renovator.message.req.TextMessage;
-import com.renovator.message.req.VideoMessage;
-import com.renovator.message.req.VoiceMessage;
-import com.renovator.message.resp.Article;
-import com.renovator.message.resp.ImageMessage;
-import com.renovator.message.resp.MusicMessage;
-import com.renovator.message.resp.NewsMessage;
+import com.renovator.pojo.message.req.TextMessage;
+import com.renovator.pojo.message.req.VideoMessage;
+import com.renovator.pojo.message.req.VoiceMessage;
+import com.renovator.pojo.message.resp.Article;
+import com.renovator.pojo.message.resp.ImageMessage;
+import com.renovator.pojo.message.resp.MusicMessage;
+import com.renovator.pojo.message.resp.NewsMessage;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;

@@ -1,6 +1,6 @@
 package com.renovator.controller;
 
-import com.renovator.service.TulingService.CoreService;
+import com.renovator.service.menu.RenovatorService;
 import com.renovator.util.SignUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ import java.io.PrintWriter;
 public class WechatController {
 
     @Autowired
-    private CoreService coreService;
+    private RenovatorService renovatorService;
 
     @RequestMapping(method = RequestMethod.GET)
     public void get(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -39,7 +39,6 @@ public class WechatController {
             out.print(echostr);
         }
         out.close();
-        out = null;
     }
 
 
@@ -51,10 +50,9 @@ public class WechatController {
 
         PrintWriter out = response.getWriter();
         // 请求校验
-        String respXml = coreService.processRequest(request);
+        String respXml = renovatorService.processRequest(request);
         out.print(respXml);
         out.close();
-        out = null;
 
     }
 

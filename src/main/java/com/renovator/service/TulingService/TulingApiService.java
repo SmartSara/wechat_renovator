@@ -1,4 +1,4 @@
-package com.renovator.service;
+package com.renovator.service.TulingService;
 
 /**
  * Created by darlingtld on 2015/2/19.

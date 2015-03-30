@@ -1,8 +1,8 @@
-package com.renovator.service;
+package com.renovator.service.TulingService;
 
+import com.renovator.message.req.TextMessage;
 import com.renovator.message.resp.Article;
 import com.renovator.message.resp.NewsMessage;
-import com.renovator.message.req.TextMessage;
 import com.renovator.util.MessageUtil;
 import com.renovator.util.PropertyHolder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,9 @@ import java.util.Map;
 @Service
 public class CoreService {
 
+    private final String SERVER = PropertyHolder.SERVER;
     @Autowired
     private TulingApiService tulingApiService;
-
-    private final String SERVER= PropertyHolder.SERVER;
 
     /**
      * 处理微信发来的请求
@@ -85,19 +84,19 @@ public class CoreService {
             Article article1 = new Article();
             article1.setTitle("限量版8888号“吉利美元”长这样");
             article1.setDescription("为庆祝中国春节，美国财政部造币和印钞局近期发行了羊年限量版“吉利钱”。所有“吉利钱”的编号都以“8888”开头，1美元装在横版大红卡片中，卡片上写着“福禄寿喜临门，金银财宝齐来”、“恭喜发财”……我们过个年，老外也够忙活的");
-            article1.setPicUrl(SERVER+"/images/wechat/1.jpg");
+            article1.setPicUrl(SERVER + "/images/wechat/1.jpg");
             article1.setUrl("http://news.sina.com.cn/w/2015-02-20/005931534558.shtml");
 
             Article article2 = new Article();
             article2.setTitle("东亚各国过年有哪些独特民俗？");
             article2.setDescription("庆祝农历新年并不是全球华人的“专利”。由于深受汉文化影响，一些东亚国家几千年来也有着庆祝农历新年的习俗，并根据各自传统而形成了一些独特的过年文化。来看看这些国家过年有哪些独特的民俗。");
-            article2.setPicUrl(SERVER+"/images/wechat/2.jpg");
+            article2.setPicUrl(SERVER + "/images/wechat/2.jpg");
             article2.setUrl("http://weibo.com/p/1001603812252150048798");
 
             Article article3 = new Article();
             article3.setTitle("过年N问 你最怕被问什么？");
             article3.setDescription("过年走亲访友，七大姑八大姨聚在一起，难免会被拷问，面对各种问题，你最怕听到什么？调查显示，工资多少和有对象了吗成为市民在过年最怕被问到的事情，而近四成受访者反感被问“买房买车了吗？”，超三成受访者害怕被问“每年给家里多少钱”。");
-            article3.setPicUrl(SERVER+"/images/wechat/3.jpg");
+            article3.setPicUrl(SERVER + "/images/wechat/3.jpg");
             article3.setUrl("http://news.sina.com.cn/s/2015-02-20/041531534632.shtml");
 
             articleList.add(article1);
@@ -111,7 +110,7 @@ public class CoreService {
             Article article = new Article();
             article.setTitle("灵猪影视 掀起新一轮下载热潮");
             article.setDescription("提供各类影视的下载链接，还有客户端App,非常好的东西");
-            article.setPicUrl(SERVER+"/images/wechat/4.jpg");
+            article.setPicUrl(SERVER + "/images/wechat/4.jpg");
             article.setUrl("http://lingdagames.sinaapp.com/pages/index.html");
             articleList.add(article);
             // 设置图文消息个数
@@ -153,7 +152,7 @@ public class CoreService {
             Article article = new Article();
             article.setTitle("澳大利亚旅游推荐");
             article.setDescription("澳大利亚（Australia）位于南太平洋和印度洋之间，由澳大利亚大陆和塔斯马尼亚岛等岛屿和海外领土组成。它东濒太平洋的珊瑚海和塔斯曼海，西、北、南三面临印度洋及其边缘海。是世界上唯一一个独占一个大陆的国家。");
-            article.setPicUrl(SERVER+"/images/wechat/australia.jpg");
+            article.setPicUrl(SERVER + "/images/wechat/australia.jpg");
             article.setUrl("http://lingdagames.sinaapp.com/travel1/index.html");
             articleList.add(article);
             // 设置图文消息个数

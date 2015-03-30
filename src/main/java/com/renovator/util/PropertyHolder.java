@@ -9,6 +9,14 @@ import java.util.Properties;
  */
 public class PropertyHolder {
     private static Properties prop = new Properties();
+
+    static {
+        try {
+            prop.load(PropertyHolder.class.getClassLoader().getResourceAsStream("renovator.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static final String TOKEN = prop.getProperty("wechat.token");
     public static final String APPID = prop.getProperty("wechat.app_id");
     public static final String APPSECRET = prop.getProperty("wechat.app_secret");
@@ -51,12 +59,5 @@ public class PropertyHolder {
     public static final String MENU_ABOUT_US = prop.getProperty("menu.about_us");
     public static final String MENU_MORE_INFO = prop.getProperty("menu.more_info");
 
-    static {
-        try {
-            prop.load(PropertyHolder.class.getClassLoader().getResourceAsStream("renovator.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 }

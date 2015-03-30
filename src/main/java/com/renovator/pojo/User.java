@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class User {
     @Id
     private int id;
-    @Column
+    @Column(name = "name")
     private String name;
 
     public int getId() {

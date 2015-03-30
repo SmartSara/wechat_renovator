@@ -121,13 +121,6 @@ public class MenuManager {
         mainBtn3.setName(Button.TYPE_CLICK);
         mainBtn3.setSub_button(new Button[]{btn31, btn32, btn33, btn34, btn35});
 
-        /**
-         * 每个一级菜单都有二级菜单项<br>
-         *
-         * 在某个一级菜单下没有二级菜单的情况，menu该如何定义呢？<br>
-         * 比如，第三个一级菜单项不是“更多体验”，而直接是“幽默笑话”，那么menu应该这样定义：<br>
-         * menu.setButton(new Button[] { mainBtn1, mainBtn2, btn33 });
-         */
         Menu menu = new Menu();
         menu.setButton(new Button[]{mainBtn1, mainBtn2, mainBtn3});
 

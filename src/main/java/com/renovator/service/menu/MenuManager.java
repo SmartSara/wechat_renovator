@@ -5,7 +5,7 @@ package com.renovator.service.menu;
  */
 
 
-import com.renovator.pojo.*;
+import com.renovator.pojo.AccessToken;
 import com.renovator.pojo.button.Button;
 import com.renovator.pojo.button.ClickButton;
 import com.renovator.pojo.button.ComplexButton;
@@ -15,39 +15,26 @@ import com.renovator.util.WeixinUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-/**
- * 菜单管理器类
- */
 public class MenuManager {
     private static Logger log = LoggerFactory.getLogger(MenuManager.class);
 
     public static void main(String[] args) {
-        // 第三方用户唯一凭证
         String appId = PropertyHolder.APPID;
-        // 第三方用户唯一凭证密钥
         String appSecret = PropertyHolder.APPSECRET;
 
-        // 调用接口获取access_token
         AccessToken at = WeixinUtil.getAccessToken(appId, appSecret);
 
         if (null != at) {
-            // 调用接口创建菜单
             int result = WeixinUtil.createMenu(getMenu(), at.getToken());
 
-            // 判断菜单创建结果
-            if (0 == result)
-                log.info("菜单创建成功！");
-            else
-                log.info("菜单创建失败，错误码：" + result);
+            if (0 == result) {
+                log.info("�˵������ɹ�");
+            } else {
+                log.info("�˵�����ʧ�ܣ������룺{}", result);
+            }
         }
     }
 
-    /**
-     * 组装菜单数据
-     *
-     * @return
-     */
     private static Menu getMenu() {
         ClickButton btn11 = new ClickButton();
         btn11.setName(PropertyHolder.MENU_MEMBERSHIP_BALANCE);

@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 
 /**
@@ -47,13 +49,12 @@ public class WechatController {
         // 将请求、响应的编码均设置为UTF-8（防止中文乱码）
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-
-        PrintWriter out = response.getWriter();
-        // 请求校验
+        response.setContentType("text/html;charset=UTF-8");
         String respXml = renovatorService.processRequest(request);
-        out.print(respXml);
-        out.close();
-
+        ServletOutputStream outputStream = response.getOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+        printStream.write(respXml.getBytes("utf-8"));
+        printStream.close();
     }
 
 }

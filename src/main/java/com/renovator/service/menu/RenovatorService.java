@@ -22,7 +22,7 @@ public class RenovatorService {
     public String processRequest(HttpServletRequest request) {
         String respMessage = null;
         try {
-            String respContent = "ä½ å¥½";
+            String respContent = "ÄãºÃ";
 
             Map<String, String> requestMap = MessageUtil.parseXml(request);
 
@@ -37,19 +37,19 @@ public class RenovatorService {
             textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
 
             if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {
-                respContent = "ä½ å¥½" + MessageUtil.REQ_MESSAGE_TYPE_TEXT;
+                respContent = "ÄãºÃ" + MessageUtil.REQ_MESSAGE_TYPE_TEXT;
             } else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)) {
-                respContent = "ä½ å¥½" + MessageUtil.REQ_MESSAGE_TYPE_IMAGE;
+                respContent = "ÄãºÃ" + MessageUtil.REQ_MESSAGE_TYPE_IMAGE;
             } else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LOCATION)) {
-                respContent = "ä½ å¥½" + MessageUtil.REQ_MESSAGE_TYPE_LOCATION;
+                respContent = "ÄãºÃ" + MessageUtil.REQ_MESSAGE_TYPE_LOCATION;
             } else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_LINK)) {
-                respContent = "ä½ å¥½" + MessageUtil.REQ_MESSAGE_TYPE_LINK;
+                respContent = "ÄãºÃ" + MessageUtil.REQ_MESSAGE_TYPE_LINK;
             } else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_VOICE)) {
-                respContent = "ä½ å¥½" + MessageUtil.REQ_MESSAGE_TYPE_VOICE;
+                respContent = "ÄãºÃ" + MessageUtil.REQ_MESSAGE_TYPE_VOICE;
             } else if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)) {
                 String eventType = requestMap.get("Event");
                 if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
-                    respContent = "ä½ å¥½" + MessageUtil.EVENT_TYPE_SUBSCRIBE;
+                    respContent = "ÄãºÃ" + MessageUtil.EVENT_TYPE_SUBSCRIBE;
                 } else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
                 } else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
                     String eventKey = requestMap.get("EventKey");

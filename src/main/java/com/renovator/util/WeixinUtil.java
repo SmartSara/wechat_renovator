@@ -122,7 +122,7 @@ public class WeixinUtil {
                 accessToken = null;
                 // 获取token失败
                 try {
-                    log.error("获取token失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
+                    log.error("Failed to get token. errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
                 } catch (JSONException e1) {
                     e1.printStackTrace();
                 }
@@ -153,7 +153,7 @@ public class WeixinUtil {
             try {
                 if (0 != jsonObject.getInt("errcode")) {
                     result = jsonObject.getInt("errcode");
-                    log.error("创建菜单失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
+                    log.error("Error creating menu. errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

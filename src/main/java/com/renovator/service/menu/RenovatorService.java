@@ -54,40 +54,27 @@ public class RenovatorService {
                 } else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
                     String eventKey = requestMap.get("EventKey");
 
-                    if (eventKey.equals(PropertyHolder.MENU_MEMBERSHIP_BALANCE)) {
+                    if (eventKey.equals(PropertyHolder.MENU_MEMBERSHIP_BALANCE_KEY)) {
                         respContent = PropertyHolder.MENU_MEMBERSHIP_BALANCE;
-                    } else if (eventKey.equals(PropertyHolder.MENU_MEMBERSHIP_EXPENSE)) {
+                    } else if (eventKey.equals(PropertyHolder.MENU_MEMBERSHIP_EXPENSE_KEY)) {
                         respContent = PropertyHolder.MENU_MEMBERSHIP_EXPENSE;
-                    } else if (eventKey.equals(PropertyHolder.MENU_MEMBERSHIP_BIRTH_NOTIFICATION)) {
-                        respContent = PropertyHolder.MENU_MEMBERSHIP_BIRTH_NOTIFICATION;
-                    } else if (eventKey.equals(PropertyHolder.MENU_MEMBERSHIP_CARD_EXPIRATION)) {
-                        respContent = PropertyHolder.MENU_MEMBERSHIP_CARD_EXPIRATION;
-                    } else if (eventKey.equals(PropertyHolder.MENU_MEMBERSHIP_CARD_BALANCE_NOTIFICATION)) {
-                        respContent = PropertyHolder.MENU_MEMBERSHIP_CARD_BALANCE_NOTIFICATION;
-                    } else if (eventKey.equals(PropertyHolder.MENU_CURRENT_ORDER_STATUS)) {
+                    } else if (eventKey.equals(PropertyHolder.MENU_MEMBERSHIP_NOTIFICATION_KEY)) {
+                        respContent = PropertyHolder.MENU_MEMBERSHIP_NOTIFICATION;
+                    } else if (eventKey.equals(PropertyHolder.MENU_CURRENT_ORDER_STATUS_KEY)) {
                         respContent = PropertyHolder.MENU_CURRENT_ORDER_STATUS;
-                    } else if (eventKey.equals(PropertyHolder.MENU_APPOINTMENT_RECEIVE)) {
-                        respContent = PropertyHolder.MENU_APPOINTMENT_RECEIVE;
-                    } else if (eventKey.equals(PropertyHolder.MENU_APPOINTMENT_FETCH)) {
-                        respContent = PropertyHolder.MENU_APPOINTMENT_FETCH;
-                    } else if (eventKey.equals(PropertyHolder.MENU_PRODUCT_SHOWCASE)) {
+                    } else if (eventKey.equals(PropertyHolder.MENU_APPOINTMENT_RECEIVE_FETCH_KEY)) {
+                        respContent = PropertyHolder.MENU_APPOINTMENT_RECEIVE_FETCH;
+                    } else if (eventKey.equals(PropertyHolder.MENU_PRODUCT_SHOWCASE_KEY)) {
                         respContent = PropertyHolder.MENU_PRODUCT_SHOWCASE;
-                    } else if (eventKey.equals(PropertyHolder.MENU_PRODUCT_INQUIRY)) {
+                    } else if (eventKey.equals(PropertyHolder.MENU_PRODUCT_INQUIRY_KEY)) {
                         respContent = PropertyHolder.MENU_PRODUCT_INQUIRY;
-                    } else if (eventKey.equals(PropertyHolder.MENU_SERVICE_PRICE_INQUIRY)) {
-                        respContent = PropertyHolder.MENU_SERVICE_PRICE_INQUIRY;
-                    } else if (eventKey.equals(PropertyHolder.MENU_CURRENT_SHOP_ACTIVITY)) {
+                    } else if (eventKey.equals(PropertyHolder.MENU_CURRENT_SHOP_ACTIVITY_KEY)) {
                         respContent = PropertyHolder.MENU_CURRENT_SHOP_ACTIVITY;
-                    } else if (eventKey.equals(PropertyHolder.MENU_COOPERATION)) {
-                        respContent = PropertyHolder.MENU_COOPERATION;
-                    } else if (eventKey.equals(PropertyHolder.MENU_ABOUT_US)) {
+                    } else if (eventKey.equals(PropertyHolder.MENU_ABOUT_US_KEY)) {
                         respContent = PropertyHolder.MENU_ABOUT_US;
-                    } else if (eventKey.equals(PropertyHolder.MENU_MORE_INFO)) {
-                        respContent = PropertyHolder.MENU_MORE_INFO;
                     }
                 }
             }
-
             textMessage.setContent(respContent);
             respMessage = MessageUtil.messageToXml(textMessage);
         } catch (Exception e) {

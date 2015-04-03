@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * Created by darlingtld on 2015/4/3.
@@ -21,6 +22,17 @@ public class Product {
     private double price;
     @Column(name = "discount")
     private float discount;
+
+    public Date getTs() {
+        return ts;
+    }
+
+    public void setTs(Date ts) {
+        this.ts = ts;
+    }
+
+    @Column(name = "ts")
+    private Date ts;
 
     public String getDescription() {
         return description;

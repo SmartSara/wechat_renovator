@@ -45,7 +45,7 @@ public class RenovatorTestService {
 
             String content = requestMap.get("Content").trim();
 
-            if (!msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {
+            if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_TEXT)) {
                 if (PropertyHolder.MENU_MEMBERSHIP_BALANCE_KEY.equals(content)) {
                     return doMembershipBalance(fromUserName, toUserName);
                 } else if (PropertyHolder.MENU_MEMBERSHIP_EXPENSE_KEY.equals(content)) {
@@ -65,44 +65,40 @@ public class RenovatorTestService {
                 } else if (PropertyHolder.MENU_CURRENT_SHOP_ACTIVITY_KEY.equals(content)) {
                     return doCurrentShopActivity(fromUserName, toUserName);
                 }
-            } else {
-                TextMessage textMessage = new TextMessage();
-                textMessage.setToUserName(fromUserName);
-                textMessage.setFromUserName(toUserName);
-                textMessage.setCreateTime(new Date().getTime());
-                textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
-                String respContent = String.format("请回复数字\n" +
-                                "回复%s：%s\n" +
-                                "回复%s：%s\n" +
-                                "回复%s：%s\n" +
-                                "回复%s：%s\n" +
-                                "回复%s：%s\n" +
-                                "回复%s：%s\n" +
-                                "回复%s：%s\n" +
-                                "回复%s：%s\n" +
-                                "回复%s：%s\n",
-                        PropertyHolder.MENU_MEMBERSHIP_BALANCE_KEY, PropertyHolder.MENU_MEMBERSHIP_BALANCE,
-                        PropertyHolder.MENU_MEMBERSHIP_EXPENSE_KEY, PropertyHolder.MENU_MEMBERSHIP_EXPENSE,
-                        PropertyHolder.MENU_CURRENT_ORDER_STATUS_KEY, PropertyHolder.MENU_CURRENT_ORDER_STATUS,
-                        PropertyHolder.MENU_APPOINTMENT_RECEIVE_FETCH_KEY, PropertyHolder.MENU_APPOINTMENT_RECEIVE_FETCH,
-                        PropertyHolder.MENU_MEMBERSHIP_NOTIFICATION_KEY, PropertyHolder.MENU_MEMBERSHIP_NOTIFICATION,
-                        PropertyHolder.MENU_PRODUCT_SHOWCASE_KEY, PropertyHolder.MENU_PRODUCT_SHOWCASE,
-                        PropertyHolder.MENU_PRODUCT_INQUIRY_KEY, PropertyHolder.MENU_PRODUCT_INQUIRY,
-                        PropertyHolder.MENU_ABOUT_US_KEY, PropertyHolder.MENU_ABOUT_US,
-                        PropertyHolder.MENU_CURRENT_SHOP_ACTIVITY_KEY, PropertyHolder.MENU_CURRENT_SHOP_ACTIVITY
-                );
-                textMessage.setContent(respContent);
-                return MessageUtil.messageToXml(textMessage);
             }
-
+            TextMessage textMessage = new TextMessage();
+            textMessage.setToUserName(fromUserName);
+            textMessage.setFromUserName(toUserName);
+            textMessage.setCreateTime(new Date().getTime());
+            textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
+            String respContent = String.format("请回复数字\n" +
+                            "回复%s：%s\n" +
+                            "回复%s：%s\n" +
+                            "回复%s：%s\n" +
+                            "回复%s：%s\n" +
+                            "回复%s：%s\n" +
+                            "回复%s：%s\n" +
+                            "回复%s：%s\n" +
+                            "回复%s：%s\n" +
+                            "回复%s：%s\n",
+                    PropertyHolder.MENU_MEMBERSHIP_BALANCE_KEY, PropertyHolder.MENU_MEMBERSHIP_BALANCE,
+                    PropertyHolder.MENU_MEMBERSHIP_EXPENSE_KEY, PropertyHolder.MENU_MEMBERSHIP_EXPENSE,
+                    PropertyHolder.MENU_CURRENT_ORDER_STATUS_KEY, PropertyHolder.MENU_CURRENT_ORDER_STATUS,
+                    PropertyHolder.MENU_APPOINTMENT_RECEIVE_FETCH_KEY, PropertyHolder.MENU_APPOINTMENT_RECEIVE_FETCH,
+                    PropertyHolder.MENU_MEMBERSHIP_NOTIFICATION_KEY, PropertyHolder.MENU_MEMBERSHIP_NOTIFICATION,
+                    PropertyHolder.MENU_PRODUCT_SHOWCASE_KEY, PropertyHolder.MENU_PRODUCT_SHOWCASE,
+                    PropertyHolder.MENU_PRODUCT_INQUIRY_KEY, PropertyHolder.MENU_PRODUCT_INQUIRY,
+                    PropertyHolder.MENU_ABOUT_US_KEY, PropertyHolder.MENU_ABOUT_US,
+                    PropertyHolder.MENU_CURRENT_SHOP_ACTIVITY_KEY, PropertyHolder.MENU_CURRENT_SHOP_ACTIVITY
+            );
+            textMessage.setContent(respContent);
+            return MessageUtil.messageToXml(textMessage);
 
         } catch (Exception e) {
             logger.error(e.getMessage());
             return doErrorHandler(fromUserName, toUserName);
 
         }
-
-        return null;
     }
 
     private String doAboutUs(String fromUserName, String toUserName) {
@@ -124,7 +120,7 @@ public class RenovatorTestService {
         return MessageUtil.messageToXml(newsMessage);
     }
 
-    private String doCurrentShopActivity(String fromUserName, String toUserName) {
+    private String doProductInquiry(String fromUserName, String toUserName) {
         NewsMessage newsMessage = new NewsMessage();
         newsMessage.setToUserName(fromUserName);
         newsMessage.setFromUserName(toUserName);
@@ -143,7 +139,7 @@ public class RenovatorTestService {
         return MessageUtil.messageToXml(newsMessage);
     }
 
-    private String doProductInquiry(String fromUserName, String toUserName) {
+    private String doCurrentShopActivity(String fromUserName, String toUserName) {
         NewsMessage newsMessage = new NewsMessage();
         newsMessage.setToUserName(fromUserName);
         newsMessage.setFromUserName(toUserName);

@@ -57,7 +57,7 @@
 			<td>${balance}</td>
             <td>
                 <a href="expense.html?id=${id}" class="btn btn-primary btn-md-width">查看消费记录</a>
-                <button class="update-user btn btn-warning btn-md-width" data-toggle="modal" data-target="#updateModal" data-username="${name}" data-mobile="${contact}" data-address="${address}" data-money="${balance}" data-id="${id}">修改</button>
+                <button class="update-user btn btn-warning btn-md-width" data-toggle="modal" data-target="#updateModal" data-username="${name}" data-mobile="${contact}" data-address="${address}" data-money="${balance}" data-birthday="${birthday}" data-id="${id}">修改</button>
                 <a onclick="_deleteUserById(${id})" class="btn btn-danger btn-md-width">删除</a>
             </td>
           </tr>
@@ -119,6 +119,7 @@
 <script src="../javascript/lib/bootstrap.min.js"></script>
 <script src="../javascript/lib/bootstrap-dialog.js"></script>
 <script src="../javascript/lib/pagination.js"></script>
+<script src="../javascript/lib/util.js"></script>
 <script src="../javascript/user.js"></script>
 
 </body>

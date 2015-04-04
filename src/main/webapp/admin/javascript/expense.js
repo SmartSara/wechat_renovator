@@ -4,7 +4,7 @@
 $(function () {
     var id = getURLParameter("id");
     _initialNav();
-    _initialPage();
+    _initialPage(id);
 });
 
 function _initialPage(id) {
@@ -29,11 +29,4 @@ function _initialNav() {
     $('#nav').load("nav.html", function () {
         $("#userNav").addClass("active");
     });
-}
-
-function getURLParameter(key) {
-    var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)", "i");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]);
-    return null;
 }

@@ -31,11 +31,12 @@
             <th>用户名</th>
             <th>手机号</th>
             <th>地址</th>
+            <th>生日</th>
             <th>会员卡余额</th>
             <th>操作</th>
         </tr>
         </thead>
-        <tr>
+        <!--<tr>
             <td>灵达</td>
             <td>13588888888</td>
             <td>淞沪路252号三号楼</td>
@@ -45,27 +46,21 @@
                 <button class="update-user btn btn-warning btn-md-width" data-toggle="modal" data-target="#updateModal" data-username="灵达" data-mobile="13688888888" data-address="淞沪路252号三号楼" data-money="100">修改</button>
                 <a onclick="_deleteUserById(1)" class="btn btn-danger btn-md-width">删除</a>
             </td>
-        </tr>
-        <tbody id="agentList">
-        <script id="agentTemplate" type="text/x-jquery-tmpl">
+        </tr>-->
+        <tbody id="userList">
+        <script id="userTemplate" type="text/x-jquery-tmpl">
           <tr>
             <td>${name}</td>
-            <td>${description}</td>
+            <td>${contact}</td>
+            <td>${address}</td>
+            <td>${birthday}</td>
+			<td>${balance}</td>
             <td>
-              {{if status}}
-                <span class="label label-success">ON</span>
-              {{else}}
-                <span class="label label-danger">OFF</span>
-              {{/if}}
-            </td>
-			<td>${getLocalTime(createTime)}</td>
-            <td>
-                <a href="update.html?id=${id}" role="button" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Update</a>
-                <a href="javascript:void(0)" onclick="doDel(${id})" role="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                <a href="expense.html?id=${id}" class="btn btn-primary btn-md-width">查看消费记录</a>
+                <button class="update-user btn btn-warning btn-md-width" data-toggle="modal" data-target="#updateModal" data-username="${name}" data-mobile="${contact}" data-address="${address}" data-money="${balance}">修改</button>
+                <a onclick="_deleteUserById(${id})" class="btn btn-danger btn-md-width">删除</a>
             </td>
           </tr>
-
-
         </script>
         </tbody>
     </table>

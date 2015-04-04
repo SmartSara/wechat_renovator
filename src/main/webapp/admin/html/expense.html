@@ -34,26 +34,13 @@
             <th>消费金额</th>
         </tr>
         </thead>
-        <tr>
-            <td>20150404</td>
-            <td>清洗</td>
-            <td>2015.04.04</td>
-            <td>100</td>
-        </tr>
-        <tbody id="agentList">
-        <script id="agentTemplate" type="text/x-jquery-tmpl">
+        <tbody id="expenseList">
+        <script id="expenseTemplate" type="text/x-jquery-tmpl">
           <tr>
-            <td>${name}</td>
-            <td>${description}</td>
-            <td>
-              {{if status}}
-                <span class="label label-success">ON</span>
-              {{else}}
-                <span class="label label-danger">OFF</span>
-              {{/if}}
-            </td>
-			<td>${getLocalTime(createTime)}</td>
-            <td>${getLocalTime(lastSyncTime)}</td>
+            <td>${orderId}</td>
+            <td>${type}</td>
+            <td>${ts}</td>
+			<td>${price}</td>
           </tr>
           </script>
         </tbody>
@@ -70,7 +57,7 @@
 <script src="../javascript/lib/bootstrap.min.js"></script>
 <script src="../javascript/lib/jquery.tmpl.min.js"></script>
 <script src="../javascript/lib/pagination.js"></script>
-<script src="../javascript/user.js"></script>
+<script src="../javascript/expense.js"></script>
 
 </body>
 </html>

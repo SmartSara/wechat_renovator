@@ -72,4 +72,16 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "address='" + address + '\'' +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", contact='" + contact + '\'' +
+                ", birthday=" + birthday +
+                ", balance=" + balance +
+                '}';
+    }
 }

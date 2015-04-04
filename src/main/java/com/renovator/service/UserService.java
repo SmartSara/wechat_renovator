@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -27,7 +28,22 @@ public class UserService {
     }
 
     @Transactional
-    public List<User> getUserList(){
+    public List<User> getUserList() {
         return userDao.getUserList();
+    }
+
+    @Transactional
+    public boolean addUser(User user) {
+        return userDao.addUser(user);
+    }
+
+    @Transactional
+    public boolean updateUser(User user) {
+        return userDao.updateUser(user);
+    }
+
+    @Transactional
+    public boolean deleteUser(int userId) {
+        return userDao.deleteUser(userId);
     }
 }

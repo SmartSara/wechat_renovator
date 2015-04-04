@@ -22,6 +22,8 @@ public class Product {
     private double price;
     @Column(name = "discount")
     private float discount;
+    @Column(name = "ts")
+    private Date ts;
 
     public Date getTs() {
         return ts;
@@ -31,8 +33,6 @@ public class Product {
         this.ts = ts;
     }
 
-    @Column(name = "ts")
-    private Date ts;
 
     public String getDescription() {
         return description;

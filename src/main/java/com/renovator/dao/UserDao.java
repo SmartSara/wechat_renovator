@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
  */
 @Repository
 public class UserDao {
-    private static final Logger loggger = LoggerFactory.getLogger(UserDao.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserDao.class);
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -23,7 +24,42 @@ public class UserDao {
         return (User) sessionFactory.getCurrentSession().get(User.class, id);
     }
 
-    public List<User> getUserList(){
+    public List<User> getUserList() {
         return (List<User>) sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.User");
     }
+
+    public boolean addUser(User user) {
+        try {
+            Serializable userId = sessionFactory.getCurrentSession().save(user);
+            logger.debug("Add user {} {}", userId, user.toString());
+            return true;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean updateUser(User user) {
+        try {
+            sessionFactory.getCurrentSession().update(user);
+            logger.debug("Update user {}", user.toString());
+            return true;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean deleteUser(int userId) {
+        try {
+            User user = (User) sessionFactory.getCurrentSession().get(User.class, userId);
+            sessionFactory.getCurrentSession().delete(user);
+            logger.debug("Delete user {}", user);
+            return true;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return false;
+        }
+    }
 }
+

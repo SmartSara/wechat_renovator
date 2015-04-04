@@ -32,6 +32,8 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.renovator.pojo.User</value>
+                <value>com.renovator.pojo.Service</value>
+                <value>com.renovator.pojo.Product</value>
             </list>
         </property>
         <property name="hibernateProperties">

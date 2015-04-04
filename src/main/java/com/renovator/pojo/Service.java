@@ -24,6 +24,16 @@ public class Service {
     private Date ts;
     @Column(name = "user_id")
     private int userId;
+    @Column(name = "product_id")
+    private int productId;
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
 
     public int getUserId() {
         return userId;
@@ -82,6 +92,7 @@ public class Service {
                 ", price=" + price +
                 ", ts=" + ts +
                 ", userId=" + userId +
+                ", productId=" + productId +
                 '}';
     }
 }

@@ -61,5 +61,17 @@ public class ServiceDao {
             return false;
         }
     }
+
+    public List<Service> getServiceListByUserId(int userId) {
+        try {
+            List<Service> serviceList = sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.Service where userId=" + userId).list();
+            logger.debug("Get service list of userId {}", userId);
+            logger.debug(serviceList.toString());
+            return serviceList;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+    }
 }
 

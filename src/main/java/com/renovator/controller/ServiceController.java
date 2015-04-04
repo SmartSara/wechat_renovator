@@ -26,6 +26,13 @@ public class ServiceController {
         return serviceService.getServiceList();
     }
 
+    @RequestMapping(value = "list/{user_id}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<Service> getServiceListByUserId(@PathVariable("user_id") int userId, HttpServletRequest request, HttpServletResponse response) {
+        return serviceService.getServiceListByUserId(userId);
+    }
+
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public
     @ResponseBody

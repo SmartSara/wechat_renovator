@@ -1,6 +1,7 @@
 package com.renovator.service;
 
 import com.renovator.dao.ServiceDao;
+import com.renovator.pojo.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,10 @@ public class ServiceService {
     @Transactional
     public boolean deleteService(int serviceId) {
         return serviceDao.deleteService(serviceId);
+    }
+
+    @Transactional
+    public List<Service> getServiceListByUserId(int userId) {
+        return serviceDao.getServiceListByUserId(userId);
     }
 }

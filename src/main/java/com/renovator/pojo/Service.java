@@ -22,6 +22,16 @@ public class Service {
     private double price;
     @Column(name = "ts")
     private Date ts;
+    @Column(name = "user_id")
+    private int userId;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public Date getTs() {
         return ts;
@@ -71,6 +81,7 @@ public class Service {
                 ", type='" + type + '\'' +
                 ", price=" + price +
                 ", ts=" + ts +
+                ", userId=" + userId +
                 '}';
     }
 }

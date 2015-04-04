@@ -39,15 +39,27 @@ $(document).on("click", ".update-user", function () {
     $(".modal-body #mobile").val(mobile);
     var address = $(this).data('address');
     $(".modal-body #address").val(address);
+    var birthday = $(this).data('birthday');
+    $(".modal-body #birthday").val(birthday);
     var money = $(this).data('money');
     $(".modal-body #money").val(money);
+    var userId = $(this).data('id');
+    $(".modal-body #userId").val(userId);
 });
 
 
-function updateUserById(mobile) {
+function updateUser() {
+    var user = {};
+    user.id = $("#userId");
+    user.contact = $("#mobile");
+    user.address = $("#address");
+    user.birthday = $("#birthday");
+    user.balance = $("#money");
     $.ajax({
         type: "post",
-        url: "/hermes-agent/job/cancel/" + mobile,
+        url: "/user/update",
+        contentType:"application/json",
+        data:JSON.stringify(user),
         success: function (data) {
             $("#loading").addClass("hidden");
             dialogItself.close();
@@ -70,7 +82,7 @@ function _deleteUserById(id) {
                 $("#loading").removeClass("hidden");
                 $.ajax({
                     type: "post",
-                    url: "/hermes-agent/job/cancel/" + id,
+                    url: "/user/delete?id=" + id,
                     success: function (data) {
                         $("#loading").addClass("hidden");
                         dialogItself.close();

@@ -57,7 +57,7 @@
 			<td>${balance}</td>
             <td>
                 <a href="expense.html?id=${id}" class="btn btn-primary btn-md-width">查看消费记录</a>
-                <button class="update-user btn btn-warning btn-md-width" data-toggle="modal" data-target="#updateModal" data-username="${name}" data-mobile="${contact}" data-address="${address}" data-money="${balance}">修改</button>
+                <button class="update-user btn btn-warning btn-md-width" data-toggle="modal" data-target="#updateModal" data-username="${name}" data-mobile="${contact}" data-address="${address}" data-money="${balance}" data-id="${id}">修改</button>
                 <a onclick="_deleteUserById(${id})" class="btn btn-danger btn-md-width">删除</a>
             </td>
           </tr>
@@ -91,14 +91,21 @@
                         <td><input id="address"></td>
                     </tr>
                     <tr>
+                        <td>生日：</td>
+                        <td><input id="birthday"></td>
+                    </tr>
+                    <tr>
                         <td>会员卡余额：</td>
                         <td><input id="money"></td>
+                    </tr>
+                    <tr>
+                        <input id="userId" style="display: none">
                     </tr>
                 </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="updateUserById($('#mobile'))">提交更改</button>
+                <button type="button" class="btn btn-primary" onclick="updateUser()">提交更改</button>
             </div>
         </div>
     </div>

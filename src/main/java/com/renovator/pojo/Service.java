@@ -62,4 +62,15 @@ public class Service {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "Service{" +
+                "id=" + id +
+                ", orderId=" + orderId +
+                ", type='" + type + '\'' +
+                ", price=" + price +
+                ", ts=" + ts +
+                '}';
+    }
 }

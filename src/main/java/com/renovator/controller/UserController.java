@@ -43,7 +43,7 @@ public class UserController {
         userService.updateUser(user);
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.POST, headers = "Content-Type=application/json")
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
     public void deleteUser(@RequestParam("id") int userId, HttpServletRequest request, HttpServletResponse response) {
         userService.deleteUser(userId);
     }

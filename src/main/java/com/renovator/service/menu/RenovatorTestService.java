@@ -71,16 +71,16 @@ public class RenovatorTestService {
                 textMessage.setFromUserName(toUserName);
                 textMessage.setCreateTime(new Date().getTime());
                 textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
-                String respContent = String.format("Çë»Ø¸´Êı×Ö\n" +
-                                "»Ø¸´%s£º%s\n" +
-                                "»Ø¸´%s£º%s\n" +
-                                "»Ø¸´%s£º%s\n" +
-                                "»Ø¸´%s£º%s\n" +
-                                "»Ø¸´%s£º%s\n" +
-                                "»Ø¸´%s£º%s\n" +
-                                "»Ø¸´%s£º%s\n" +
-                                "»Ø¸´%s£º%s\n" +
-                                "»Ø¸´%s£º%s\n",
+                String respContent = String.format("è¯·å›å¤æ•°å­—\n" +
+                                "å›å¤%sï¼š%s\n" +
+                                "å›å¤%sï¼š%s\n" +
+                                "å›å¤%sï¼š%s\n" +
+                                "å›å¤%sï¼š%s\n" +
+                                "å›å¤%sï¼š%s\n" +
+                                "å›å¤%sï¼š%s\n" +
+                                "å›å¤%sï¼š%s\n" +
+                                "å›å¤%sï¼š%s\n" +
+                                "å›å¤%sï¼š%s\n",
                         PropertyHolder.MENU_MEMBERSHIP_BALANCE_KEY, PropertyHolder.MENU_MEMBERSHIP_BALANCE,
                         PropertyHolder.MENU_MEMBERSHIP_EXPENSE_KEY, PropertyHolder.MENU_MEMBERSHIP_EXPENSE,
                         PropertyHolder.MENU_CURRENT_ORDER_STATUS_KEY, PropertyHolder.MENU_CURRENT_ORDER_STATUS,
@@ -114,8 +114,8 @@ public class RenovatorTestService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("¹«Ë¾¼ò½é");
-        article.setDescription("µã»÷²é¿´µêÆÌµØÖ·¡¢ÁªÏµ·½Ê½¡¢ÓªÒµÊ±¼ä");
+        article.setTitle("å…¬å¸ç®€ä»‹");
+        article.setDescription("ç‚¹å‡»æŸ¥çœ‹åº—é“ºåœ°å€ã€è”ç³»æ–¹å¼ã€è¥ä¸šæ—¶é—´");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/product_showcase/introduction.html");
         articleList.add(article);
@@ -133,8 +133,8 @@ public class RenovatorTestService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("¼ÄÂôÉÌÆ·²éÑ¯");
-        article.setDescription("µã»÷²éÑ¯¼ÄÂôÉÌÆ·");
+        article.setTitle("å¯„å–å•†å“æŸ¥è¯¢");
+        article.setDescription("ç‚¹å‡»æŸ¥è¯¢å¯„å–å•†å“");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/product_showcase/luxury.html");
         articleList.add(article);
@@ -152,8 +152,8 @@ public class RenovatorTestService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("µ±Ç°ÕıÔÚ½øĞĞµÄµêÆÌ»î¶¯");
-        article.setDescription("µã»÷²é¿´µ±Ç°ÕıÔÚ½øĞĞµÄµêÆÌ»î¶¯");
+        article.setTitle("å½“å‰æ­£åœ¨è¿›è¡Œçš„åº—é“ºæ´»åŠ¨");
+        article.setDescription("ç‚¹å‡»æŸ¥çœ‹å½“å‰æ­£åœ¨è¿›è¡Œçš„åº—é“ºæ´»åŠ¨");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/product_showcase/activity.html");
         articleList.add(article);
@@ -171,8 +171,8 @@ public class RenovatorTestService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("¼ÄÂôÉÌÆ·Õ¹Ê¾");
-        article.setDescription("µã»÷²é¿´¼ÄÂôÉÌÆ·Õ¹Ê¾");
+        article.setTitle("å¯„å–å•†å“å±•ç¤º");
+        article.setDescription("ç‚¹å‡»æŸ¥çœ‹å¯„å–å•†å“å±•ç¤º");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/product_showcase/luxury.html");
         articleList.add(article);
@@ -190,8 +190,8 @@ public class RenovatorTestService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("»áÔ±¿¨ÌáĞÑ£¨ÉúÈÕÔÂÌáĞÑ¡¢»áÔ±¿¨µ½ÆÚÌáĞÑ£©");
-        article.setDescription("µã»÷ÉèÖÃ»áÔ±¿¨ÌáĞÑ£¨ÉúÈÕÔÂÌáĞÑ¡¢»áÔ±¿¨µ½ÆÚÌáĞÑ£©");
+        article.setTitle("ä¼šå‘˜å¡æé†’ï¼ˆç”Ÿæ—¥æœˆæé†’ã€ä¼šå‘˜å¡åˆ°æœŸæé†’ï¼‰");
+        article.setDescription("ç‚¹å‡»è®¾ç½®ä¼šå‘˜å¡æé†’ï¼ˆç”Ÿæ—¥æœˆæé†’ã€ä¼šå‘˜å¡åˆ°æœŸæé†’ï¼‰");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/pages/index.html?openId=" + fromUserName);
         articleList.add(article);
@@ -209,8 +209,8 @@ public class RenovatorTestService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("Ô¤Ô¼ÉÏÃÅÊÕ»õ/ËÍ»õ");
-        article.setDescription("µã»÷Ô¤Ô¼ÉÏÃÅÊÕ»õ/ËÍ»õ");
+        article.setTitle("é¢„çº¦ä¸Šé—¨æ”¶è´§/é€è´§");
+        article.setDescription("ç‚¹å‡»é¢„çº¦ä¸Šé—¨æ”¶è´§/é€è´§");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/pages/index.html?openId=" + fromUserName);
         articleList.add(article);
@@ -228,7 +228,7 @@ public class RenovatorTestService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("·şÎñÆ÷ÕıÔÚĞİÏ¢ÖĞ£¬ÉÔºóÔÙÊÔ°É~~");
+        article.setTitle("æœåŠ¡å™¨æ­£åœ¨ä¼‘æ¯ä¸­ï¼Œç¨åå†è¯•å§~~");
         article.setDescription("OooooOoooOooOo.");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/pages/index.html");
@@ -247,8 +247,8 @@ public class RenovatorTestService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("·şÎñµ¥Ä¿Ç°×´Ì¬");
-        article.setDescription("µã»÷²é¿´ÄúµÄ·şÎñµ¥Ä¿Ç°×´Ì¬");
+        article.setTitle("æœåŠ¡å•ç›®å‰çŠ¶æ€");
+        article.setDescription("ç‚¹å‡»æŸ¥çœ‹æ‚¨çš„æœåŠ¡å•ç›®å‰çŠ¶æ€");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/pages/index.html?openId=" + fromUserName);
         articleList.add(article);
@@ -264,7 +264,7 @@ public class RenovatorTestService {
         textMessage.setFromUserName(toUserName);
         textMessage.setCreateTime(new Date().getTime());
         textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
-        String respContent = String.format("%s\n»áÔ±¿¨Óà¶î:%sÔª", user.getName(), user.getBalance());
+        String respContent = String.format("%s\nä¼šå‘˜å¡ä½™é¢:%så…ƒ", user.getName(), user.getBalance());
         textMessage.setContent(respContent);
         return MessageUtil.messageToXml(textMessage);
     }
@@ -278,8 +278,8 @@ public class RenovatorTestService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("»áÔ±¿¨Ïû·Ñ¼ÇÂ¼");
-        article.setDescription("µã»÷²é¿´ÄúµÄÏû·Ñ¼ÇÂ¼");
+        article.setTitle("ä¼šå‘˜å¡æ¶ˆè´¹è®°å½•");
+        article.setDescription("ç‚¹å‡»æŸ¥çœ‹æ‚¨çš„æ¶ˆè´¹è®°å½•");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/pages/index.html?openId=" + fromUserName);
         articleList.add(article);

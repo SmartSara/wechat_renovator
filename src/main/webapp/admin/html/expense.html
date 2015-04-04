@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Service Management For Renovator">
+    <meta name="author" content="Sara Zhu">
+    <title>消费记录信息</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pagination.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div id="nav">
+</div>
+
+<div class="container">
+    <div id="loading" class="background">
+        <div class="loading"></div>
+    </div>
+    <ol class="breadcrumb">
+        <li class="active">消费记录信息</a></li>
+    </ol>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>订单号</th>
+            <th>类型</th>
+            <th>消费时间</th>
+            <th>消费金额</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>20150404</td>
+            <td>清洗</td>
+            <td>2015.04.04</td>
+            <td>100</td>
+        </tr>
+        <tbody id="agentList">
+        <script id="agentTemplate" type="text/x-jquery-tmpl">
+          <tr>
+            <td>${name}</td>
+            <td>${description}</td>
+            <td>
+              {{if status}}
+                <span class="label label-success">ON</span>
+              {{else}}
+                <span class="label label-danger">OFF</span>
+              {{/if}}
+            </td>
+			<td>${getLocalTime(createTime)}</td>
+            <td>${getLocalTime(lastSyncTime)}</td>
+          </tr>
+          </script>
+        </tbody>
+    </table>
+    <div id="pagination" class="pagination"></div>
+
+
+</div> <!-- /container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../javascript/lib/jquery.min.js"></script>
+<script src="../javascript/lib/bootstrap.min.js"></script>
+<script src="../javascript/lib/jquery.tmpl.min.js"></script>
+<script src="../javascript/lib/pagination.js"></script>
+<script src="../javascript/user.js"></script>
+
+</body>
+</html>

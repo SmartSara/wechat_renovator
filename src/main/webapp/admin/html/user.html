@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="User Management For Renovator">
+    <meta name="author" content="Sara Zhu">
+    <title>管理用户信息</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/pagination.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div id="nav">
+</div>
+
+<div class="container">
+    <div id="loading" class="background">
+        <div class="loading"></div>
+    </div>
+    <ol class="breadcrumb">
+        <li class="active">用户信息管理</a></li>
+    </ol>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>用户名</th>
+            <th>手机号</th>
+            <th>地址</th>
+            <th>会员卡余额</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>灵达</td>
+            <td>13588888888</td>
+            <td>淞沪路252号三号楼</td>
+            <td>100</td>
+            <td>
+                <a href="expense.html?id=灵达" class="btn btn-primary btn-md-width">查看消费记录</a>
+                <button class="update-user btn btn-warning btn-md-width" data-toggle="modal" data-target="#updateModal" data-username="灵达" data-mobile="13688888888" data-address="淞沪路252号三号楼" data-money="100">修改</button>
+                <a onclick="_deleteUserById(1)" class="btn btn-danger btn-md-width">删除</a>
+            </td>
+        </tr>
+        <tbody id="agentList">
+        <script id="agentTemplate" type="text/x-jquery-tmpl">
+          <tr>
+            <td>${name}</td>
+            <td>${description}</td>
+            <td>
+              {{if status}}
+                <span class="label label-success">ON</span>
+              {{else}}
+                <span class="label label-danger">OFF</span>
+              {{/if}}
+            </td>
+			<td>${getLocalTime(createTime)}</td>
+            <td>
+                <a href="update.html?id=${id}" role="button" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Update</a>
+                <a href="javascript:void(0)" onclick="doDel(${id})" role="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+            </td>
+          </tr>
+
+
+        </script>
+        </tbody>
+    </table>
+    <div id="pagination" class="pagination"></div>
+
+</div>
+
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">更新用户信息</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <tr>
+                        <td>用户名：</td>
+                        <td><input id="username"></td>
+                    </tr>
+                    <tr>
+                        <td>手机号：</td>
+                        <td><input id="mobile"></td>
+                    </tr>
+                    <tr>
+                        <td>地址：</td>
+                        <td><input id="address"></td>
+                    </tr>
+                    <tr>
+                        <td>会员卡余额：</td>
+                        <td><input id="money"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="updateUserById($('#mobile'))">提交更改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../javascript/lib/jquery.min.js"></script>
+<script src="../javascript/lib/jquery.tmpl.min.js"></script>
+<script src="../javascript/lib/bootstrap.min.js"></script>
+<script src="../javascript/lib/bootstrap-dialog.js"></script>
+<script src="../javascript/lib/pagination.js"></script>
+<script src="../javascript/user.js"></script>
+
+</body>
+</html>

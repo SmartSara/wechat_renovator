@@ -53,11 +53,11 @@
             <td>${name}</td>
             <td>${contact}</td>
             <td>${address}</td>
-            <td>${birthday}</td>
-			<td>${balance}</td>
+            <td>${formatDate(new Date(birthday), 'yyyy-MM-dd')}</td>
+			<td>${balance} 元</td>
             <td>
                 <a href="expense.html?id=${id}" class="btn btn-primary btn-md-width">查看消费记录</a>
-                <button class="update-user btn btn-warning btn-md-width" data-toggle="modal" data-target="#updateModal" data-username="${name}" data-mobile="${contact}" data-address="${address}" data-money="${balance}" data-birthday="${birthday}" data-id="${id}">修改</button>
+                <button class="update-user btn btn-warning btn-md-width" data-toggle="modal" data-target="#updateModal" data-username="${name}" data-mobile="${contact}" data-address="${address}" data-money="${balance}" data-birthday="${birthday}" data-openid="${openId}" data-id="${id}">修改</button>
                 <a onclick="_deleteUserById(${id})" class="btn btn-danger btn-md-width">删除</a>
             </td>
           </tr>
@@ -100,6 +100,7 @@
                     </tr>
                     <tr>
                         <input id="userId" style="display: none">
+                        <input id="openId" style="display: none">
                     </tr>
                 </table>
             </div>

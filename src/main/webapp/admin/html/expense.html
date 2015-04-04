@@ -39,7 +39,7 @@
           <tr>
             <td>${orderId}</td>
             <td>${type}</td>
-            <td>${ts}</td>
+            <td>${formatDate(new Date(ts), 'yyyy-MM-dd hh:mm:ss')}</td>
 			<td>${price}</td>
           </tr>
           </script>
@@ -56,7 +56,9 @@
 <script src="../javascript/lib/jquery.min.js"></script>
 <script src="../javascript/lib/bootstrap.min.js"></script>
 <script src="../javascript/lib/jquery.tmpl.min.js"></script>
+<script src="../javascript/lib/bootstrap-dialog.js"></script>
 <script src="../javascript/lib/pagination.js"></script>
+<script src="../javascript/lib/util.js"></script>
 <script src="../javascript/expense.js"></script>
 
 </body>

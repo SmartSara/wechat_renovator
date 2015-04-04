@@ -39,22 +39,26 @@ $(document).on("click", ".update-user", function () {
     $(".modal-body #mobile").val(mobile);
     var address = $(this).data('address');
     $(".modal-body #address").val(address);
-    var birthday = formatDate($(this).data('birthday'), 'yyyy-MM-dd');
+    var birthday = formatDate(new Date($(this).data('birthday')), 'yyyy-MM-dd');
     $(".modal-body #birthday").val(birthday);
     var money = $(this).data('money');
     $(".modal-body #money").val(money);
     var userId = $(this).data('id');
     $(".modal-body #userId").val(userId);
+    var openId = $(this).data('openid');
+    $(".modal-body #openId").val(openId);
 });
 
 
 function updateUser() {
     var user = {};
-    user.id = $("#userId");
-    user.contact = $("#mobile");
-    user.address = $("#address");
-    user.birthday = $("#birthday");
-    user.balance = $("#money");
+    user.id = $("#userId").val();
+    user.name = $("#username").val();
+    user.contact = $("#mobile").val();
+    user.address = $("#address").val();
+    user.birthday = $("#birthday").val();
+    user.balance = $("#money").val();
+    user.openId = $("#openId").val();
     $.ajax({
         type: "post",
         url: "/user/update",
@@ -62,7 +66,6 @@ function updateUser() {
         data: JSON.stringify(user),
         success: function (data) {
             $("#loading").addClass("hidden");
-            dialogItself.close();
             location.reload();
         },
         error: function (data) {

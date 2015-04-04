@@ -2,6 +2,7 @@ package com.renovator.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.renovator.pojo.User;
+import com.renovator.util.PropertyHolder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,5 +49,10 @@ public class AppTests {
         System.out.println(userJson);
         mockMvc.perform(post("/user/add").content(userJson).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andDo(print());
+    }
+
+    @Test
+    public void getProperty() throws Exception {
+        System.out.println(PropertyHolder.MENU_ABOUT_US);
     }
 }

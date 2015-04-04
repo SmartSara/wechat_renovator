@@ -25,7 +25,7 @@ public class ProductDao {
     }
 
     public List<Product> getProductList() {
-        return (List<Product>) sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.Product");
+        return (List<Product>) sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.Product").list();
     }
 
     public boolean addProduct(Product product) {

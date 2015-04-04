@@ -25,7 +25,7 @@ public class UserDao {
     }
 
     public List<User> getUserList() {
-        return (List<User>) sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.User");
+        return (List<User>) sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.User").list();
     }
 
     public boolean addUser(User user) {

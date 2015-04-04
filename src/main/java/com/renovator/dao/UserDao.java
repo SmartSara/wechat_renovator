@@ -61,5 +61,15 @@ public class UserDao {
             return false;
         }
     }
+
+    public User getUserWithOpenId(String openId) {
+        User user = null;
+        try{
+            user = (User) sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.User where openId = "+openId).uniqueResult();
+        }catch (Exception e){
+            logger.error(e.getMessage());
+        }
+        return user;
+    }
 }
 

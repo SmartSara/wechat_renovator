@@ -53,7 +53,6 @@ public class RenovatorService {
                 } else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
                 } else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
                     String eventKey = requestMap.get("EventKey");
-
                     if (eventKey.equals(PropertyHolder.MENU_MEMBERSHIP_BALANCE_KEY)) {
                         respContent = PropertyHolder.MENU_MEMBERSHIP_BALANCE;
                     } else if (eventKey.equals(PropertyHolder.MENU_MEMBERSHIP_EXPENSE_KEY)) {

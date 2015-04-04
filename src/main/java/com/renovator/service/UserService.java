@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -45,5 +44,10 @@ public class UserService {
     @Transactional
     public boolean deleteUser(int userId) {
         return userDao.deleteUser(userId);
+    }
+
+    @Transactional
+    public User getUserWithOpenId(String openId) {
+        return userDao.getUserWithOpenId(openId);
     }
 }

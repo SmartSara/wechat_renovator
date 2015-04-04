@@ -24,6 +24,16 @@ public class User {
     private Date birthday;
     @Column(name = "balance")
     private double balance;
+    @Column(name="open_id")
+    private String openId;
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
 
     public String getAddress() {
         return address;
@@ -82,6 +92,7 @@ public class User {
                 ", address='" + address + '\'' +
                 ", birthday=" + birthday +
                 ", balance=" + balance +
+                ", openId='" + openId + '\'' +
                 '}';
     }
 }

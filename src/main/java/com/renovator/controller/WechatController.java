@@ -1,6 +1,6 @@
 package com.renovator.controller;
 
-import com.renovator.service.menu.RenovatorService;
+import com.renovator.service.menu.RenovatorTestService;
 import com.renovator.util.SignUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ import java.io.PrintWriter;
 public class WechatController {
 
     @Autowired
-    private RenovatorService renovatorService;
+    private RenovatorTestService renovatorService;
 
     @RequestMapping(method = RequestMethod.GET)
     public void get(HttpServletRequest request, HttpServletResponse response) throws IOException {

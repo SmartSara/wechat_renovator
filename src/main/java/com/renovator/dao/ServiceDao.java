@@ -25,7 +25,7 @@ public class ServiceDao {
     }
 
     public List<Service> getServiceList() {
-        return (List<Service>) sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.Service");
+        return (List<Service>) sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.Service").list();
     }
 
     public boolean addService(Service service) {

@@ -1,6 +1,8 @@
 package com.renovator.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.renovator.pojo.Product;
+import com.renovator.pojo.Service;
 import com.renovator.pojo.User;
 import com.renovator.util.PropertyHolder;
 import org.junit.Before;
@@ -38,7 +40,7 @@ public class AppTests {
 
     @Test
     public void addUser() throws Exception {
-        User user=new User();
+        User user = new User();
         user.setName("灵达");
         user.setAddress("lingda 家");
         user.setBalance(99.8);
@@ -54,5 +56,36 @@ public class AppTests {
     @Test
     public void getProperty() throws Exception {
         System.out.println(PropertyHolder.MENU_ABOUT_US);
+    }
+
+    @Test
+    public void addService() throws Exception {
+        Service service = new Service();
+        service.setOrderId(12345567);
+        service.setType("sale");
+        service.setPrice(87.5);
+        service.setTs(new Date());
+        service.setUserId(2);
+        service.setProductId(1);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String serviceJson = objectMapper.writeValueAsString(service);
+        System.out.println(serviceJson);
+        mockMvc.perform(post("/service/add").content(serviceJson).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andDo(print());
+    }
+
+    @Test
+    public void addProduct() throws Exception {
+        Product product = new Product();
+        product.setPrice(37.5);
+        product.setTs(new Date());
+        product.setName("灵达的神器");
+        product.setDescription("猪猪的最爱");
+        product.setDiscount(0.85f);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String productJson = objectMapper.writeValueAsString(product);
+        System.out.println(productJson);
+        mockMvc.perform(post("/product/add").content(productJson).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andDo(print());
     }
 }

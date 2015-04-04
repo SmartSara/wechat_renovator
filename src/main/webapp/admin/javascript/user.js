@@ -39,7 +39,7 @@ $(document).on("click", ".update-user", function () {
     $(".modal-body #mobile").val(mobile);
     var address = $(this).data('address');
     $(".modal-body #address").val(address);
-    var birthday = $(this).data('birthday');
+    var birthday = formatDate($(this).data('birthday'), 'yyyy-MM-dd');
     $(".modal-body #birthday").val(birthday);
     var money = $(this).data('money');
     $(".modal-body #money").val(money);
@@ -58,12 +58,12 @@ function updateUser() {
     $.ajax({
         type: "post",
         url: "/user/update",
-        contentType:"application/json",
-        data:JSON.stringify(user),
+        contentType: "application/json",
+        data: JSON.stringify(user),
         success: function (data) {
             $("#loading").addClass("hidden");
             dialogItself.close();
-            _refreshList(true);
+            location.reload();
         },
         error: function (data) {
             $("#loading").addClass("hidden");
@@ -86,7 +86,7 @@ function _deleteUserById(id) {
                     success: function (data) {
                         $("#loading").addClass("hidden");
                         dialogItself.close();
-                        _refreshList(true);
+                        location.reload();
                     },
                     error: function (data) {
                         $("#loading").addClass("hidden");

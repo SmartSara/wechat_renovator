@@ -19,15 +19,30 @@
         <property name="password" value="${mysql.password}" />
     </bean>
 
-    <security:http auto-config="true">
-        <security:intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+    <!-- enable use-expressions -->
+    <security:http auto-config="true" use-expressions="true">
+
+        <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+
+        <!-- access denied page -->
+        <security:access-denied-handler error-page="/error" />
+
+        <security:form-login
+                login-page="/pages/login.jsp"
+                default-target-url="/admin/html/user.html"
+                authentication-failure-url="/pages/login.jsp?error"
+                username-parameter="username"
+                password-parameter="password" />
+        <security:logout logout-success-url="/pages/login.jsp?logout"  />
+        <!-- enable csrf protection -->
+        <security:csrf/>
     </security:http>
 
     <security:authentication-manager>
         <security:authentication-provider>
             <security:jdbc-user-service
                     data-source-ref="dataSource2"
-                    users-by-username-query="select username,password from administrator where username=?"
+                    users-by-username-query="select username,password, 1 from administrator where username=?"
                     authorities-by-username-query="select username, role from administrator where username=?"
                     />
         </security:authentication-provider>

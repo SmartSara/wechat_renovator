@@ -16,7 +16,6 @@
     </properties>
 
     <dependencies>
-
         <!-- Spring and Transactions -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -101,6 +100,12 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring.security}</version>
         </dependency>
+        <!-- Spring Security JSP Taglib -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.security}</version>
+        </dependency>
 
         <!-- Quartz framework -->
         <dependency>
@@ -167,6 +172,13 @@
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
             <version>1.4.8</version>
+        </dependency>
+
+        <!-- jstl for jsp page -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
         </dependency>
     </dependencies>
 

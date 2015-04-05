@@ -52,14 +52,14 @@
 
 
     <bean id="notificationService" class="com.renovator.service.NotificationService"/>
-    <task:scheduled-tasks scheduler="myScheduler">
-        <task:scheduled ref="notificationService" method="notifyBalance" fixed-delay="5000" initial-delay="1000"/>
-        <task:scheduled ref="notificationService" method="notifyBirthday" fixed-rate="5000"/>
-        <!--<task:scheduled ref="notificationService" method="...." cron="*/5 * * * * MON-FRI"/>-->
-    </task:scheduled-tasks>
+    <!--<task:scheduled-tasks scheduler="myScheduler">-->
+        <!--<task:scheduled ref="notificationService" method="notifyBalance" fixed-delay="5000" initial-delay="1000"/>-->
+        <!--<task:scheduled ref="notificationService" method="notifyBirthday" fixed-rate="5000"/>-->
+        <!--&lt;!&ndash;<task:scheduled ref="notificationService" method="...." cron="*/5 * * * * MON-FRI"/>&ndash;&gt;-->
+    <!--</task:scheduled-tasks>-->
 
-    <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
-    <task:executor id="myExecutor" pool-size="5"/>
-    <task:scheduler id="myScheduler" pool-size="10"/>
+    <!--<task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>-->
+    <!--<task:executor id="myExecutor" pool-size="5"/>-->
+    <!--<task:scheduler id="myScheduler" pool-size="10"/>-->
 
 </beans>

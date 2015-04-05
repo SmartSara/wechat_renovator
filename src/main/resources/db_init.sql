@@ -25,7 +25,6 @@ DROP TABLE IF EXISTS `administrator`;
 CREATE TABLE `administrator` (
   `username` varchar(45) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `enabled` bit(1) DEFAULT NULL,
   `role` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -37,7 +36,7 @@ CREATE TABLE `administrator` (
 
 LOCK TABLES `administrator` WRITE;
 /*!40000 ALTER TABLE `administrator` DISABLE KEYS */;
-INSERT INTO `administrator` VALUES ('lingda','123','','ROLE_ADMIN');
+INSERT INTO `administrator` VALUES ('lingda','123','ROLE_ADMIN');
 /*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,4 +135,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-05  9:52:13
+-- Dump completed on 2015-04-05  9:55:33

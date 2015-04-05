@@ -16,8 +16,6 @@ public class Administrator {
     private String username;
     @Column(name = "password")
     private String password;
-    @Column(name = "enabled")
-    private boolean enabled;
     @Column(name = "role")
     private String role;
 
@@ -43,14 +41,6 @@ public class Administrator {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
 }

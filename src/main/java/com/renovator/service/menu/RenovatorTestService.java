@@ -1,5 +1,6 @@
 package com.renovator.service.menu;
 
+import com.renovator.exception.UserNotFoundException;
 import com.renovator.pojo.User;
 import com.renovator.pojo.message.req.TextMessage;
 import com.renovator.pojo.message.resp.Article;
@@ -94,11 +95,32 @@ public class RenovatorTestService {
             textMessage.setContent(respContent);
             return MessageUtil.messageToXml(textMessage);
 
+        } catch (UserNotFoundException e) {
+            return doMembershipBinding(fromUserName, toUserName);
         } catch (Exception e) {
             logger.error(e.getMessage());
             return doErrorHandler(fromUserName, toUserName);
 
         }
+    }
+
+    private String doMembershipBinding(String fromUserName, String toUserName) {
+        NewsMessage newsMessage = new NewsMessage();
+        newsMessage.setToUserName(fromUserName);
+        newsMessage.setFromUserName(toUserName);
+        newsMessage.setCreateTime(new Date().getTime());
+        newsMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
+        newsMessage.setFuncFlag(0);
+        List<Article> articleList = new ArrayList<Article>();
+        Article article = new Article();
+        article.setTitle("请绑定账号");
+        article.setDescription("绑定会员账号，使用微信获取更多信息");
+        article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
+        article.setUrl(PropertyHolder.SERVER + "/account_binding/index.html");
+        articleList.add(article);
+        newsMessage.setArticleCount(articleList.size());
+        newsMessage.setArticles(articleList);
+        return MessageUtil.messageToXml(newsMessage);
     }
 
     private String doAboutUs(String fromUserName, String toUserName) {
@@ -253,8 +275,11 @@ public class RenovatorTestService {
         return MessageUtil.messageToXml(newsMessage);
     }
 
-    private String doMembershipBalance(String fromUserName, String toUserName) {
+    private String doMembershipBalance(String fromUserName, String toUserName) throws UserNotFoundException {
         User user = userService.getUserWithOpenId(fromUserName);
+        if (user == null) {
+            throw new UserNotFoundException("User not found");
+        }
         TextMessage textMessage = new TextMessage();
         textMessage.setToUserName(fromUserName);
         textMessage.setFromUserName(toUserName);

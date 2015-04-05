@@ -3,6 +3,7 @@ package com.renovator.controller;
 import com.renovator.service.menu.RenovatorTestService;
 import com.renovator.util.SignUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import java.io.PrintWriter;
 /**
  * Created by darlingtld on 2015/2/10.
  */
+@Scope("prototype")
 @Controller
 @RequestMapping("/wechat")
 public class WechatController {

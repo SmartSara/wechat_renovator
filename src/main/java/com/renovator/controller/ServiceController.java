@@ -3,6 +3,7 @@ package com.renovator.controller;
 import com.renovator.pojo.Service;
 import com.renovator.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * Created by darlingtld on 2015/4/4.
  */
+@Scope("prototype")
 @Controller
 @RequestMapping("/service")
 public class ServiceController {

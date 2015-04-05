@@ -34,6 +34,7 @@
                 <value>com.renovator.pojo.User</value>
                 <value>com.renovator.pojo.Service</value>
                 <value>com.renovator.pojo.Product</value>
+                <value>com.renovator.pojo.Administrator</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -47,5 +48,7 @@
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </bean>
+
+
 
 </beans>

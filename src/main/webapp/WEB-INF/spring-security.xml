@@ -31,8 +31,8 @@
                 login-page="/pages/login.jsp"
                 default-target-url="/admin/html/user.html"
                 authentication-failure-url="/pages/login.jsp?error"
-                username-parameter="username"
-                password-parameter="password" />
+                username-parameter="j_username"
+                password-parameter="j_password" />
         <security:logout logout-success-url="/pages/login.jsp?logout"  />
         <!-- enable csrf protection -->
         <security:csrf/>

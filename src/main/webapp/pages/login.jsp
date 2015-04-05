@@ -1,78 +1,46 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page session="true" %>
+<%@page session="true" contentType="text/html; charset=GB2312" %>
 <html>
 <head>
-    <title>ç™»é™†</title>
-    <style>
-        .error {
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            color: #a94442;
-            background-color: #f2dede;
-            border-color: #ebccd1;
-        }
+    <meta charset="UTF-8">
+    <link href="lib/bootstrap.min.css" rel="stylesheet">
+    <title>µÇÂ½</title>
 
-        .msg {
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            color: #31708f;
-            background-color: #d9edf7;
-            border-color: #bce8f1;
-        }
-
-        #login-box {
-            width: 300px;
-            padding: 20px;
-            margin: 100px auto;
-            background: #fff;
-            -webkit-border-radius: 2px;
-            -moz-border-radius: 2px;
-            border: 1px solid #000;
-        }
-    </style>
 </head>
 <body onload='document.loginForm.username.focus();'>
 
-<h1>é›·è¯ºç»´ç‰¹ç®¡ç†å‘˜ç™»é™†</h1>
+<div class="container">
+    <h1>À×ÅµÎ¬ÌØ¹ÜÀíÔ±µÇÂ¼</h1>
 
-<div id="login-box">
+    <div id="login-box">
 
-    <h3>è¯·è¾“å…¥ç”¨æˆ·åå’Œå¯†ç </h3>
+        <h3>ÇëÊäÈëÓÃ»§ÃûºÍÃÜÂë</h3>
+        <c:if test="${not empty error}">
+            <div class="error">${error}</div>
+        </c:if>
+        <c:if test="${not empty msg}">
+            <div class="msg">${msg}</div>
+        </c:if>
+        <form role="form" name='loginForm' action="<c:url value='/j_spring_security_check' />" method='POST'>
+            <div class="form-group">
+                <label for="name">ÓÃ»§Ãû</label>
+                <input type="text" class="form-control" id="name" name="j_username"
+                       placeholder="ÇëÊäÈëÓÃ»§Ãû">
+            </div>
+            <div class="form-group">
+                <label for="password">ÃÜÂë</label>
+                <input type="text" class="form-control" id="password" name="j_password"
+                       placeholder="ÇëÊäÈëÃÜÂë">
+            </div>
+            <input type="hidden" name="${_csrf.parameterName}"
+                   value="${_csrf.token}"/>
+            <button type="submit" class="btn btn-default">Ìá½»</button>
+        </form>
 
-    <c:if test="${not empty error}">
-        <div class="error">${error}</div>
-    </c:if>
-    <c:if test="${not empty msg}">
-        <div class="msg">${msg}</div>
-    </c:if>
+    </div>
 
-    <form name='loginForm'
-          action="<c:url value='/j_spring_security_check' />" method='POST'>
-
-        <table>
-            <tr>
-                <td>ç”¨æˆ·å:</td>
-                <td><input type='text' name='username'></td>
-            </tr>
-            <tr>
-                <td>å¯†ç :</td>
-                <td><input type='password' name='password'/></td>
-            </tr>
-            <tr>
-                <td colspan='2'><input name="submit" type="submit"
-                                       value="submit"/></td>
-            </tr>
-        </table>
-
-        <input type="hidden" name="${_csrf.parameterName}"
-               value="${_csrf.token}"/>
-
-    </form>
 </div>
+
 
 </body>
 </html>

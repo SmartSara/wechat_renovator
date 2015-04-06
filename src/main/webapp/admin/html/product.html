@@ -22,49 +22,100 @@
         <div class="loading"></div>
     </div>
     <ol class="breadcrumb">
-        <li class="active">产品信息管理</a></li>
+        <li class="active">产品信息管理</li>
     </ol>
+
+    <div>
+        <button class="create-product btn btn-primary btn-md-width" data-toggle="modal"
+                data-target="#saveOrUpdateModal" data-id="${id}">新增产品
+        </button>
+    </div>
+    <br/>
 
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
-            <th>Agent Name</th>
-            <th>Description</th>
-            <th>Status</th>
-            <th>Create Time</th>
-            <th>Last Sync Time</th>
+            <th>产品名称</th>
+            <th>产品描述</th>
+            <th>产品价格</th>
+            <th>产品折扣</th>
+            <th>更新时间</th>
+            <th>操作</th>
         </tr>
         </thead>
-        <tbody id="agentList">
-        <script id="agentTemplate" type="text/x-jquery-tmpl">
+        <tbody id="productList">
+        <script id="productTemplate" type="text/x-jquery-tmpl">
           <tr>
             <td>${name}</td>
             <td>${description}</td>
+            <td>${price} 元</td>
+			<td>${discount}</td>
+            <td>${formatDate(new Date(ts), 'yyyy-MM-dd hh:mm:ss')}</td>
             <td>
-              {{if status}}
-                <span class="label label-success">ON</span>
-              {{else}}
-                <span class="label label-danger">OFF</span>
-              {{/if}}
+                <button class="update-product btn btn-warning btn-md-width" data-toggle="modal" data-target="#saveOrUpdateModal" data-id="${id}">修改</button>
+                <a onclick="_deleteProductById(${id})" class="btn btn-danger btn-md-width">删除</a>
             </td>
-			<td>${getLocalTime(createTime)}</td>
-            <td>${getLocalTime(lastSyncTime)}</td>
           </tr>
-          </script>
+
+
+        </script>
         </tbody>
     </table>
     <div id="pagination" class="pagination"></div>
+</div>
+<!-- /container -->
 
 
-</div> <!-- /container -->
+<div class="modal fade" id="saveOrUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">更新用户信息</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <tr>
+                        <td>产品名称：</td>
+                        <td><input id="productName"></td>
+                    </tr>
+                    <tr>
+                        <td>产品描述：</td>
+                        <td><input id="productDescription"></td>
+                    </tr>
+                    <tr>
+                        <td>产品价格：</td>
+                        <td><input id="productPrice"></td>
+                    </tr>
+                    <tr>
+                        <td>产品折扣：</td>
+                        <td><input id="productDiscount"></td>
+                    </tr>
+                    <tr style="display: none">
+                        <td>
+                            <input id="productId">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="_saveOrUpdateProduct()">提交更改</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="../javascript/lib/jquery.min.js"></script>
 <script src="../javascript/lib/bootstrap.min.js"></script>
+<script src="../javascript/lib/bootstrap-dialog.js"></script>
 <script src="../javascript/lib/jquery.tmpl.min.js"></script>
 <script src="../javascript/lib/pagination.js"></script>
+<script src="../javascript/lib/util.js"></script>
 <script src="../javascript/product.js"></script>
 
 </body>

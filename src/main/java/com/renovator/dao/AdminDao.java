@@ -20,7 +20,7 @@ public class AdminDao {
     public Administrator findByUserName(String username) {
 
         List<Administrator> administrators = sessionFactory.getCurrentSession()
-                .createQuery("from Administrator where username=?")
+                .createQuery("from com.renovator.pojo.Administrator where username=?")
                 .setParameter(0, username)
                 .list();
 

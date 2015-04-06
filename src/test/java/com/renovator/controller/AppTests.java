@@ -18,6 +18,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Date;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -25,7 +26,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration("file:src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml")
+@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml", "file:src/main/webapp/WEB-INF/spring-security.xml"})
 public class AppTests {
     private MockMvc mockMvc;
 
@@ -65,8 +66,8 @@ public class AppTests {
         service.setType("sale");
         service.setPrice(87.5);
         service.setTs(new Date());
-        service.setUserId(2);
-        service.setProductId(1);
+//        service.setUserId(2);
+//        service.setProductId(1);
         ObjectMapper objectMapper = new ObjectMapper();
         String serviceJson = objectMapper.writeValueAsString(service);
         System.out.println(serviceJson);
@@ -87,5 +88,10 @@ public class AppTests {
         System.out.println(productJson);
         mockMvc.perform(post("/product/add").content(productJson).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andDo(print());
+    }
+
+    @Test
+    public void getService() throws Exception {
+        mockMvc.perform(get("/service/list")).andExpect(status().isOk()).andDo(print());
     }
 }

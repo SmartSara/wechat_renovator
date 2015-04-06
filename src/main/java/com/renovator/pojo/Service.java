@@ -1,9 +1,6 @@
 package com.renovator.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -22,26 +19,12 @@ public class Service {
     private double price;
     @Column(name = "ts")
     private Date ts;
-    @Column(name = "user_id")
-    private int userId;
-    @Column(name = "product_id")
-    private int productId;
-
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+    @OneToOne
+    @JoinColumn(name="user_id")
+    private User user;
+    @OneToOne
+    @JoinColumn(name="product_id")
+    private Product product;
 
     public Date getTs() {
         return ts;
@@ -83,6 +66,22 @@ public class Service {
         this.type = type;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Override
     public String toString() {
         return "Service{" +
@@ -91,8 +90,8 @@ public class Service {
                 ", type='" + type + '\'' +
                 ", price=" + price +
                 ", ts=" + ts +
-                ", userId=" + userId +
-                ", productId=" + productId +
+                ", user=" + user +
+                ", product=" + product +
                 '}';
     }
 }

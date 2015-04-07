@@ -35,8 +35,6 @@
                 username-parameter="j_username"
                 password-parameter="j_password" />
         <security:logout logout-success-url="/pages/login.jsp?logout"  />
-        <!-- enable csrf protection -->
-        <security:csrf/>
     </security:http>
 
     <security:authentication-manager>

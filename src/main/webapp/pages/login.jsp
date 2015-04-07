@@ -7,7 +7,7 @@
     <title>登陆</title>
 
 </head>
-<body onload='document.loginForm.username.focus();'>
+<body>
 
 <div class="container">
     <h1>雷诺维特管理员登录</h1>
@@ -32,9 +32,7 @@
                 <input type="text" class="form-control" id="password" name="j_password"
                        placeholder="请输入密码">
             </div>
-            <input type="hidden" name="${_csrf.parameterName}"
-                   value="${_csrf.token}"/>
-            <button type="submit" class="btn btn-default">提交</button>
+            <button type="submit" class="btn btn-default">登录</button>
         </form>
 
     </div>

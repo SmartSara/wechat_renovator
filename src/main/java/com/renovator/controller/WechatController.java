@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -57,6 +58,11 @@ public class WechatController {
         PrintStream printStream = new PrintStream(outputStream);
         printStream.write(respXml.getBytes("utf-8"));
         printStream.close();
+    }
+
+    @RequestMapping(value = "test", method = RequestMethod.POST)
+    public @ResponseBody String test(HttpServletRequest request, HttpServletResponse response) throws Exception {
+       return "test";
     }
 
 }

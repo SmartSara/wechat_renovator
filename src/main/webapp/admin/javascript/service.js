@@ -15,6 +15,13 @@ function _initialNav() {
 }
 
 function _initialPage() {
+    //init datepicker
+    $("#searchTs").datepicker({
+        language: "zh-CN",
+        autoclose: true
+    });
+
+    //init table
     $.ajax({
         type: "get",
         url: "/service/list",
@@ -62,6 +69,27 @@ function _updateOrder() {
         error: function (data) {
             $("#loading").addClass("hidden");
             alert(data.status);
+        }
+    });
+}
+
+function _searchService(){
+    var ts = $("#searchTs").val().replace("年","-").replace("月","-").replace("日","");
+    var params = "order_id="+ $("#searchOrderId").val() + "&type="+ $("#searchType").val() + "&price="+ $("#searchPrice").val()
+        + "&ts=" + ts + "&username=" + $("#searchUsername").val() + "&mobile=" + $("#searchMobile").val() + "&product_name=" + $("#searchProduct").val();
+    $.ajax({
+        type: "get",
+        url: "/service/search?" + params,
+        contentType: "application/json",
+        success: function (data) {
+            $("#userTemplate").tmpl(data).appendTo("#userList");
+            //pageTable("#pagination", "#packageList tr",num_per_page);
+            $("#loading").addClass("hidden");
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(textStatus);
+            console.log(XMLHttpRequest.status);
+            console.log(XMLHttpRequest.responseText);
         }
     });
 }

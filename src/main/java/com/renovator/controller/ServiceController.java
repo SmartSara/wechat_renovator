@@ -65,7 +65,7 @@ public class ServiceController {
     @ResponseBody
     List<Service> getUserList(@RequestParam("order_id") String orderId, @RequestParam("type") String type,
                            @RequestParam("price") String price, @RequestParam("ts") String ts,
-                           @RequestParam("username") String username, @RequestParam("contact") String contact,
+                           @RequestParam("username") String username, @RequestParam("mobile") String contact,
                            @RequestParam("product_name") String productName,
                            HttpServletRequest request, HttpServletResponse response) {
         try {

@@ -55,7 +55,7 @@ public class UserController {
     @RequestMapping(value = "search", method = RequestMethod.GET)
     public
     @ResponseBody
-    List<User> getUserList(@RequestParam("name") String name, @RequestParam("contact") String contact,
+    List<User> getUserList(@RequestParam("name") String name, @RequestParam("mobile") String contact,
                            @RequestParam("address") String address, @RequestParam("birthday") String birthday,
                            @RequestParam("balance") String balance, HttpServletRequest request, HttpServletResponse response) {
         try {

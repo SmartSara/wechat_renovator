@@ -1,7 +1,9 @@
 package com.renovator.dao;
 
 import com.renovator.pojo.Service;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +74,32 @@ public class ServiceDao {
             logger.error(e.getMessage());
             return null;
         }
+    }
+
+    public List<Service> searchService(String orderId, String type, String price, String ts, String username, String contact, String productName) {
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Service.class);
+        if (!"".equalsIgnoreCase(orderId)) {
+            criteria.add(Restrictions.like("orderId", orderId));
+        }
+        if (!"".equalsIgnoreCase(type)) {
+            criteria.add(Restrictions.like("type", type));
+        }
+        if (!"".equalsIgnoreCase(price)) {
+            criteria.add(Restrictions.eq("price", Double.parseDouble(price)));
+        }
+        if (!"".equalsIgnoreCase(ts)) {
+            criteria.add(Restrictions.eq("ts", orderId));
+        }
+        if (!"".equalsIgnoreCase(username)) {
+            criteria.createCriteria("user").add(Restrictions.like("name", username));
+        }
+        if (!"".equalsIgnoreCase(contact)) {
+            criteria.createCriteria("user").add(Restrictions.like("contact", contact));
+        }
+        if (!"".equalsIgnoreCase(productName)) {
+            criteria.createCriteria("product").add(Restrictions.like("name", productName));
+        }
+        return criteria.list();
     }
 }
 

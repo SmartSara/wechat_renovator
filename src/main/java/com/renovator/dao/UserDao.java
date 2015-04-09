@@ -1,13 +1,17 @@
 package com.renovator.dao;
 
 import com.renovator.pojo.User;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -64,12 +68,33 @@ public class UserDao {
 
     public User getUserWithOpenId(String openId) {
         User user = null;
-        try{
-            user = (User) sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.User where openId = "+openId).uniqueResult();
-        }catch (Exception e){
+        try {
+            user = (User) sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.User where openId = " + openId).uniqueResult();
+        } catch (Exception e) {
             logger.error(e.getMessage());
         }
         return user;
+    }
+
+    public List<User> searchUsers(String name, String contact, String address, String birthday, String balance) throws ParseException {
+        logger.debug("Search users with name={}, contact={}, address={}, birthday={}, balance={}", name, contact, address, birthday, balance);
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
+        if (!"".equalsIgnoreCase(name)) {
+            criteria.add(Restrictions.like("name", "%" + name + "%"));
+        }
+        if (!"".equalsIgnoreCase(contact)) {
+            criteria.add(Restrictions.like("contact", "%" + contact + "%"));
+        }
+        if (!"".equalsIgnoreCase(birthday)) {
+            criteria.add(Restrictions.eq("birthday", new SimpleDateFormat("yyyy-MM-dd").parse(birthday)));
+        }
+        if (!"".equalsIgnoreCase(address)) {
+            criteria.add(Restrictions.like("address", "%" + address + "%"));
+        }
+        if (!"".equalsIgnoreCase(balance)) {
+            criteria.add(Restrictions.eq("balance", Double.parseDouble(balance)));
+        }
+        return criteria.list();
     }
 }
 

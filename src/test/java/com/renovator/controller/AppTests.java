@@ -94,4 +94,14 @@ public class AppTests {
     public void getService() throws Exception {
         mockMvc.perform(get("/service/list")).andExpect(status().isOk()).andDo(print());
     }
+
+    @Test
+    public void searchUser() throws Exception {
+        mockMvc.perform(get("/user/search?name=lingda&contact=&address=&birthday=&balance=")).andExpect(status().isOk()).andDo(print());
+    }
+
+    @Test
+    public void searchService() throws Exception {
+        mockMvc.perform(get("/service/search?order_id=&type=sale&contact=&price=&ts=&username=&contact=&product_name=")).andExpect(status().isOk()).andDo(print());
+    }
 }

@@ -1,7 +1,6 @@
 package com.renovator.service;
 
 import com.renovator.dao.ProductDao;
-import com.renovator.dao.ProductDao;
 import com.renovator.pojo.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -45,5 +45,10 @@ public class ProductService {
     @Transactional
     public boolean deleteProduct(int productId) {
         return productDao.deleteProduct(productId);
+    }
+
+    @Transactional
+    public List<Product> searchProduct(String name, String description, String price, String discount, String ts) throws ParseException {
+        return productDao.searchProduct(name, description, price, discount, ts);
     }
 }

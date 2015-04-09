@@ -1,13 +1,17 @@
 package com.renovator.dao;
 
 import com.renovator.pojo.Product;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -61,5 +65,28 @@ public class ProductDao {
             return false;
         }
     }
+
+    public List<Product> searchProduct(String name, String description, String price, String discount, String ts) throws ParseException {
+        logger.debug("Search product with name={}, description={},price={},discount={},ts={}", name, description,price,discount,ts);
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
+        if(!"".equalsIgnoreCase(name)){
+            criteria.add(Restrictions.like("name", name));
+        }
+        if(!"".equalsIgnoreCase(description)){
+            criteria.add(Restrictions.like("description", description));
+        }
+        if(!"".equalsIgnoreCase(ts)){
+            criteria.add(Restrictions.eq("ts", new SimpleDateFormat("yyyy-MM-dd").parse(ts)));
+        }
+        if(!"".equalsIgnoreCase(price)){
+            criteria.add(Restrictions.eq("price", Double.parseDouble(price)));
+        }
+        if(!"".equalsIgnoreCase(discount)){
+            criteria.add(Restrictions.eq("discount", Float.parseFloat(discount)));
+        }
+        return criteria.list();
+    }
+
+
 }
 

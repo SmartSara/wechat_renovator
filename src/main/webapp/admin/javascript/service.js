@@ -73,16 +73,16 @@ function _updateOrder() {
     });
 }
 
-function _searchService(){
-    var ts = $("#searchTs").val().replace("年","-").replace("月","-").replace("日","");
-    var params = "order_id="+ $("#searchOrderId").val() + "&type="+ $("#searchType").val() + "&price="+ $("#searchPrice").val()
+function _searchService() {
+    var ts = $("#searchTs").val().replace("年", "-").replace("月", "-").replace("日", "");
+    var params = "order_id=" + $("#searchOrderId").val() + "&type=" + $("#searchType").val() + "&price=" + $("#searchPrice").val()
         + "&ts=" + ts + "&username=" + $("#searchUsername").val() + "&mobile=" + $("#searchMobile").val() + "&product_name=" + $("#searchProduct").val();
     $.ajax({
         type: "get",
         url: "/service/search?" + params,
         contentType: "application/json",
         success: function (data) {
-            $("#userTemplate").tmpl(data).appendTo("#userList");
+            $("#orderTemplate").tmpl(data).appendTo("#orderList");
             //pageTable("#pagination", "#packageList tr",num_per_page);
             $("#loading").addClass("hidden");
         },
@@ -134,3 +134,45 @@ function _getServiceBySerivceId(serviceId) {
         }
     }
 }
+
+$(document).on("click", ".sort", function () {
+    if ($(this).hasClass("price")) {
+        if ($(this).hasClass("desc")) {
+            $(this).removeClass("desc");
+            _order.sort(function (a, b) {
+                return a.price - b.price;
+            });
+        } else {
+            $(this).addClass("desc");
+            _order.sort(function (a, b) {
+                return b.price - a.price;
+            });
+        }
+    } else if ($(this).hasClass("orderId")) {
+        if ($(this).hasClass("desc")) {
+            $(this).removeClass("desc");
+            _order.sort(function (a, b) {
+                return a.orderId - b.orderId;
+            });
+        } else {
+            $(this).addClass("desc");
+            _order.sort(function (a, b) {
+                return b.orderId - a.orderId;
+            });
+        }
+    } else if ($(this).hasClass("ts")) {
+        if ($(this).hasClass("desc")) {
+            $(this).removeClass("desc");
+            _order.sort(function (a, b) {
+                return a.ts - b.ts;
+            });
+        } else {
+            $(this).addClass("desc");
+            _order.sort(function (a, b) {
+                return b.ts - a.ts;
+            });
+        }
+    }
+    $("#orderList tr").empty();
+    $("#orderTemplate").tmpl(_order).appendTo("#orderList");
+});

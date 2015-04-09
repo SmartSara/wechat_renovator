@@ -11,6 +11,8 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pagination.css" rel="stylesheet">
     <link href="../css/bootstrap-datepicker.css" rel="stylesheet">
+    <link href="../css/select2.css" rel="stylesheet">
+    <link href="../css/bootstrap-glyphicons.css" rel="stylesheet">
 </head>
 
 <body>
@@ -77,10 +79,10 @@
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
-            <th>订单号</th>
+            <th>订单号<span title="点此排序" class="glyphicon glyphicon-sort sort orderId" style="float: right;"></span></th>
             <th>订单类型</th>
-            <th>订单价格</th>
-            <th>订单时间</th>
+            <th>订单价格<span title="点此排序" class="glyphicon glyphicon-sort sort price" style="float: right;"></span></th>
+            <th>订单时间<span title="点此排序" class="glyphicon glyphicon-sort sort ts" style="float: right;"></span></th>
             <th>用户名</th>
             <th>用户手机号码</th>
             <th>商品名称</th>
@@ -153,11 +155,12 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="../javascript/lib/jquery.min.js"></script>
-<script src="../javascript/lib/bootstrap.min.js"></script>
-<script src="../javascript/lib/bootstrap-dialog.js"></script>
 <script src="../javascript/lib/jquery.tmpl.min.js"></script>
+<script src="../javascript/lib/select2.js"></script>
 <script src="../javascript/lib/pagination.js"></script>
 <script src="../javascript/lib/util.js"></script>
+<script src="../javascript/lib/bootstrap.min.js"></script>
+<script src="../javascript/lib/bootstrap-dialog.js"></script>
 <script src="../javascript/lib/bootstrap-datepicker.min.js"></script>
 <script src="../javascript/lib/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="../javascript/service.js"></script>

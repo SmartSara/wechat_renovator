@@ -90,7 +90,7 @@ function _searchProduct(){
         url: "/product/search?" + params,
         contentType: "application/json",
         success: function (data) {
-            $("#userTemplate").tmpl(data).appendTo("#userList");
+            $("#productTemplate").tmpl(data).appendTo("#productList");
             //pageTable("#pagination", "#packageList tr",num_per_page);
             $("#loading").addClass("hidden");
         },
@@ -142,3 +142,45 @@ function _getProductByProductId(productId) {
         }
     }
 }
+
+$(document).on("click", ".sort", function () {
+    if ($(this).hasClass("price")) {
+        if ($(this).hasClass("desc")) {
+            $(this).removeClass("desc");
+            _product.sort(function (a, b) {
+                return a.price - b.price;
+            });
+        } else {
+            $(this).addClass("desc");
+            _product.sort(function (a, b) {
+                return b.price - a.price;
+            });
+        }
+    } else if ($(this).hasClass("discount")) {
+        if ($(this).hasClass("desc")) {
+            $(this).removeClass("desc");
+            _product.sort(function (a, b) {
+                return a.discount - b.discount;
+            });
+        } else {
+            $(this).addClass("desc");
+            _product.sort(function (a, b) {
+                return b.discount - a.discount;
+            });
+        }
+    } else if ($(this).hasClass("ts")) {
+        if ($(this).hasClass("desc")) {
+            $(this).removeClass("desc");
+            _product.sort(function (a, b) {
+                return a.ts - b.ts;
+            });
+        } else {
+            $(this).addClass("desc");
+            _product.sort(function (a, b) {
+                return b.ts - a.ts;
+            });
+        }
+    }
+    $("#productList tr").empty();
+    $("#productTemplate").tmpl(_product).appendTo("#productList");
+});

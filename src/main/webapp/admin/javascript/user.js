@@ -2,6 +2,8 @@
  * Created by zhus1 on 2015/4/4.
  */
 
+var _user;
+
 $(function () {
     _initialNav();
     _initialPage();
@@ -21,6 +23,7 @@ function _initialPage() {
         dataType: "json",
         success: function (data) {
             $("#userTemplate").tmpl(data).appendTo("#userList");
+            _user = data;
             //pageTable("#pagination", "#packageList tr",num_per_page);
             $("#loading").addClass("hidden");
         },
@@ -133,3 +136,33 @@ function _deleteUserById(id) {
         }]
     });
 }
+
+$(document).on("click", ".sort", function () {
+    if ($(this).hasClass("birthday")) {
+        if ($(this).hasClass("desc")) {
+            $(this).removeClass("desc");
+            _user.sort(function (a, b) {
+                return a.birthday - b.birthday;
+            });
+        } else {
+            $(this).addClass("desc");
+            _user.sort(function (a, b) {
+                return b.birthday - a.birthday;
+            });
+        }
+    } else if ($(this).hasClass("balance")) {
+        if ($(this).hasClass("desc")) {
+            $(this).removeClass("desc");
+            _user.sort(function (a, b) {
+                return a.balance - b.balance;
+            });
+        } else {
+            $(this).addClass("desc");
+            _user.sort(function (a, b) {
+                return b.balance - a.balance;
+            });
+        }
+    }
+    $("#userList tr").empty();
+    $("#userTemplate").tmpl(_user).appendTo("#userList");
+});

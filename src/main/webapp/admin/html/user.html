@@ -11,7 +11,6 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pagination.css" rel="stylesheet">
     <link href="../css/bootstrap-datepicker.css" rel="stylesheet">
-    <link href="../css/select2.css" rel="stylesheet">
 </head>
 
 
@@ -26,9 +25,9 @@
         <li class="active">用户信息管理</a></li>
     </ol>
 
-
+    <!--Search Panel-->
     <div class="panel panel-info">
-        <div class="panel-heading"><h3 class="panel-title">Search</h3></div>
+        <div class="panel-heading"><h3 class="panel-title">过滤查询</h3></div>
         <div class="panel-body">
             <div class="form-horizontal">
                 <div class="form-group">
@@ -58,7 +57,7 @@
                     <div class="col-sm-1"></div>
                     <div class="col-sm-2">
                         <button id="search" class="btn btn-primary" onclick="_searchUser()">
-                            <span></span>Search
+                            <span></span>查找
                         </button>
                     </div>
                 </div>
@@ -66,7 +65,7 @@
         </div>
     </div>
 
-
+    <!--User Table-->
     <table class="table table-bordered table-hover">
         <thead>
         <tr>

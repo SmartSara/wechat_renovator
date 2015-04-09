@@ -10,12 +10,13 @@
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pagination.css" rel="stylesheet">
-
+    <link href="../css/bootstrap-datepicker.css" rel="stylesheet">
 </head>
 <body>
 
 <div id="nav">
 </div>
+
 
 <div class="container">
     <div id="loading" class="background">
@@ -25,6 +26,48 @@
         <li class="active">产品信息管理</li>
     </ol>
 
+    <!--Search Panel-->
+    <div class="panel panel-info">
+        <div class="panel-heading"><h3 class="panel-title">过滤查询</h3></div>
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">产品名称</label>
+                    <div class="col-sm-2">
+                        <input id="searchName" class="form-control">
+                    </div>
+                    <label class="col-sm-1 control-label">产品描述</label>
+
+                    <div class="col-sm-2">
+                        <input id="searchDescription" class="form-control">
+                    </div>
+                    <label class="col-sm-1 control-label">产品价格</label>
+                    <div class="col-sm-2">
+                        <input id="searchPrice" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">产品折扣</label>
+
+                    <div class="col-sm-2">
+                        <input id="searchDiscount" class="form-control" type="text" value="">
+                    </div>
+                    <label class="col-sm-1 control-label">更新时间</label>
+                    <div class="col-sm-2">
+                        <input id="searchTs" class="form-control">
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">
+                        <button id="search" class="btn btn-primary" onclick="_searchProduct()">
+                            <span></span>查找
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div>
         <button class="create-product btn btn-primary btn-md-width" data-toggle="modal"
                 data-target="#saveOrUpdateModal" data-id="${id}">新增产品
@@ -32,6 +75,7 @@
     </div>
     <br/>
 
+    <!--Product Table-->
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -56,8 +100,6 @@
                 <a onclick="_deleteProductById(${id})" class="btn btn-danger btn-md-width">删除</a>
             </td>
           </tr>
-
-
         </script>
         </tbody>
     </table>
@@ -66,7 +108,8 @@
 <!-- /container -->
 
 
-<div class="modal fade" id="saveOrUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="saveOrUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -116,6 +159,8 @@
 <script src="../javascript/lib/jquery.tmpl.min.js"></script>
 <script src="../javascript/lib/pagination.js"></script>
 <script src="../javascript/lib/util.js"></script>
+<script src="../javascript/lib/bootstrap-datepicker.min.js"></script>
+<script src="../javascript/lib/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="../javascript/product.js"></script>
 
 </body>

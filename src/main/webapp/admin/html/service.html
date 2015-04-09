@@ -10,10 +10,10 @@
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/pagination.css" rel="stylesheet">
-
+    <link href="../css/bootstrap-datepicker.css" rel="stylesheet">
 </head>
-<body>
 
+<body>
 <div id="nav">
 </div>
 
@@ -22,9 +22,58 @@
         <div class="loading"></div>
     </div>
     <ol class="breadcrumb">
-        <li class="active">订单信息管理</a></li>
+        <li class="active">订单信息管理</li>
     </ol>
 
+    <!--Search Panel-->
+    <div class="panel panel-info">
+        <div class="panel-heading"><h3 class="panel-title">过滤查询</h3></div>
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">订单号</label>
+                    <div class="col-sm-2">
+                        <input id="searchOrderId" class="form-control">
+                    </div>
+                    <label class="col-sm-1 control-label">订单类型</label>
+                    <div class="col-sm-2">
+                        <input id="searchType" class="form-control">
+                    </div>
+                    <label class="col-sm-1 control-label">订单价格</label>
+                    <div class="col-sm-2">
+                        <input id="searchPrice" class="form-control">
+                    </div>
+                    <label class="col-sm-1 control-label">订单时间</label>
+                    <div class="col-sm-2">
+                        <input id="searchTs" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">用户名</label>
+                    <div class="col-sm-2">
+                        <input id="searchUsername" class="form-control" type="text" value="">
+                    </div>
+                    <label class="col-sm-1 control-label">手机号码</label>
+                    <div class="col-sm-2">
+                        <input id="searchMobile" class="form-control">
+                    </div>
+                    <label class="col-sm-1 control-label">商品名</label>
+                    <div class="col-sm-2">
+                        <input id="searchProduct" class="form-control">
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-2">
+                        <button id="search" class="btn btn-primary" onclick="_searchService()">
+                            <span></span>查找
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Service Table-->
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -109,6 +158,8 @@
 <script src="../javascript/lib/jquery.tmpl.min.js"></script>
 <script src="../javascript/lib/pagination.js"></script>
 <script src="../javascript/lib/util.js"></script>
+<script src="../javascript/lib/bootstrap-datepicker.min.js"></script>
+<script src="../javascript/lib/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="../javascript/service.js"></script>
 
 </body>

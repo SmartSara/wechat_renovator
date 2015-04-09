@@ -14,6 +14,7 @@ function _initialPage() {
         autoclose: true
     });
 
+    //init table
     $.ajax({
         type: "get",
         url: "/user/list",
@@ -59,7 +60,6 @@ function _searchUser(){
     var birth = $("#searchBirthday").val().replace("年","-").replace("月","-").replace("日","");
     var params = "name="+ $("#searchUsername").val() + "&mobile="+ $("#searchMobile").val() + "&address="+ $("#searchAddress").val()
         + "&birthday=" + birth + "&balance=" + $("#searchBalance").val();
-    alert(params);
     $.ajax({
         type: "get",
         url: "/user/search?" + params,

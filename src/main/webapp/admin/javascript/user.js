@@ -8,6 +8,12 @@ $(function () {
 });
 
 function _initialPage() {
+    //init date-picker
+    $("#searchBirthday").datepicker({
+        language: "zh-CN",
+        autoclose: true
+    });
+
     $.ajax({
         type: "get",
         url: "/user/list",
@@ -49,6 +55,27 @@ $(document).on("click", ".update-user", function () {
     $(".modal-body #openId").val(openId);
 });
 
+function _searchUser(){
+    var birth = $("#searchBirthday").val().replace("年","-").replace("月","-").replace("日","");
+    var params = "name="+ $("#searchUsername").val() + "&mobile="+ $("#searchMobile").val() + "&address="+ $("#searchAddress").val()
+        + "&birthday=" + birth + "&balance=" + $("#searchBalance").val();
+    alert(params);
+    $.ajax({
+        type: "get",
+        url: "/user/search?" + params,
+        contentType: "application/json",
+        success: function (data) {
+            $("#userTemplate").tmpl(data).appendTo("#userList");
+            //pageTable("#pagination", "#packageList tr",num_per_page);
+            $("#loading").addClass("hidden");
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log(textStatus);
+            console.log(XMLHttpRequest.status);
+            console.log(XMLHttpRequest.responseText);
+        }
+    });
+}
 
 function updateUser() {
     var user = {};

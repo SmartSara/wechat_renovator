@@ -17,6 +17,8 @@ public class PropertyHolder {
             e.printStackTrace();
         }
     }
+    public static final String HEADER_MSG = "msg";
+
     public static final String TOKEN = prop.getProperty("wechat.token");
     public static final String APPID = prop.getProperty("wechat.app_id");
     public static final String APPSECRET = prop.getProperty("wechat.app_secret");

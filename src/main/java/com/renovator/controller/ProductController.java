@@ -2,6 +2,7 @@ package com.renovator.controller;
 
 import com.renovator.pojo.Product;
 import com.renovator.service.ProductService;
+import com.renovator.util.PropertyHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
@@ -61,7 +62,7 @@ public class ProductController {
             return productService.searchProduct(name, description, price, discount, ts);
         } catch (ParseException e) {
             response.setStatus(HttpStatus.EXPECTATION_FAILED.value());
-            response.setHeader("msg", e.getMessage());
+            response.setHeader(PropertyHolder.HEADER_MSG, e.getMessage());
             return null;
         }
     }

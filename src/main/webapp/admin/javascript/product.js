@@ -90,6 +90,7 @@ function _searchProduct(){
         url: "/product/search?" + params,
         contentType: "application/json",
         success: function (data) {
+            $("#productList tr").empty();
             $("#productTemplate").tmpl(data).appendTo("#productList");
             //pageTable("#pagination", "#packageList tr",num_per_page);
             $("#loading").addClass("hidden");

@@ -82,6 +82,7 @@ function _searchService() {
         url: "/service/search?" + params,
         contentType: "application/json",
         success: function (data) {
+            $("#orderList tr").empty();
             $("#orderTemplate").tmpl(data).appendTo("#orderList");
             //pageTable("#pagination", "#packageList tr",num_per_page);
             $("#loading").addClass("hidden");

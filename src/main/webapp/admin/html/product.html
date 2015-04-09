@@ -23,14 +23,13 @@
     <div id="loading" class="background">
         <div class="loading"></div>
     </div>
-    <ol class="breadcrumb">
-        <li class="active">产品信息管理</li>
-    </ol>
 
     <!--Search Panel-->
     <div class="panel panel-info">
-        <div class="panel-heading"><h3 class="panel-title">过滤查询</h3></div>
-        <div class="panel-body">
+        <div class="panel-heading" data-target='#searchPanel' data-toggle='collapse'>
+            <h3 class="panel-title">点击打开条件搜索</h3>
+        </div>
+        <div class="collapse panel-body" id="searchPanel">
             <div class="form-horizontal">
                 <div class="form-group">
                     <label class="col-sm-1 control-label">产品名称</label>
@@ -69,12 +68,24 @@
         </div>
     </div>
 
+    <!--pagination-->
+    <div id="pagination" style="float: right;">
+        <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+    
     <div>
         <button class="create-product btn btn-primary btn-md-width" data-toggle="modal"
                 data-target="#saveOrUpdateModal" data-id="${id}">新增产品
         </button>
     </div>
-    <br/>
 
     <!--Product Table-->
     <table class="table table-bordered table-hover">

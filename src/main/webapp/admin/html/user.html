@@ -22,14 +22,13 @@
     <div id="loading" class="background">
         <div class="loading"></div>
     </div>
-    <ol class="breadcrumb">
-        <li class="active">用户信息管理</a></li>
-    </ol>
 
     <!--Search Panel-->
     <div class="panel panel-info">
-        <div class="panel-heading"><h3 class="panel-title">过滤查询</h3></div>
-        <div class="panel-body">
+        <div class="panel-heading" data-target='#searchPanel' data-toggle='collapse'>
+            <h3 class="panel-title">点击打开条件搜索</h3>
+        </div>
+        <div class="collapse panel-body" id="searchPanel">
             <div class="form-horizontal">
                 <div class="form-group">
                     <label class="col-sm-1 control-label">用户名</label>
@@ -64,6 +63,10 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!--pagination-->
+    <div id="pagination" style="float: right;">
     </div>
 
     <!--User Table-->
@@ -108,7 +111,6 @@
         </script>
         </tbody>
     </table>
-    <div id="pagination" class="pagination"></div>
 
 </div>
 
@@ -165,10 +167,10 @@
 <script src="../javascript/lib/jquery.tmpl.min.js"></script>
 <script src="../javascript/lib/bootstrap-dialog.js"></script>
 <script src="../javascript/lib/bootstrap.min.js"></script>
-<script src="../javascript/lib/pagination.js"></script>
 <script src="../javascript/lib/util.js"></script>
 <script src="../javascript/lib/bootstrap-datepicker.min.js"></script>
 <script src="../javascript/lib/bootstrap-datepicker.zh-CN.min.js"></script>
+<script src="../javascript/lib/pagination.js"></script>
 <script src="../javascript/user.js"></script>
 
 </body>

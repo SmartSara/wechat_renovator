@@ -33,6 +33,13 @@ function _initialPage() {
             console.log(XMLHttpRequest.responseText);
         }
     });
+
+
+    //$("#pagination").pagination(2, {
+    //    prev_text: "pre",
+    //    next_text: "next",
+    //    items_per_page: 1
+    //});
 }
 
 
@@ -68,6 +75,7 @@ function _searchUser(){
         url: "/user/search?" + params,
         contentType: "application/json",
         success: function (data) {
+            $("#userList tr").empty();
             $("#userTemplate").tmpl(data).appendTo("#userList");
             //pageTable("#pagination", "#packageList tr",num_per_page);
             $("#loading").addClass("hidden");

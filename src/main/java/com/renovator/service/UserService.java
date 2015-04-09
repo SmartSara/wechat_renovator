@@ -52,6 +52,16 @@ public class UserService {
         return userDao.getUserWithOpenId(openId);
     }
 
+    /**
+     *
+     * @param name
+     * @param contact
+     * @param address
+     * @param birthday
+     * @param balance
+     * @return users
+     * @throws ParseException
+     */
     @Transactional
     public List<User> searchUsers(String name, String contact, String address, String birthday, String balance) throws ParseException {
         return userDao.searchUsers(name, contact, address, birthday, balance);

@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.renovator.pojo.Product;
 import com.renovator.pojo.Service;
 import com.renovator.pojo.User;
+import com.renovator.service.ProductService;
+import com.renovator.service.ServiceService;
+import com.renovator.service.UserService;
 import com.renovator.util.PropertyHolder;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -33,6 +37,15 @@ public class AppTests {
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     protected WebApplicationContext wac;
+
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private ServiceService serviceService;
+
+    @Autowired
+    private UserService userService;
 
     @Before
     public void setup() {
@@ -86,7 +99,7 @@ public class AppTests {
         ObjectMapper objectMapper = new ObjectMapper();
         String productJson = objectMapper.writeValueAsString(product);
         System.out.println(productJson);
-        mockMvc.perform(post("/product/add").content(productJson).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(post("/service/add").content(productJson).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andDo(print());
     }
 
@@ -97,11 +110,45 @@ public class AppTests {
 
     @Test
     public void searchUser() throws Exception {
-        mockMvc.perform(get("/user/search?name=lingda&contact=&address=&birthday=&balance=")).andExpect(status().isOk()).andDo(print());
+//        mockMvc.perform(get("/user/search?name=lingda&contact=&address=&birthday=&balance=")).andExpect(status().isOk()).andDo(print());
+        String name = "";
+        String contact = "";
+        String address = "¼Ò";
+        String birthday = "2015-04-04";
+        String balance = "";
+        List<User> userList = userService.searchUsers(name, contact, address, birthday, balance);
+        for (User user : userList) {
+            System.out.println(user);
+        }
     }
 
     @Test
     public void searchService() throws Exception {
-        mockMvc.perform(get("/service/search?order_id=&type=sale&contact=&price=&ts=&username=&contact=&product_name=")).andExpect(status().isOk()).andDo(print());
+//        mockMvc.perform(get("/service/search?order_id=&type=sale&price=&ts=&username=&contact=&product_name=")).andExpect(status().isOk()).andDo(print());
+        String order_id = "";
+        String type = "sale";
+        String contact = "";
+        String price = "";
+        String ts = "";
+        String username="";
+        String product_name="";
+        List<Service> serviceList = serviceService.searchServices(order_id, type, price, ts, username, contact, product_name);
+        for (Service service : serviceList) {
+            System.out.println(service);
+        }
+    }
+
+    @Test
+    public void searchProduct() throws Exception {
+//        mockMvc.perform(get("/service/search?order_id=&type=sale&price=&ts=&username=&contact=&product_name=")).andExpect(status().isOk()).andDo(print());
+        String name = "ÉñÆ÷";
+        String description = "";
+        String price = "";
+        String discount = "";
+        String ts = "";
+        List<Product> productList = productService.searchProduct(name, description, price, discount, ts);
+        for (Product product : productList) {
+            System.out.println(product);
+        }
     }
 }

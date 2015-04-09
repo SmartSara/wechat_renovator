@@ -67,21 +67,21 @@ public class ProductDao {
     }
 
     public List<Product> searchProduct(String name, String description, String price, String discount, String ts) throws ParseException {
-        logger.debug("Search product with name={}, description={},price={},discount={},ts={}", name, description,price,discount,ts);
+        logger.debug("Search product with name={}, description={},price={},discount={},ts={}", name, description, price, discount, ts);
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Product.class);
-        if(!"".equalsIgnoreCase(name)){
-            criteria.add(Restrictions.like("name", name));
+        if (!"".equalsIgnoreCase(name)) {
+            criteria.add(Restrictions.like("name", "%" + name + "%"));
         }
-        if(!"".equalsIgnoreCase(description)){
-            criteria.add(Restrictions.like("description", description));
+        if (!"".equalsIgnoreCase(description)) {
+            criteria.add(Restrictions.like("description", "%" + description + "%"));
         }
-        if(!"".equalsIgnoreCase(ts)){
+        if (!"".equalsIgnoreCase(ts)) {
             criteria.add(Restrictions.eq("ts", new SimpleDateFormat("yyyy-MM-dd").parse(ts)));
         }
-        if(!"".equalsIgnoreCase(price)){
+        if (!"".equalsIgnoreCase(price)) {
             criteria.add(Restrictions.eq("price", Double.parseDouble(price)));
         }
-        if(!"".equalsIgnoreCase(discount)){
+        if (!"".equalsIgnoreCase(discount)) {
             criteria.add(Restrictions.eq("discount", Float.parseFloat(discount)));
         }
         return criteria.list();

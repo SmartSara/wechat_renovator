@@ -2,13 +2,16 @@ package com.renovator.controller;
 
 import com.renovator.pojo.Product;
 import com.renovator.service.ProductService;
+import com.renovator.util.PropertyHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -49,5 +52,20 @@ public class ProductController {
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     public void deleteProduct(@RequestParam("id") int productId, HttpServletRequest request, HttpServletResponse response) {
         productService.deleteProduct(productId);
+    }
+
+    @RequestMapping(value = "search", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<Product> searchProduct(@RequestParam("name") String name, @RequestParam("desc") String description,
+                                @RequestParam("price") String price, @RequestParam("discount") String discount, @RequestParam("ts") String ts,
+                                HttpServletRequest request, HttpServletResponse response) {
+        try {
+            return productService.searchProduct(name, description, price, discount, ts);
+        } catch (ParseException e) {
+            response.setStatus(HttpStatus.EXPECTATION_FAILED.value());
+            response.setHeader(PropertyHolder.HEADER_MSG, e.getMessage());
+            return null;
+        }
     }
 }

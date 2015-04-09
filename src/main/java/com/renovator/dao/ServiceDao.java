@@ -66,7 +66,7 @@ public class ServiceDao {
 
     public List<Service> getServiceListByUserId(int userId) {
         try {
-            List<Service> serviceList = sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.Service where userId=" + userId).list();
+            List<Service> serviceList = sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.Service where user.id=" + userId).list();
             logger.debug("Get service list of userId {}", userId);
             logger.debug(serviceList.toString());
             return serviceList;
@@ -79,10 +79,10 @@ public class ServiceDao {
     public List<Service> searchService(String orderId, String type, String price, String ts, String username, String contact, String productName) {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Service.class);
         if (!"".equalsIgnoreCase(orderId)) {
-            criteria.add(Restrictions.like("orderId", orderId));
+            criteria.add(Restrictions.like("orderId", "%" + orderId + "%"));
         }
         if (!"".equalsIgnoreCase(type)) {
-            criteria.add(Restrictions.like("type", type));
+            criteria.add(Restrictions.like("type", "%" + type + "%"));
         }
         if (!"".equalsIgnoreCase(price)) {
             criteria.add(Restrictions.eq("price", Double.parseDouble(price)));
@@ -91,13 +91,13 @@ public class ServiceDao {
             criteria.add(Restrictions.eq("ts", orderId));
         }
         if (!"".equalsIgnoreCase(username)) {
-            criteria.createCriteria("user").add(Restrictions.like("name", username));
+            criteria.createCriteria("user").add(Restrictions.like("name", "%" + username + "%"));
         }
         if (!"".equalsIgnoreCase(contact)) {
-            criteria.createCriteria("user").add(Restrictions.like("contact", contact));
+            criteria.createCriteria("user").add(Restrictions.like("contact", "%" + contact + "%"));
         }
         if (!"".equalsIgnoreCase(productName)) {
-            criteria.createCriteria("product").add(Restrictions.like("name", productName));
+            criteria.createCriteria("product").add(Restrictions.like("name", "%" + productName + "%"));
         }
         return criteria.list();
     }

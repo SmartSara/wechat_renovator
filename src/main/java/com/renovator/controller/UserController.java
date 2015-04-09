@@ -2,6 +2,7 @@ package com.renovator.controller;
 
 import com.renovator.pojo.User;
 import com.renovator.service.UserService;
+import com.renovator.util.PropertyHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
@@ -63,7 +64,7 @@ public class UserController {
         } catch (ParseException e) {
             e.printStackTrace();
             response.setStatus(HttpStatus.EXPECTATION_FAILED.value());
-            response.setHeader("msg", e.getMessage());
+            response.setHeader(PropertyHolder.HEADER_MSG, e.getMessage());
             return null;
         }
     }

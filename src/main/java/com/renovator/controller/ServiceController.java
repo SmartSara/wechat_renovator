@@ -3,6 +3,7 @@ package com.renovator.controller;
 import com.renovator.pojo.Service;
 import com.renovator.pojo.User;
 import com.renovator.service.ServiceService;
+import com.renovator.util.PropertyHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
@@ -73,7 +74,7 @@ public class ServiceController {
         } catch (Exception e) {
             e.printStackTrace();
             response.setStatus(HttpStatus.EXPECTATION_FAILED.value());
-            response.setHeader("msg", e.getMessage());
+            response.setHeader(PropertyHolder.HEADER_MSG, e.getMessage());
             return null;
         }
     }

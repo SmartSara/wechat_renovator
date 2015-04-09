@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -49,5 +50,10 @@ public class UserService {
     @Transactional
     public User getUserWithOpenId(String openId) {
         return userDao.getUserWithOpenId(openId);
+    }
+
+    @Transactional
+    public List<User> searchUsers(String name, String contact, String address, String birthday, String balance) throws ParseException {
+        return userDao.searchUsers(name, contact, address, birthday, balance);
     }
 }

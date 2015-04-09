@@ -1,14 +1,17 @@
 package com.renovator.controller;
 
 import com.renovator.pojo.Service;
+import com.renovator.pojo.User;
 import com.renovator.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -55,5 +58,23 @@ public class ServiceController {
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     public void deleteService(@RequestParam("id") int serviceId, HttpServletRequest request, HttpServletResponse response) {
         serviceService.deleteService(serviceId);
+    }
+
+    @RequestMapping(value = "search", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<Service> getUserList(@RequestParam("order_id") String orderId, @RequestParam("type") String type,
+                           @RequestParam("price") String price, @RequestParam("ts") String ts,
+                           @RequestParam("username") String username, @RequestParam("mobile") String contact,
+                           @RequestParam("product_name") String productName,
+                           HttpServletRequest request, HttpServletResponse response) {
+        try {
+            return serviceService.searchServices(orderId, type, price, ts, username, contact, productName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(HttpStatus.EXPECTATION_FAILED.value());
+            response.setHeader("msg", e.getMessage());
+            return null;
+        }
     }
 }

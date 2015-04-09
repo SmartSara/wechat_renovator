@@ -4,11 +4,13 @@ import com.renovator.pojo.User;
 import com.renovator.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -48,5 +50,21 @@ public class UserController {
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     public void deleteUser(@RequestParam("id") int userId, HttpServletRequest request, HttpServletResponse response) {
         userService.deleteUser(userId);
+    }
+
+    @RequestMapping(value = "search", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<User> getUserList(@RequestParam("name") String name, @RequestParam("mobile") String contact,
+                           @RequestParam("address") String address, @RequestParam("birthday") String birthday,
+                           @RequestParam("balance") String balance, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            return userService.searchUsers(name, contact, address, birthday, balance);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            response.setStatus(HttpStatus.EXPECTATION_FAILED.value());
+            response.setHeader("msg", e.getMessage());
+            return null;
+        }
     }
 }

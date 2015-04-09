@@ -2,6 +2,7 @@ package com.renovator.service;
 
 import com.renovator.dao.ServiceDao;
 import com.renovator.pojo.Service;
+import com.renovator.pojo.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,10 @@ public class ServiceService {
     @Transactional
     public List<Service> getServiceListByUserId(int userId) {
         return serviceDao.getServiceListByUserId(userId);
+    }
+
+    @Transactional
+    public List<Service> searchServices(String orderId, String type, String price, String ts, String username, String contact, String productName) {
+        return serviceDao.searchService(orderId, type, price, ts, username, contact, productName);
     }
 }

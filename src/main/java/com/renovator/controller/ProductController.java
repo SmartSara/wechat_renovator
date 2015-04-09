@@ -55,9 +55,11 @@ public class ProductController {
     }
 
     @RequestMapping(value = "search", method = RequestMethod.GET)
-    public List<Product> searchProduct(@RequestParam("name") String name, @RequestParam("desc") String description,
-                                       @RequestParam("price") String price, @RequestParam("discount") String discount, @RequestParam("ts") String ts,
-                                       HttpServletRequest request, HttpServletResponse response) {
+    public
+    @ResponseBody
+    List<Product> searchProduct(@RequestParam("name") String name, @RequestParam("desc") String description,
+                                @RequestParam("price") String price, @RequestParam("discount") String discount, @RequestParam("ts") String ts,
+                                HttpServletRequest request, HttpServletResponse response) {
         try {
             return productService.searchProduct(name, description, price, discount, ts);
         } catch (ParseException e) {

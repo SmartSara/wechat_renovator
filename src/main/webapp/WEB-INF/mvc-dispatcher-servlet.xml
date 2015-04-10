@@ -1,65 +1,72 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:task="http://www.springframework.org/schema/task"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
-    <context:component-scan base-package="com.renovator"/>
+	<context:component-scan base-package="com.renovator" />
 
-    <mvc:annotation-driven/>
-    <tx:annotation-driven/>
+	<mvc:annotation-driven />
+	<tx:annotation-driven />
 
-    <mvc:resources location="/" mapping="/**"/>
+	<mvc:resources location="/" mapping="/**" />
 
-    <context:property-placeholder ignore-unresolvable="true"
-                                  location="classpath*:/dbconfig.properties"/>
+	<context:property-placeholder
+		ignore-unresolvable="true" location="classpath*:/dbconfig.properties" />
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-          destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="${mysql.url}"/>
-        <property name="username" value="${mysql.username}"/>
-        <property name="password" value="${mysql.password}"/>
-    </bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
-
-    <!-- Hibernate 4 SessionFactory Bean definition -->
-    <bean id="hibernate4AnnotatedSessionFactory"
-          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="annotatedClasses">
-            <list>
-                <value>com.renovator.pojo.User</value>
-                <value>com.renovator.pojo.Service</value>
-                <value>com.renovator.pojo.Product</value>
-                <value>com.renovator.pojo.Administrator</value>
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <prop key="hibernate.show_sql">true</prop>
-            </props>
-        </property>
-    </bean>
-
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </bean>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="${mysql.url}" />
+		<property name="username" value="${mysql.username}" />
+		<property name="password" value="${mysql.password}" />
+	</bean>
 
 
-    <bean id="notificationService" class="com.renovator.service.NotificationService"/>
-    <!--<task:scheduled-tasks scheduler="myScheduler">-->
-        <!--<task:scheduled ref="notificationService" method="notifyBalance" fixed-delay="5000" initial-delay="1000"/>-->
-        <!--<task:scheduled ref="notificationService" method="notifyBirthday" fixed-rate="5000"/>-->
-        <!--&lt;!&ndash;<task:scheduled ref="notificationService" method="...." cron="*/5 * * * * MON-FRI"/>&ndash;&gt;-->
-    <!--</task:scheduled-tasks>-->
+	<!-- Hibernate 4 SessionFactory Bean definition -->
+	<bean id="hibernate4AnnotatedSessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.renovator.pojo.User</value>
+				<value>com.renovator.pojo.Service</value>
+				<value>com.renovator.pojo.Product</value>
+				<value>com.renovator.pojo.Article</value>
+				<value>com.renovator.pojo.Material</value>
+				<value>com.renovator.pojo.Administrator</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
 
-    <!--<task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>-->
-    <!--<task:executor id="myExecutor" pool-size="5"/>-->
-    <!--<task:scheduler id="myScheduler" pool-size="10"/>-->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+	</bean>
+
+
+	<bean id="notificationService" class="com.renovator.service.NotificationService" />
+	<!--<task:scheduled-tasks scheduler="myScheduler"> -->
+	<!--<task:scheduled ref="notificationService" method="notifyBalance" fixed-delay="5000" 
+		initial-delay="1000"/> -->
+	<!--<task:scheduled ref="notificationService" method="notifyBirthday" fixed-rate="5000"/> -->
+	<!--&lt;!&ndash;<task:scheduled ref="notificationService" method="...." 
+		cron="*/5 * * * * MON-FRI"/>&ndash;&gt; -->
+	<!--</task:scheduled-tasks> -->
+
+	<!--<task:annotation-driven executor="myExecutor" scheduler="myScheduler"/> -->
+	<!--<task:executor id="myExecutor" pool-size="5"/> -->
+	<!--<task:scheduler id="myScheduler" pool-size="10"/> -->
 
 </beans>

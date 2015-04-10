@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="User Management For Renovator">
+<meta name="author" content="Sara Zhu">
+<title>素材管理</title>
+<!-- Bootstrap core CSS -->
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/pagination.css" rel="stylesheet">
+<link href="../css/bootstrap-datepicker.css" rel="stylesheet">
+<link href="../css/font/font-awesome.css" rel="stylesheet">
+<link href="../css/material.css" rel="stylesheet">
+</head>
+
+<body>
+	<div id="nav"></div>
+
+	<div class="container">
+		<div id="loading" class="background">
+			<div class="loading"></div>
+		</div>
+		<ol class="breadcrumb">
+			<li class="active">素材管理</li>
+		</ol>
+
+
+		<div class="modal fade" id="addDialog" tabindex="-1" role="dialog"
+			aria-labelledby="dialogTitle" aria-hidden="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="dialogTitle">编辑推送消息</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-horizontal">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="row">
+										<label class="col-md-3 control-label">标题</label>
+										<div class="col-md-9">
+											<input id="title" class="form-control" placeholder="请输入标题">
+										</div>
+									</div>
+									<div class="row" style="margin-top: 5px">
+										<label class=" col-md-3 control-label" for="cover">封面</label>
+										<div class="col-md-9">
+											<button class="btn" id="coverBtn">上传封面</button>
+											<input type="file" id="cover" class="col-md-3"
+												style="display: none">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-2 no-padding-left">
+									<img alt="封面" id="coverPreview" width="70px" height="70px"
+										style="display: none">
+								</div>
+							</div>
+						</div>
+
+						<div class="hero-unit">
+							<div class="btn-toolbar" data-role="editor-toolbar"
+								data-target="#editor">
+								<div class="btn-group">
+									<a class="btn dropdown-toggle" data-toggle="dropdown"
+										title="Font"><i class="icon-font"></i><b class="caret"></b></a>
+									<ul class="dropdown-menu">
+									</ul>
+								</div>
+								<div class="btn-group">
+									<a class="btn dropdown-toggle" data-toggle="dropdown"
+										title="Font Size"><i class="icon-text-height"></i>&nbsp;<b
+										class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li><a data-edit="fontSize 5"> <font size="5">Huge</font>
+										</a></li>
+										<li><a data-edit="fontSize 3"> <font size="3">Normal</font>
+										</a></li>
+										<li><a data-edit="fontSize 1"> <font size="1">Small</font>
+										</a></li>
+									</ul>
+								</div>
+								<div class="btn-group">
+									<a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i
+										class="icon-bold"></i></a> <a class="btn" data-edit="italic"
+										title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a> <a
+										class="btn" data-edit="strikethrough" title="Strikethrough"><i
+										class="icon-strikethrough"></i></a> <a class="btn"
+										data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i
+										class="icon-underline"></i></a>
+								</div>
+								<div class="btn-group">
+									<a class="btn" data-edit="insertunorderedlist"
+										title="Bullet list"><i class="icon-list-ul"></i></a> <a
+										class="btn" data-edit="insertorderedlist" title="Number list"><i
+										class="icon-list-ol"></i></a> <a class="btn" data-edit="outdent"
+										title="Reduce indent (Shift+Tab)"><i
+										class="icon-indent-left"></i></a> <a class="btn"
+										data-edit="indent" title="Indent (Tab)"><i
+										class="icon-indent-right"></i></a>
+								</div>
+								<div class="btn-group">
+									<a class="btn" data-edit="justifyleft"
+										title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
+									<a class="btn" data-edit="justifycenter"
+										title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
+									<a class="btn" data-edit="justifyright"
+										title="Align Right (Ctrl/Cmd+R)"><i
+										class="icon-align-right"></i></a> <a class="btn"
+										data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i
+										class="icon-align-justify"></i></a>
+								</div>
+								<div class="btn-group">
+									<a class="btn dropdown-toggle" data-toggle="dropdown"
+										title="Hyperlink"><i class="icon-link"></i></a>
+									<div class="dropdown-menu input-append">
+										<input class="span2" placeholder="URL" type="text"
+											data-edit="createLink" />
+										<button class="btn" type="button">Add</button>
+									</div>
+									<a class="btn" data-edit="unlink" title="Remove Hyperlink"><i
+										class="icon-cut"></i></a>
+
+								</div>
+
+								<div class="btn-group">
+									<a class="btn" title="Insert picture (or just drag & drop)"
+										id="pictureBtn"><i class="icon-picture"></i></a> <input
+										type="file" data-role="magic-overlay"
+										data-target="#pictureBtn" data-edit="insertImage" />
+								</div>
+								<div class="btn-group">
+									<a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i
+										class="icon-undo"></i></a> <a class="btn" data-edit="redo"
+										title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
+								</div>
+								<input type="text" data-edit="inserttext" id="voiceBtn"
+									x-webkit-speech="">
+							</div>
+							<div id="editor" ></div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="cancelBtn">关闭
+						</button>
+						<button type="button" class="btn btn-primary" id="saveBtn">
+							保存</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="materials">
+			<div class="col-md-2" id="addItem">
+				<div>新增</div>
+				<a class="thumbnail"> <img id="addIcon"
+					src="../../images/add.png"> <img id="optionsIcon"
+					src="../../images/merge.png" usemap="#optionsMap"
+					style="display: none">
+				</a>
+				<map name="optionsMap">
+					<area id="singleAdd" shape="rect" coords="0,0,64,128" title="单图文消息">
+					<area id="mutliAdd" shape="rect" coords="64,0,128,128"
+						title="多图文消息">
+				</map>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../javascript/lib/jquery.min.js"></script>
+<script src="../javascript/lib/jquery.hotkeys.js"></script>
+<script src="../javascript/lib/bootstrap-dialog.js"></script>
+<script src="../javascript/lib/bootstrap.min.js"></script>
+<script src="../javascript/lib/util.js"></script>
+<script src="../javascript/lib/bootstrap-datepicker.min.js"></script>
+<script src="../javascript/lib/bootstrap-datepicker.zh-CN.min.js"></script>
+<script src="../javascript/lib/bootstrap-wysiwyg.js"></script>
+<script src="../javascript/material.js"></script>
+
+</html>

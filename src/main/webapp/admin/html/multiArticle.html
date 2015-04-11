@@ -7,18 +7,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="User Management For Renovator">
 <meta name="author" content="Sara Zhu">
-<title>素材管理</title>
+<title>多图文消息</title>
 <!-- Bootstrap core CSS -->
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/pagination.css" rel="stylesheet">
 <link href="../css/bootstrap-datepicker.css" rel="stylesheet">
 <link href="../css/font/font-awesome.css" rel="stylesheet">
 <link href="../css/material.css" rel="stylesheet">
+
+
 </head>
 
 <body>
 	<div id="nav"></div>
-
 	<div class="container">
 		<div id="loading" class="background">
 			<div class="loading"></div>
@@ -26,16 +27,44 @@
 		<ol class="breadcrumb">
 			<li class="active">素材管理</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> 单图文 <b class="caret"></b>
+					data-toggle="dropdown">多图文 <b class="caret"></b>
 				</a>
 					<ul class="dropdown-menu">
-						<li><a href="#">多图文</a></li>
+						<li><a href="#">单图文</a></li>
 					</ul></li>
 		</ol>
 
 
+	<div class="modal fade" id="addDialog" tabindex="-1" role="dialog"
+			aria-labelledby="dialogTitle" aria-hidden="false">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="dialogTitle">编辑推送消息</h4>
+					</div>
+					<div class="modal-body">
+					<script id="singleArticleTemplate" type="text/x-jsrender">
+							<div class="col-md-2 singleArticle" data-id={{>id}}> <div>{{>title}}</div> <a class="thumbnail"> <img src="/pic/{{>cover}}"> <i></i></a> </div>
+					</script>
+					<div class="row" id="singleMaterials">
 
-		<div class="modal fade" id="addDialog" tabindex="-1" role="dialog"
+					 </div>
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							id="cancelBtn">关闭</button>
+						<button type="button" class="btn btn-primary" id="saveBtn">
+							保存</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal fade" id="xxxx" tabindex="-1" role="dialog"
 			aria-labelledby="dialogTitle" aria-hidden="false">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -161,20 +190,28 @@
 				</div>
 			</div>
 		</div>
-		<div class="row" id="materials">
+
+
+
+
+
+		<div class="row" id="pushMessageContainer">
 			<div class="col-md-2" id="addItem">
 				<div>新增</div>
 				<a class="thumbnail"> <img id="addIcon"
-					src="../../images/add.png"> <img id="singleAdd"
-					src="../../images/singleArticle.png" usemap="#optionsMap"
+					src="../../images/add.png"> <img id="multiAdd"
+					src="../../images/multiArticle.png"
 					style="display: none">
 				</a>
-<!-- 				<map name="optionsMap"> -->
-<!-- 					<area id="singleAdd" shape="rect" coords="0,0,64,128" title="单图文消息"> -->
-<!-- 					<area id="mutliAdd" shape="rect" coords="64,0,128,128" -->
-<!-- 						title="多图文消息"> -->
-<!-- 				</map> -->
 			</div>
+			<script id="pushMessageTemplate" type="text/x-jsrender">
+				<div class="col-md-2" id="{{>id}}">
+					<div>{{>title}}</div>
+						<a class="thumbnail"> 
+							<img src="/pic/{{>cover}}">
+					</a>
+				</div>
+			</script>
 		</div>
 
 	</div>
@@ -185,12 +222,13 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="../javascript/lib/jquery.min.js"></script>
 <script src="../javascript/lib/jquery.hotkeys.js"></script>
+<script src="../javascript/lib/jsrender.js"></script>
 <script src="../javascript/lib/bootstrap-dialog.js"></script>
 <script src="../javascript/lib/bootstrap.min.js"></script>
 <script src="../javascript/lib/util.js"></script>
 <script src="../javascript/lib/bootstrap-datepicker.min.js"></script>
 <script src="../javascript/lib/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="../javascript/lib/bootstrap-wysiwyg.js"></script>
-<script src="../javascript/material.js"></script>
+<script src="../javascript/multiArticle.js"></script>
 
 </html>

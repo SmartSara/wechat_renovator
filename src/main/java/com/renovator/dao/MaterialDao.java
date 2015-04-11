@@ -1,10 +1,10 @@
 package com.renovator.dao;
 
 import com.daveayan.transformers.Transformer;
-import com.renovator.pojo.Article;
-import com.renovator.pojo.Material;
 import com.renovator.pojo.User;
-import com.renovator.pojo.dto.ArticlePreview;
+import com.renovator.pojo.dto.Preview;
+import com.renovator.pojo.dto.PushMessageTask;
+import com.renovator.pojo.dto.material.Article;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -48,10 +48,10 @@ public class MaterialDao {
 		return articles;
 	}
 
-	public String saveMaterial(Material material) {
+	public String saveMaterial(PushMessageTask material) {
 		try {
 			Serializable id = sessionFactory.getCurrentSession().save(material);
-			logger.debug("Add material {} {}", id, material.toString());
+			logger.debug("Add notifaciton {} {}", id, material.toString());
 			return id.toString();
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -64,21 +64,33 @@ public class MaterialDao {
 		sessionFactory
 				.getCurrentSession()
 				.createSQLQuery(
-						"update material set msg = concat (msg,';',?) where id = ?")
+						"update notifaction set msg = concat (msg,';',?) where id = ?")
 				.setString(0, articleId)
 				.setInteger(1, Integer.parseInt(materialNO)).executeUpdate();
 
 	}
 
-	public List<ArticlePreview> getArticlePreview() {
+	public List<Preview> getArticlePreview() {
 
 		@SuppressWarnings("unchecked")
-		List<ArticlePreview> articlePreviews = sessionFactory
+		List<Preview> articlePreviews = sessionFactory
+				.getCurrentSession()
+				.createSQLQuery(
+						"select id  ,title ,cover from article order by id asc")
+				.setResultTransformer(
+						Transformers.aliasToBean(Preview.class)).list();
+		return articlePreviews;
+	}
+	
+	public List<Preview> getNotifactionPreview() {
+
+		@SuppressWarnings("unchecked")
+		List<Preview> articlePreviews = sessionFactory
 				.getCurrentSession()
 				.createSQLQuery(
 						"select article.id as id  ,title ,cover from material , article where article.id = SUBSTRING_INDEX(material.msg,';',1) order by id asc")
 				.setResultTransformer(
-						Transformers.aliasToBean(ArticlePreview.class)).list();
+						Transformers.aliasToBean(Preview.class)).list();
 		return articlePreviews;
 	}
 

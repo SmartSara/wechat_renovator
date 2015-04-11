@@ -3,11 +3,11 @@ package com.renovator.dao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.Files;
 import com.renovator.dao.MaterialDao;
-import com.renovator.pojo.Article;
-import com.renovator.pojo.Material;
 import com.renovator.pojo.Product;
 import com.renovator.pojo.Service;
 import com.renovator.pojo.User;
+import com.renovator.pojo.dto.PushMessageTask;
+import com.renovator.pojo.dto.material.Article;
 import com.renovator.util.PropertyHolder;
 
 import org.junit.Before;
@@ -49,7 +49,7 @@ public class DaoTests {
 	public void saveMaterialTest(){
 		
 		
-		Material material = new Material();
+		PushMessageTask material = new PushMessageTask();
 		material.setMsg("1");
 		material.setScheduledTime(new Date());
 		material.setType("article");
@@ -70,7 +70,7 @@ public class DaoTests {
 			System.out.println("content ==============");
 			System.out.println(article.getContent());
 			System.out.println("cover save as ==============");
-			Files.write(article.getCover(), to);
+//			Files.write(article.getCover(), to);
 			
 		}
 	}

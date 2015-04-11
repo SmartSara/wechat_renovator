@@ -1,4 +1,4 @@
-package com.renovator.pojo;
+package com.renovator.pojo.dto;
 
 import java.util.Date;
 
@@ -9,8 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "material")
-public class Material {	
+@Table(name = "pushMessageTask")
+public class PushMessageTask {	
 	@Id
 	@GeneratedValue
 	private int id;

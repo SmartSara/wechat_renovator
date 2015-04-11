@@ -1,9 +1,15 @@
 package com.renovator.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.renovator.pojo.Article;
-import com.renovator.pojo.dto.ArticlePreview;
+import com.renovator.pojo.dto.Preview;
+import com.renovator.pojo.dto.material.Article;
 import com.renovator.service.MaterialService;
+import com.renovator.util.PropertyHolder;
 
 /**
  * Created by darlingtld on 2015/4/4.
@@ -32,30 +39,47 @@ public class MaterialController {
 	@Autowired
 	private MaterialService materialService;
 
-	@RequestMapping(value = "/{materialNo}/article/add", method = RequestMethod.POST)
-	public @ResponseBody String addArticle(@PathVariable String materialNo,
+	@RequestMapping(value = "/article/add", method = RequestMethod.POST)
+	public @ResponseBody String addArticleMaterial(
 			@RequestParam("cover") MultipartFile cover,
 			@RequestParam("title") String title,
 			@RequestParam("content") String content) {
 
 		System.out.println(title);
-		System.out.println(content);
 		System.out.println("Cover size : " + cover.getSize());
 		Article article = new Article();
+		
+		String coverName = cover.getOriginalFilename();
+		
 		article.setTitle(title);
 		article.setContent(content);
+		article.setCover(coverName);
 		try {
-			article.setCover(cover.getBytes());
+			File storedCover =  new File(PropertyHolder.MATERIAL_PICTURE_DIR,coverName);
+			storedCover.createNewFile();
+			IOUtils.copy(cover.getInputStream(),new FileOutputStream(storedCover));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
-			logger.error(e.getMessage(), e);
+			e.printStackTrace();
 		}
-		return materialService.addArticle(materialNo, article);
+		String artileNO = materialService.addArticle(article);
+		
+		return artileNO;
 	}
 	
 	@RequestMapping(value = "/article/preview")
 	public @ResponseBody Object getArticlePreview() {
 		
-		List<ArticlePreview> articlePreviews = materialService.getArticlePreview();
+		List<Preview> articlePreviews = materialService.getArticlePreview();
+
+		 return articlePreviews;
+	}
+	
+	@RequestMapping(value = "/article/list")
+	public @ResponseBody Object getArticleList() {
+		
+		List<Preview> articlePreviews = materialService.getArticlePreview();
 
 		 return articlePreviews;
 	}

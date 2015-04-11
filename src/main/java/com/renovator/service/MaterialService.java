@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.renovator.dao.MaterialDao;
-import com.renovator.pojo.Article;
-import com.renovator.pojo.Material;
-import com.renovator.pojo.dto.ArticlePreview;
+import com.renovator.pojo.dto.Preview;
+import com.renovator.pojo.dto.PushMessageTask;
+import com.renovator.pojo.dto.material.Article;
 import com.renovator.util.MaterialType;
 
 /**
@@ -38,23 +38,23 @@ public class MaterialService {
 
 		String articleId = materialDao.addArticle(article);
 
-		if ("blank".equals(materialNO)) {
+//		if ("blank".equals(materialNO)) {
+//
+//			Notification material = new Notification();
+//			material.setMsg(articleId);
+////			material.setType(MaterialType.);
+//			material.setScheduledTime(new Date());
+//			materialNO = materialDao.saveMaterial(material);
+//
+//		} else {
+//			materialDao.updateMaterial(materialNO, articleId);
+//		}
 
-			Material material = new Material();
-			material.setMsg(articleId);
-			material.setType(MaterialType.ARTICLE);
-			material.setScheduledTime(new Date());
-			materialNO = materialDao.saveMaterial(material);
-
-		} else {
-			materialDao.updateMaterial(materialNO, articleId);
-		}
-
-		return materialNO;
+		return articleId;
 	}
 
 	@Transactional
-	public List<ArticlePreview> getArticlePreview() {
+	public List<Preview> getArticlePreview() {
 		
 		return materialDao.getArticlePreview();
 	}

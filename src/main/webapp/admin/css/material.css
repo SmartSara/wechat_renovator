@@ -45,3 +45,6 @@ div[data-role="editor-toolbar"] {
 	width : 800px;
 }
 
+.checked{border:2px solid green;margin:-1px 1px;}
+.checked i{width:30px; height:30px; position:absolute; right:0; bottom:0;_right:-1px; _bottom:-1px;background:url(../../images/checked.gif) no-repeat;}
+

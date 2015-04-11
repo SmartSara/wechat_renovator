@@ -1,4 +1,4 @@
-package com.renovator.pojo;
+package com.renovator.pojo.dto.material;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -18,8 +18,8 @@ public class Article {
 	@Column(name = "title")
 	private String title;
 
-	@Column(name = "cover", columnDefinition = "BLOB NOT NULL")
-	private byte[] cover;
+	@Column(name="cover")
+	private String cover;
 
 	@Column(name = "content", columnDefinition = "CLOB NOT NULL")
 	private String content;
@@ -43,11 +43,11 @@ public class Article {
 		this.title = title;
 	}
 
-	public byte[] getCover() {
+	public String getCover() {
 		return cover;
 	}
 
-	public void setCover(byte[] cover) {
+	public void setCover(String cover) {
 		this.cover = cover;
 	}
 
@@ -69,8 +69,8 @@ public class Article {
 
 	@Override
 	public String toString() {
-		return "Article [id=" + id + ", title=" + title + ", cover.size="
-				+ cover.length + ", content=" + content + ", ts="
+		return "Article [id=" + id + ", title=" + title + ", cover="
+				+ cover + ", content=" + content + ", ts="
 				+ ts + "]";
 	}
 

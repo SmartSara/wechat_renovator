@@ -66,8 +66,10 @@
     </div>
 
     <!--pagination-->
-    <div id="pagination" style="float: right;">
-    </div>
+    <div id="pagination" style="float: right;" class="pagination"></div>
+    <span class="pagination" style="float: right;">
+        每页显示：<input type="text" style="width: 40%" id="numPerPage" onkeydown="paginationEnter(event, $(this).val());" value="10"> 个
+    </span>
 
     <!--User Table-->
     <table class="table table-bordered table-hover">

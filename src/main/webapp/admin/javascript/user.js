@@ -24,7 +24,7 @@ function _initialPage() {
         success: function (data) {
             $("#userTemplate").tmpl(data).appendTo("#userList");
             _user = data;
-            //pageTable("#pagination", "#packageList tr",num_per_page);
+            _pageTable(10);
             $("#loading").addClass("hidden");
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -33,13 +33,6 @@ function _initialPage() {
             console.log(XMLHttpRequest.responseText);
         }
     });
-
-
-    //$("#pagination").pagination(2, {
-    //    prev_text: "pre",
-    //    next_text: "next",
-    //    items_per_page: 1
-    //});
 }
 
 
@@ -66,9 +59,9 @@ $(document).on("click", ".update-user", function () {
     $(".modal-body #openId").val(openId);
 });
 
-function _searchUser(){
-    var birth = $("#searchBirthday").val().replace("年","-").replace("月","-").replace("日","");
-    var params = "name="+ $("#searchUsername").val() + "&mobile="+ $("#searchMobile").val() + "&address="+ $("#searchAddress").val()
+function _searchUser() {
+    var birth = $("#searchBirthday").val().replace("年", "-").replace("月", "-").replace("日", "");
+    var params = "name=" + $("#searchUsername").val() + "&mobile=" + $("#searchMobile").val() + "&address=" + $("#searchAddress").val()
         + "&birthday=" + birth + "&balance=" + $("#searchBalance").val();
     $.ajax({
         type: "get",
@@ -77,7 +70,6 @@ function _searchUser(){
         success: function (data) {
             $("#userList tr").empty();
             $("#userTemplate").tmpl(data).appendTo("#userList");
-            //pageTable("#pagination", "#packageList tr",num_per_page);
             $("#loading").addClass("hidden");
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -174,3 +166,22 @@ $(document).on("click", ".sort", function () {
     $("#userList tr").empty();
     $("#userTemplate").tmpl(_user).appendTo("#userList");
 });
+
+function _pageTable(numPerPage) {
+    $("#pagination").pagination(_user.length, {
+        callback: pageSelectCallback,
+        items_per_page: numPerPage,
+        prev_text: "上一页",
+        next_text: "下一页"
+    });
+}
+function pageSelectCallback(page_index) {
+    var numPerPage = $("#numPerPage").val();
+    $("#userList tr").hide();
+    if (page_index == 0) {
+        $("#userList tr:lt(" + numPerPage + ")").show();
+    } else {
+        $("#userList tr:gt(" + (page_index * numPerPage - 1) + ")").show();
+        $("#userList tr:gt(" + ((page_index + 1) * numPerPage - 1) + ")").hide();
+    }
+}

@@ -29,7 +29,7 @@ function _initialPage() {
         success: function (data) {
             $("#orderTemplate").tmpl(data).appendTo("#orderList");
             _order = data;
-            //pageTable("#pagination", "#packageList tr",num_per_page);
+            _pageTable(10);
             $("#loading").addClass("hidden");
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -37,6 +37,10 @@ function _initialPage() {
             console.log(XMLHttpRequest.status);
             console.log(XMLHttpRequest.responseText);
         }
+    });
+
+    $("#pagination").pagination(15, {
+        items_per_page: 10
     });
 }
 
@@ -177,3 +181,22 @@ $(document).on("click", ".sort", function () {
     $("#orderList tr").empty();
     $("#orderTemplate").tmpl(_order).appendTo("#orderList");
 });
+
+function _pageTable(numPerPage) {
+    $("#pagination").pagination(_order.length, {
+        callback: pageSelectCallback,
+        items_per_page: numPerPage,
+        prev_text: "上一页",
+        next_text: "下一页"
+    });
+}
+function pageSelectCallback(page_index) {
+    var numPerPage = $("#numPerPage").val();
+    $("#orderList tr").hide();
+    if (page_index == 0) {
+        $("#orderList tr:lt(" + numPerPage + ")").show();
+    } else {
+        $("#orderList tr:gt(" + (page_index * numPerPage - 1) + ")").show();
+        $("#orderList tr:gt(" + ((page_index + 1) * numPerPage - 1) + ")").hide();
+    }
+}

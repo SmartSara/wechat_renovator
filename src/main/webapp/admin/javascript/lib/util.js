@@ -24,3 +24,14 @@ function getURLParameter(key) {
     if (r != null) return unescape(r[2]);
     return null;
 }
+
+function paginationEnter(evt, val) {
+    var evt = evt ? evt : (window.event ? window.event : null);//兼容IE和FF
+    if (evt.keyCode == 13) {
+        if(val < 1){
+            alert("请输入大于0的数！");
+            return;
+        }
+        _pageTable($("#numPerPage").val());
+    }
+}

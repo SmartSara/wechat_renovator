@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -52,7 +53,7 @@ public class ServiceService {
     }
 
     @Transactional
-    public List<Service> searchServices(String orderId, String type, String price, String ts, String username, String contact, String productName) {
+    public List<Service> searchServices(String orderId, String type, String price, String ts, String username, String contact, String productName) throws ParseException {
         return serviceDao.searchService(orderId, type, price, ts, username, contact, productName);
     }
 }

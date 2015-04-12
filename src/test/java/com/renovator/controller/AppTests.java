@@ -126,10 +126,10 @@ public class AppTests {
     public void searchService() throws Exception {
 //        mockMvc.perform(get("/service/search?order_id=&type=sale&price=&ts=&username=&contact=&product_name=")).andExpect(status().isOk()).andDo(print());
         String order_id = "";
-        String type = "sale";
+        String type = "";
         String contact = "";
         String price = "";
-        String ts = "";
+        String ts = "2015-04-04";
         String username="";
         String product_name="";
         List<Service> serviceList = serviceService.searchServices(order_id, type, price, ts, username, contact, product_name);
@@ -141,10 +141,10 @@ public class AppTests {
     @Test
     public void searchProduct() throws Exception {
 //        mockMvc.perform(get("/service/search?order_id=&type=sale&price=&ts=&username=&contact=&product_name=")).andExpect(status().isOk()).andDo(print());
-        String name = "ÉñÆ÷";
+        String name = "";
         String description = "";
         String price = "";
-        String discount = "";
+        String discount = "0.1";
         String ts = "";
         List<Product> productList = productService.searchProduct(name, description, price, discount, ts);
         for (Product product : productList) {

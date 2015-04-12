@@ -82,7 +82,7 @@ public class ProductDao {
             criteria.add(Restrictions.eq("price", Double.parseDouble(price)));
         }
         if (!"".equalsIgnoreCase(discount)) {
-            criteria.add(Restrictions.eq("discount", Float.parseFloat(discount)));
+            criteria.add(Restrictions.like("discount", Float.parseFloat(discount)));
         }
         return criteria.list();
     }

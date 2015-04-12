@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -76,10 +78,10 @@ public class ServiceDao {
         }
     }
 
-    public List<Service> searchService(String orderId, String type, String price, String ts, String username, String contact, String productName) {
+    public List<Service> searchService(String orderId, String type, String price, String ts, String username, String contact, String productName) throws ParseException {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Service.class);
         if (!"".equalsIgnoreCase(orderId)) {
-            criteria.add(Restrictions.like("orderId", "%" + orderId + "%"));
+            criteria.add(Restrictions.like("orderId", Integer.parseInt(orderId)));
         }
         if (!"".equalsIgnoreCase(type)) {
             criteria.add(Restrictions.like("type", "%" + type + "%"));
@@ -88,7 +90,7 @@ public class ServiceDao {
             criteria.add(Restrictions.eq("price", Double.parseDouble(price)));
         }
         if (!"".equalsIgnoreCase(ts)) {
-            criteria.add(Restrictions.eq("ts", orderId));
+            criteria.add(Restrictions.eq("ts", new SimpleDateFormat("yyyy-MM-dd").parse(ts)));
         }
         if (!"".equalsIgnoreCase(username)) {
             criteria.createCriteria("user").add(Restrictions.like("name", "%" + username + "%"));

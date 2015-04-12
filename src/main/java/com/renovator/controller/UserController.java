@@ -3,6 +3,8 @@ package com.renovator.controller;
 import com.renovator.pojo.User;
 import com.renovator.service.UserService;
 import com.renovator.util.PropertyHolder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
 
@@ -67,5 +71,14 @@ public class UserController {
             response.setHeader(PropertyHolder.HEADER_MSG, e.getMessage());
             return null;
         }
+    }
+
+    @RequestMapping(value = "account/bind", method = RequestMethod.POST)
+    public @ResponseBody
+    void getUserList(@RequestParam("username") String username, @RequestParam("mobile") String contact,
+                            @RequestParam("email") String email, @RequestParam("openId") String openId, HttpServletRequest request, HttpServletResponse response) {
+        logger.info("username {}, mobile {}, email {}, openId {}", username, contact, email, openId);
+        userService.bindAccount(username, contact, email, openId);
+
     }
 }

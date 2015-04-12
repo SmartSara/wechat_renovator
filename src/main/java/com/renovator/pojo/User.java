@@ -24,8 +24,18 @@ public class User {
     private Date birthday;
     @Column(name = "balance")
     private double balance;
-    @Column(name="open_id")
+    @Column(name = "open_id")
     private String openId;
+    @Column(name = "email")
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getOpenId() {
         return openId;

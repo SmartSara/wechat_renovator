@@ -116,7 +116,7 @@ public class RenovatorTestService {
         article.setTitle("请绑定账号");
         article.setDescription("绑定会员账号，使用微信获取更多信息");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
-        article.setUrl(PropertyHolder.SERVER + "/account_binding/index.html");
+        article.setUrl(PropertyHolder.SERVER + "/account_binding/index.html?open_id="+fromUserName);
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
         newsMessage.setArticles(articleList);

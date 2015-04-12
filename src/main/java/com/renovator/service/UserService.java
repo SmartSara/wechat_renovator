@@ -66,4 +66,14 @@ public class UserService {
     public List<User> searchUsers(String name, String contact, String address, String birthday, String balance) throws ParseException {
         return userDao.searchUsers(name, contact, address, birthday, balance);
     }
+
+    @Transactional
+    public void bindAccount(String username, String contact, String email, String openId) {
+        User user=new User();
+        user.setName(username);
+        user.setContact(contact);
+        user.setEmail(email);
+        user.setOpenId(openId);
+        userDao.addUser(user);
+    }
 }

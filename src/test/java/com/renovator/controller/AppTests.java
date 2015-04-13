@@ -21,6 +21,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -60,6 +61,8 @@ public class AppTests {
         user.setBalance(99.8);
         user.setBirthday(new Date());
         user.setContact("1340218638");
+        user.setEmail("darlingtld@gmail.com");
+        user.setOpenId(UUID.randomUUID().toString());
         ObjectMapper objectMapper = new ObjectMapper();
         String userJson = objectMapper.writeValueAsString(user);
         System.out.println(userJson);
@@ -150,5 +153,11 @@ public class AppTests {
         for (Product product : productList) {
             System.out.println(product);
         }
+    }
+
+    @Test
+    public void testGetUserByOpenId(){
+        User user = userService.getUserWithOpenId("456");
+        System.out.println(user);
     }
 }

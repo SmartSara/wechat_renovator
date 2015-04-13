@@ -76,7 +76,7 @@ public class MaterialDao {
 		List<Preview> articlePreviews = sessionFactory
 				.getCurrentSession()
 				.createSQLQuery(
-						"select id  ,title ,cover from article order by id asc")
+						"select id  ,title ,cover from article order by id desc")
 				.setResultTransformer(
 						Transformers.aliasToBean(Preview.class)).list();
 		return articlePreviews;
@@ -92,6 +92,20 @@ public class MaterialDao {
 				.setResultTransformer(
 						Transformers.aliasToBean(Preview.class)).list();
 		return articlePreviews;
+	}
+
+	public Article getArticleById(int id) {
+		return (Article) sessionFactory.getCurrentSession().get(Article.class, id);
+	}
+
+	public void updateArticle(Article article) {
+		if(article.getCover() == null){
+			String sql = "";
+			sql = "update article set title = :title ,content = :content where id = :id ";
+			sessionFactory.getCurrentSession().createSQLQuery(sql).setInteger("id", article.getId()).setString("title", article.getTitle()).setString("content",article.getContent()).executeUpdate();
+		}else{
+			sessionFactory.getCurrentSession().saveOrUpdate(article);
+		}
 	}
 
 }

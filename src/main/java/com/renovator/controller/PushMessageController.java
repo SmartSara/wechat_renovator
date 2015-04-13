@@ -33,17 +33,40 @@ public class PushMessageController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public @ResponseBody String addArticleMaterial(
-			@RequestBody PushMessageTask message ) {
+			@RequestBody PushMessageTask message) {
 		pushMessageService.addPushMessage(message);
 		return "ok";
 	}
-	
+
 	@RequestMapping(value = "/{type}/preview")
 	public @ResponseBody Object getArticlePreview(@PathVariable String type) {
-		
+
 		List<Preview> preview = pushMessageService.getPreview(type);
 
-		 return preview;
+		return preview;
 	}
+
+	@RequestMapping(value = "/{type}/preview/{pushMessageTaskId}")
+	public @ResponseBody Object getArticlePreview(@PathVariable String type,
+			@PathVariable int pushMessageTaskId) {
+
+		List<Preview> preview = pushMessageService.getPreview(type,
+				pushMessageTaskId);
+		return preview;
+	}
+
+	@RequestMapping(value = "/del/{pushMessageTaskId}/{articleId}")
+	public @ResponseBody Object delArticleInPushMessage(
+			@PathVariable int pushMessageTaskId, @PathVariable int articleId) {
+		
+		return pushMessageService
+				.delArticleInPushMessage(pushMessageTaskId, articleId);
+	}
+	@RequestMapping(value = "/delete/{type}/{pushMessageTaskId}")
+	public @ResponseBody Object delPushMessage(
+			@PathVariable String type, @PathVariable int pushMessageTaskId) {
+		return pushMessageService.deletePushMessage(type,pushMessageTaskId);
+	}
+	
 
 }

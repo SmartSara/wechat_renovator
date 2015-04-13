@@ -45,11 +45,21 @@
 						<h4 class="modal-title" id="dialogTitle">编辑推送消息</h4>
 					</div>
 					<div class="modal-body">
-					<script id="singleArticleTemplate" type="text/x-jsrender">
-							<div class="col-md-2 singleArticle" data-id={{>id}}> <div>{{>title}}</div> <a class="thumbnail"> <img src="/pic/{{>cover}}"> <i></i></a> </div>
+					<script id="singleArticleAddTemplate" type="text/x-jsrender">
+							<div class="col-md-2 singleArticle add" data-id={{>id}}> <div>{{>title}}
+							</div> <a class="thumbnail"> <img src="/pic/{{>cover}}"> <i></i></a> </div>
 					</script>
+					<script id="singleArticleEditTemplate" type="text/x-jsrender">
+							<div class="col-md-2 singleArticle edit" data-id={{>id}}> <div>{{>title}}
+								<i class="glyphicon glyphicon-remove del" style="float:right;margin-left:4px" ></i>
+ 								<i class="glyphicon glyphicon-edit edit"   style="float:right" ></i>		
+							</div> <a class="thumbnail"> <img src="/pic/{{>cover}}"> <i></i></a> </div>
+					</script>
+					
+					<div class="row" id="alreadySingleMaterials">
+					 </div>
+					
 					<div class="row" id="singleMaterials">
-
 					 </div>
 						
 					</div>
@@ -64,7 +74,7 @@
 		</div>
 
 
-		<div class="modal fade" id="xxxx" tabindex="-1" role="dialog"
+		<div class="modal fade" id="editDailog" tabindex="-1" role="dialog"
 			aria-labelledby="dialogTitle" aria-hidden="false">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -184,16 +194,12 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal"
 							id="cancelBtn">关闭</button>
-						<button type="button" class="btn btn-primary" id="saveBtn">
+						<button type="button" class="btn btn-primary" id="updateArticleBtn">
 							保存</button>
 					</div>
 				</div>
 			</div>
 		</div>
-
-
-
-
 
 		<div class="row" id="pushMessageContainer">
 			<div class="col-md-2" id="addItem">
@@ -205,15 +211,32 @@
 				</a>
 			</div>
 			<script id="pushMessageTemplate" type="text/x-jsrender">
-				<div class="col-md-2" id="{{>id}}">
-					<div>{{>title}}</div>
+				<div class="col-md-2 preview" id="{{>id}}">
+					<div>{{>title}}
+ 						<i class="glyphicon glyphicon-remove del" style="float:right;margin-left:4px;display:none" ></i>
+ 						<i class="glyphicon glyphicon-plus add"   style="float:right;margin-left:4px;display:none" ></i>
+ 						<i class="glyphicon glyphicon-edit edit"   style="float:right;display:none" ></i>
+					</div>
 						<a class="thumbnail"> 
-							<img src="/pic/{{>cover}}">
+							<img src="/pic/{{>cover}}" id="img_{{>id}}">
 					</a>
 				</div>
 			</script>
 		</div>
-
+		
+		<div id="expandPushMessage"  style="background-color:white;display:none">
+			<div>Title</div>
+			<a class="thumbnail"> 
+				<img src="/pic/1.jpg"/>
+			</a>
+		</div>
+			<script id="expandArticleTemplate" type="text/x-jsrender">
+				<div>{{>title}}</div>
+					<a class="thumbnail preview" data-id={{>id}}> 
+						<img src="/pic/{{>cover}}"/>
+					</a>
+				</div>
+			</script>		
 	</div>
 
 </body>

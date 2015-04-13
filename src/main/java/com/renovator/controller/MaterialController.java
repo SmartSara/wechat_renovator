@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.renovator.pojo.dto.Preview;
 import com.renovator.pojo.dto.material.Article;
 import com.renovator.service.MaterialService;
@@ -68,12 +69,66 @@ public class MaterialController {
 		return artileNO;
 	}
 	
+	@RequestMapping(value = "/article/noCover/update", method = RequestMethod.POST)
+	public @ResponseBody String updateArticleMaterialWithoutCover(
+			@RequestParam("id") int id,
+			@RequestParam("title") String title,
+			@RequestParam("content") String content) {
+
+		Article article = new Article();
+		article.setId(id);
+		article.setTitle(title);
+		article.setContent(content);
+		materialService.updateArticle(article);
+		return "ok";
+	}
+	
+	@RequestMapping(value = "/article/update", method = RequestMethod.POST)
+	public @ResponseBody String updateArticleMaterial(
+			@RequestParam("id") int id,
+			@RequestParam(value = "cover") MultipartFile cover,
+			@RequestParam("title") String title,
+			@RequestParam("content") String content) {
+
+		System.out.println(title);
+		System.out.println("Cover size : " + cover.getSize());
+		Article article = new Article();
+		
+		String coverName = cover.getOriginalFilename();
+		article.setCover(coverName);
+		article.setId(id);
+		try {
+			File storedCover =  new File(PropertyHolder.MATERIAL_PICTURE_DIR,coverName);
+			storedCover.createNewFile();
+			IOUtils.copy(cover.getInputStream(),new FileOutputStream(storedCover));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		article.setTitle(title);
+		article.setContent(content);
+		materialService.updateArticle(article);
+		
+		return "ok";
+	}
+	
 	@RequestMapping(value = "/article/preview")
 	public @ResponseBody Object getArticlePreview() {
 		
 		List<Preview> articlePreviews = materialService.getArticlePreview();
 
 		 return articlePreviews;
+	}
+	
+	
+	@RequestMapping(value = "/article/{id}")
+	public @ResponseBody Object getArticleByID(@PathVariable int id) {
+		
+		Article article = materialService.getArticleById(id);
+
+		 return article;
 	}
 	
 	@RequestMapping(value = "/article/list")

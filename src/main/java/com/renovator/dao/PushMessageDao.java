@@ -1,8 +1,11 @@
 package com.renovator.dao;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang.text.StrSubstitutor;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
@@ -38,18 +41,74 @@ public class PushMessageDao {
 
 	public List<Preview> getPreview(String type) {
 		String table = "article";
-		if(type.contains("ARTICLE")){
+		if (type.contains("ARTICLE")) {
 			table = "article";
 		}
-		String sql = String.format("select pushMessageTask.id as id ,title ,cover from pushMessageTask , article where %s.id = SUBSTRING_INDEX(pushMessageTask.msg,';',1) order by pushMessageTask.id desc", table,table);
+		String sql = String
+				.format("select pushMessageTask.id as id ,title ,cover from pushMessageTask , article where %s.id = SUBSTRING_INDEX(pushMessageTask.msg,',',1) order by pushMessageTask.id desc",
+						table, table);
 		@SuppressWarnings("unchecked")
-		List<Preview> previews = sessionFactory
-				.getCurrentSession()
+		List<Preview> previews = sessionFactory.getCurrentSession()
 				.createSQLQuery(sql)
-				.setResultTransformer(
-						Transformers.aliasToBean(Preview.class)).list();
+				.setResultTransformer(Transformers.aliasToBean(Preview.class))
+				.list();
 		return previews;
 	}
 
+	public List<Preview> getPreview(String type, int pushMessageTaskId) {
+
+		PushMessageTask pushMessageTask = (PushMessageTask) sessionFactory
+				.getCurrentSession().get(PushMessageTask.class,
+						pushMessageTaskId);
+
+		String msg = pushMessageTask.getMsg();
+
+		// String inStr = msg.substring(msg.indexOf(",")+1);
+
+		String table = "article";
+		if (type.contains("ARTICLE")) {
+			table = "article";
+		}
+		String sql = "select id ,title ,cover from ${table} where id in (${in}) order by field(id,${in})";
+
+		Map<String, String> valueMap = new HashMap<String, String>();
+		valueMap.put("table", table);
+		valueMap.put("in", msg);
+		sql = StrSubstitutor.replace(sql, valueMap);
+		@SuppressWarnings("unchecked")
+		List<Preview> previews = sessionFactory.getCurrentSession()
+				.createSQLQuery(sql)
+				.setResultTransformer(Transformers.aliasToBean(Preview.class))
+				.list();
+		return previews;
+	}
+
+	public String delArticleInPushMessage(int pushMessageTaskId, int articleId) {
+		
+		PushMessageTask task = (PushMessageTask) sessionFactory
+				.getCurrentSession().get(PushMessageTask.class,
+						pushMessageTaskId);
+
+		String msg = task.getMsg();
+		if (msg.equals(""+articleId)) {
+			sessionFactory.getCurrentSession().delete(task);
+			return "del";
+		} else {
+			String regex = String
+					.format("^%1$s,|,%1$s$|(?<=,)%1$s,", articleId);
+			String newMsg = msg.replaceAll(regex, "");
+			task.setMsg(newMsg);
+			sessionFactory.getCurrentSession().saveOrUpdate(task);
+			return "ok";
+		}
+
+	}
+
+	public Object deletePushMessage(String type, int pushMessageTaskId) {
+		
+		 sessionFactory.getCurrentSession().createQuery("delete PushMessageTask where id = ?").setParameter(0, pushMessageTaskId).executeUpdate();
+		 
+		 return "ok";
+	}
 
 }

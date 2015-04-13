@@ -59,4 +59,14 @@ public class MaterialService {
 		return materialDao.getArticlePreview();
 	}
 
+	@Transactional
+	public Article getArticleById(int id) {
+		return materialDao.getArticleById(id);
+	}
+
+	@Transactional
+	public void updateArticle(Article article) {
+		materialDao.updateArticle(article);
+	}
+
 }

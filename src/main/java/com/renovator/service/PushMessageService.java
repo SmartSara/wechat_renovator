@@ -43,4 +43,20 @@ public class PushMessageService {
 		return pushMessageDao.getPreview(type);
 	}
 
+	@Transactional
+	public List<Preview> getPreview(String type,int pushMessageTaskId) {
+		return pushMessageDao.getPreview(type,pushMessageTaskId);
+	}
+	
+	@Transactional
+	public String delArticleInPushMessage(int pushMessageTaskId, int articleId) {
+		 return  pushMessageDao.delArticleInPushMessage(pushMessageTaskId,articleId);
+	}
+
+	@Transactional
+	public Object deletePushMessage(String type,int pushMessageTaskId) {
+		
+		return pushMessageDao.deletePushMessage(type,pushMessageTaskId);
+	}
+
 }

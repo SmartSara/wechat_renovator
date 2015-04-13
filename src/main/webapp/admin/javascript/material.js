@@ -66,14 +66,13 @@ function initSaveBtnEvent() {
 		$.ajax({
 			type : "post",
 			url : "../../material/article/add",
-			contentType : false,
 			data : formData,
 			contentType : false,
 			processData : false,
 			success : function(data) {
 				materialNo = data;
 				var articleId = data.articleId;
-				pushInMaterialsContain(cover, title, articleId);
+				location.reload();
 				$("#addDialog").modal("hide");
 				doClearWork();
 			},
@@ -119,7 +118,7 @@ function readURL(input) {
 function initMaterialsContain(cover, title, articleId) {
 
 		$('#materials')
-				.prepend(
+				.append(
 						$("<div class='col-md-2'/>").data("articleId",
 								articleId).append($("<div/>").text(title))
 								.append(

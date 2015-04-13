@@ -112,6 +112,7 @@ CREATE TABLE `user` (
   `birthday` date DEFAULT NULL,
   `balance` double DEFAULT NULL,
   `open_id` varchar(128) DEFAULT NULL,
+  `email` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -122,7 +123,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'zhuzhu','1340218638','lingda 家，左侧床','2015-04-04',99.8,'456'),(3,'baby','1340218638','lingda ','2015-04-04',99.8,'789');
+INSERT INTO `user` VALUES (2,'zhuzhu','1340218638','lingda 家，左侧床','2015-04-04',99.8,'456','darlingtld@qq.com'),(3,'baby','1340218638','lingda ','2015-04-04',99.8,'789','darlingtld@qq.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -134,5 +135,33 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+DROP TABLE IF EXISTS `article`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `article` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(64) COMMENT '标题',
+  `cover` VARCHAR(255) COMMENT '封面',
+  `content` MEDIUMTEXT COMMENT '正文',
+  `ts` DATE DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+
+
+DROP TABLE IF EXISTS `pushMessageTask`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pushMessageTask` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(255) NOT NULL	,
+  `msg` VARCHAR(2550) NOT NULL,
+  `scheduled_time` DATE DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 -- Dump completed on 2015-04-05  9:55:33

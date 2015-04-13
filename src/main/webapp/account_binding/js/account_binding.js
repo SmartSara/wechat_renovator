@@ -12,7 +12,7 @@ $(function(){
 
     var openId = $.getUrlParam('open_id');
 
-    $('p.login').click(function(){
+    $('#submit').click(function(){
         var userInfo={};
         userInfo.username=$('#username').val();
         userInfo.mobile=$('#mobile').val();

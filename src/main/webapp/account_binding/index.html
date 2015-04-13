@@ -11,57 +11,40 @@
 <html lang="zh" class="no-js"> <!--<![endif]-->
 <head>
     <meta charset="UTF-8"/>
-    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/demo.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="css/animate-custom.css"/>
+    <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/account_binding.css"/>
 </head>
 <body>
 <div class="container">
-    <header>
-        <h1>雷诺维特奢侈品护理 <span>会员账号绑定</span></h1>
-    </header>
+    <h1 class="text-center header_title">雷诺维特奢侈品护理</h1>
+    <h3 class="text-center header_msg">会员账号绑定</h3>
     <section>
         <div id="container_demo">
-            <a class="hiddenanchor" id="toregister"></a>
-            <a class="hiddenanchor" id="tologin"></a>
-
-            <div id="wrapper">
-                <div id="login" class="animate form">
+                <div id="login_form" class="all_center">
                     <form autocomplete="on">
-                        <h1>账号绑定</h1>
 
-                        <p>
-                            <label for="username" class="uname" data-icon="u">用户名</label>
-                            <input id="username" name="username" required="required" type="text"
-                                   placeholder="michael"/>
-                        </p>
+                        <div class="input-group">
+                            <span class="input-group-addon glyphicon glyphicon-user" aria-hidden="true"></span>
+                            <input id="username" class="form-control" name="username" required="required" type="text"
+                                   placeholder="用户名"/>
+                        </div>
 
-                        <p>
-                            <label for="mobile" class="mobile" data-icon="u">您的手机号</label>
-                            <input id="mobile" name="mobile" required="required" type="text"
-                                   placeholder="130xxxxxxxx"/>
-                        </p>
+                        <div class="input-group">
+                            <span class="input-group-addon glyphicon glyphicon-phone" aria-hidden="true"></span>
+                            <input id="mobile" class="form-control" name="mobile" required="required" type="text"
+                                   placeholder="手机号"/>
+                        </div>
 
-                        <p>
-                            <label for="email" class="email" data-icon="u">您的邮箱</label>
-                            <input id="email" name="email" required="required" type="text"
-                                   placeholder="michael@163.com"/>
-                        </p>
+                        <div class="input-group">
+                            <span class="input-group-addon glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                            <input id="email" class="form-control" name="email" required="required" type="text"
+                                   placeholder="邮箱"/>
+                        </div>
 
-                        <!--<p>-->
-                            <!--<label for="password" class="youpasswd" data-icon="p">设置密码</label>-->
-                            <!--<input id="password" name="password" required="required" type="password"-->
-                                   <!--placeholder="eg. X8df!90EO"/>-->
-                        <!--</p>-->
-
-                        <p class="login button">
-                            <input type="submit" value="绑定"/>
-                        </p>
+                        <button id="submit" class="btn btn-primary center-block" type="submit">绑定</button>
 
                     </form>
-                </div>
 
             </div>
         </div>

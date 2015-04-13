@@ -116,7 +116,7 @@ public class RenovatorTestService {
         article.setTitle("请绑定账号");
         article.setDescription("绑定会员账号，使用微信获取更多信息");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
-        article.setUrl(PropertyHolder.SERVER + "/account_binding/index.html?open_id="+fromUserName);
+        article.setUrl(PropertyHolder.SERVER + "/account_binding/index.html?open_id=" + fromUserName);
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
         newsMessage.setArticles(articleList);
@@ -199,7 +199,11 @@ public class RenovatorTestService {
         return MessageUtil.messageToXml(newsMessage);
     }
 
-    private String doMembershipNotification(String fromUserName, String toUserName) {
+    private String doMembershipNotification(String fromUserName, String toUserName) throws UserNotFoundException {
+        User user = userService.getUserWithOpenId(fromUserName);
+        if (user == null) {
+            throw new UserNotFoundException("User not found");
+        }
         NewsMessage newsMessage = new NewsMessage();
         newsMessage.setToUserName(fromUserName);
         newsMessage.setFromUserName(toUserName);
@@ -218,7 +222,11 @@ public class RenovatorTestService {
         return MessageUtil.messageToXml(newsMessage);
     }
 
-    private String doAppointmentReceiveFetch(String fromUserName, String toUserName) {
+    private String doAppointmentReceiveFetch(String fromUserName, String toUserName) throws UserNotFoundException {
+        User user = userService.getUserWithOpenId(fromUserName);
+        if (user == null) {
+            throw new UserNotFoundException("User not found");
+        }
         NewsMessage newsMessage = new NewsMessage();
         newsMessage.setToUserName(fromUserName);
         newsMessage.setFromUserName(toUserName);
@@ -256,7 +264,11 @@ public class RenovatorTestService {
         return MessageUtil.messageToXml(newsMessage);
     }
 
-    private String doCurrentOrderStatus(String fromUserName, String toUserName) {
+    private String doCurrentOrderStatus(String fromUserName, String toUserName) throws UserNotFoundException {
+        User user = userService.getUserWithOpenId(fromUserName);
+        if (user == null) {
+            throw new UserNotFoundException("User not found");
+        }
         NewsMessage newsMessage = new NewsMessage();
         newsMessage.setToUserName(fromUserName);
         newsMessage.setFromUserName(toUserName);
@@ -280,17 +292,37 @@ public class RenovatorTestService {
         if (user == null) {
             throw new UserNotFoundException("User not found");
         }
-        TextMessage textMessage = new TextMessage();
-        textMessage.setToUserName(fromUserName);
-        textMessage.setFromUserName(toUserName);
-        textMessage.setCreateTime(new Date().getTime());
-        textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
-        String respContent = String.format("%s\n会员卡余额:%s元", user.getName(), user.getBalance());
-        textMessage.setContent(respContent);
-        return MessageUtil.messageToXml(textMessage);
+        NewsMessage newsMessage = new NewsMessage();
+        newsMessage.setToUserName(fromUserName);
+        newsMessage.setFromUserName(toUserName);
+        newsMessage.setCreateTime(new Date().getTime());
+        newsMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
+        newsMessage.setFuncFlag(0);
+        List<Article> articleList = new ArrayList<Article>();
+        Article article = new Article();
+        article.setTitle("会员卡消费记录");
+        article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
+        articleList.add(article);
+
+        Article username = new Article();
+        username.setTitle("会员名 ：" + user.getName());
+        articleList.add(username);
+
+        Article balance = new Article();
+        balance.setTitle(String.format("会员卡余额 ：{}元", user.getBalance()));
+        articleList.add(balance);
+
+        newsMessage.setArticleCount(articleList.size());
+        newsMessage.setArticles(articleList);
+
+        return MessageUtil.messageToXml(newsMessage);
     }
 
-    private String doMembershipExpense(String fromUserName, String toUserName) {
+    private String doMembershipExpense(String fromUserName, String toUserName) throws UserNotFoundException {
+        User user = userService.getUserWithOpenId(fromUserName);
+        if (user == null) {
+            throw new UserNotFoundException("User not found");
+        }
         NewsMessage newsMessage = new NewsMessage();
         newsMessage.setToUserName(fromUserName);
         newsMessage.setFromUserName(toUserName);

@@ -296,11 +296,8 @@ public class RenovatorTestService {
 
             for (com.renovator.pojo.Service service : serviceList) {
                 Article record = new Article();
-                record.setTitle(String.format("日期 ：%s 商品 ：%s", service.getTs(), service.getProduct().getName()));
+                record.setTitle(String.format("日期 ：%s\n商品 ：%s\n订单状态 ：%s", service.getTs(), service.getProduct().getName(), service.getStatus()));
                 articleList.add(record);
-                Article status = new Article();
-                status.setTitle(String.format("订单状态 ：%s", service.getStatus()));
-                articleList.add(status);
             }
 
         }
@@ -372,7 +369,7 @@ public class RenovatorTestService {
             //list the latest three expense record
             for (com.renovator.pojo.Service service : serviceList) {
                 Article record = new Article();
-                record.setTitle(String.format("日期 ：%s 商品 ：%s", service.getTs(), service.getProduct().getName()));
+                record.setTitle(String.format("日期 ：%s\n商品 ：%s", service.getTs(), service.getProduct().getName()));
                 articleList.add(record);
             }
         }

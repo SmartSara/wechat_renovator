@@ -2,6 +2,7 @@ package com.renovator.dao;
 
 import com.renovator.pojo.Service;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -68,7 +69,8 @@ public class ServiceDao {
 
     public List<Service> getServiceListByUserId(int userId, int limit) {
         try {
-            List<Service> serviceList = sessionFactory.getCurrentSession().createQuery(String.format("from com.renovator.pojo.Service where user.id=%d %s order by ts desc", userId, limit == 0 ? "" : "limit " + limit)).list();
+            Query query = sessionFactory.getCurrentSession().createQuery(String.format("from com.renovator.pojo.Service where user.id=%d order by ts desc", userId));
+            List<Service> serviceList = limit == 0 ? query.list() : query.setMaxResults(limit).list();
             logger.debug("Get service list of userId {}", userId);
             logger.debug(serviceList.toString());
             return serviceList;

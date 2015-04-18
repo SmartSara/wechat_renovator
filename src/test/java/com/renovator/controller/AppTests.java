@@ -163,7 +163,7 @@ public class AppTests {
 
     @Test
     public void getServiceListByUserId() {
-        List<Service> serviceList = serviceService.getServiceListByUserId(15, 0);
+        List<Service> serviceList = serviceService.getServiceListByUserId(15, 3);
         for (Service service : serviceList) {
             System.out.println(service);
         }

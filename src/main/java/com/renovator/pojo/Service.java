@@ -12,7 +12,9 @@ public class Service {
     @Id
     private int id;
     @Column(name = "order_id")
-    private int orderId;
+    private String orderId;
+    @Column(name = "status")
+    private String status;
     @Column(name = "type")
     private String type;
     @Column(name = "price")
@@ -20,10 +22,10 @@ public class Service {
     @Column(name = "ts")
     private Date ts;
     @OneToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
     @OneToOne
-    @JoinColumn(name="product_id")
+    @JoinColumn(name = "product_id")
     private Product product;
 
     public Date getTs() {
@@ -42,11 +44,19 @@ public class Service {
         this.id = id;
     }
 
-    public int getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 
@@ -86,7 +96,8 @@ public class Service {
     public String toString() {
         return "Service{" +
                 "id=" + id +
-                ", orderId=" + orderId +
+                ", orderId='" + orderId + '\'' +
+                ", status='" + status + '\'' +
                 ", type='" + type + '\'' +
                 ", price=" + price +
                 ", ts=" + ts +
@@ -94,4 +105,13 @@ public class Service {
                 ", product=" + product +
                 '}';
     }
+
+    public class Status {
+        public static final String ORDERED = "已下单";
+        public static final String PAID = "已付款";
+        public static final String OUT_OF_FACTORY = "已发货";
+        public static final String DELIVERING = "派送中";
+        public static final String CHECKED = "已收货";
+    }
 }
+

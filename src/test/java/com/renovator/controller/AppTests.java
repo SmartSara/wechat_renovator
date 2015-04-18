@@ -78,7 +78,7 @@ public class AppTests {
     @Test
     public void addService() throws Exception {
         Service service = new Service();
-        service.setOrderId(12345567);
+        service.setOrderId("12345567");
         service.setType("sale");
         service.setPrice(87.5);
         service.setTs(new Date());
@@ -133,8 +133,8 @@ public class AppTests {
         String contact = "";
         String price = "";
         String ts = "2015-04-04";
-        String username="";
-        String product_name="";
+        String username = "";
+        String product_name = "";
         List<Service> serviceList = serviceService.searchServices(order_id, type, price, ts, username, contact, product_name);
         for (Service service : serviceList) {
             System.out.println(service);
@@ -156,8 +156,21 @@ public class AppTests {
     }
 
     @Test
-    public void testGetUserByOpenId(){
+    public void testGetUserByOpenId() {
         User user = userService.getUserWithOpenId("456");
         System.out.println(user);
+    }
+
+    @Test
+    public void getServiceListByUserId() {
+        List<Service> serviceList = serviceService.getServiceListByUserId(15, 0);
+        for (Service service : serviceList) {
+            System.out.println(service);
+        }
+        System.out.println("-----------------------");
+        serviceList = serviceService.getUncheckedServiceListByUserId(15);
+        for (Service service : serviceList) {
+            System.out.println(service);
+        }
     }
 }

@@ -53,9 +53,9 @@ CREATE TABLE `product` (
   `description` text,
   `price` double DEFAULT NULL,
   `discount` float DEFAULT NULL,
-  `ts` date DEFAULT NULL,
+  `ts` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'灵达的神器','猪猪的最爱',37.5,0.85,'2015-04-04');
+INSERT INTO `product` VALUES (1,'灵达的神器','猪猪的最爱',37.5,0.85,'2015-04-04 00:00:00'),(2,'印钞机','一天最多1000张',123,0.1,'2015-04-12 00:00:00'),(3,'时光机','轮回一万年',500,0.4,'2015-04-18 00:00:00');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,14 +77,15 @@ DROP TABLE IF EXISTS `service`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `service` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `order_id` int(11) DEFAULT NULL,
+  `order_id` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
   `type` varchar(45) DEFAULT NULL,
   `price` double DEFAULT NULL,
-  `ts` date DEFAULT NULL,
+  `ts` datetime DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +94,7 @@ CREATE TABLE `service` (
 
 LOCK TABLES `service` WRITE;
 /*!40000 ALTER TABLE `service` DISABLE KEYS */;
-INSERT INTO `service` VALUES (1,12345567,'sale',87.5,'2015-04-04',2,1),(2,12345,'free',37.5,'2015-04-04',2,1);
+INSERT INTO `service` VALUES (1,'12345567','已发货','sale',87.5,'2015-04-04 00:00:00',15,1),(2,'12345','已下单','free',37.5,'2015-04-04 00:00:00',15,2),(3,'1213545','派送中','sale',400,'2015-04-18 11:43:20',15,3),(4,'573831','已收货','normal',200,'2015-04-18 11:45:06',15,2);
 /*!40000 ALTER TABLE `service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +115,7 @@ CREATE TABLE `user` (
   `open_id` varchar(128) DEFAULT NULL,
   `email` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +124,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,'zhuzhu','1340218638','lingda 家，左侧床','2015-04-04',99.8,'456','darlingtld@qq.com'),(3,'baby','1340218638','lingda ','2015-04-04',99.8,'789','darlingtld@qq.com');
+INSERT INTO `user` VALUES (15,'唐灵达','13402188638',NULL,NULL,1500,'oR_l8s7xyfgmR7YHu1eI1z8RUzuI','darlingtld@qq.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -135,6 +136,9 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2015-04-18 11:53:26
+
 
 DROP TABLE IF EXISTS `article`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

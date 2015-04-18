@@ -48,12 +48,17 @@ public class ServiceService {
     }
 
     @Transactional
-    public List<Service> getServiceListByUserId(int userId) {
-        return serviceDao.getServiceListByUserId(userId);
+    public List<Service> getServiceListByUserId(int userId, int limit) {
+        return serviceDao.getServiceListByUserId(userId, limit);
     }
 
     @Transactional
     public List<Service> searchServices(String orderId, String type, String price, String ts, String username, String contact, String productName) throws ParseException {
         return serviceDao.searchService(orderId, type, price, ts, username, contact, productName);
+    }
+
+    @Transactional
+    public List<Service> getUncheckedServiceListByUserId(int userId) {
+        return serviceDao.getUncheckedServiceListByUserId(userId);
     }
 }

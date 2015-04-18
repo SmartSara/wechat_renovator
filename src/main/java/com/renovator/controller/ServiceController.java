@@ -36,7 +36,7 @@ public class ServiceController {
     public
     @ResponseBody
     List<Service> getServiceListByUserId(@PathVariable("user_id") int userId, HttpServletRequest request, HttpServletResponse response) {
-        return serviceService.getServiceListByUserId(userId);
+        return serviceService.getServiceListByUserId(userId, 0);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)

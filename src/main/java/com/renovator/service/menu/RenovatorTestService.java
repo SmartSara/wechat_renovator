@@ -5,6 +5,7 @@ import com.renovator.pojo.User;
 import com.renovator.pojo.message.req.TextMessage;
 import com.renovator.pojo.message.resp.Article;
 import com.renovator.pojo.message.resp.NewsMessage;
+import com.renovator.service.ServiceService;
 import com.renovator.service.UserService;
 import com.renovator.util.MessageUtil;
 import com.renovator.util.PropertyHolder;
@@ -29,6 +30,9 @@ public class RenovatorTestService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ServiceService serviceService;
 
     /**
      * @param request
@@ -269,19 +273,39 @@ public class RenovatorTestService {
         if (user == null) {
             throw new UserNotFoundException("User not found");
         }
+
+        List<com.renovator.pojo.Service> serviceList = serviceService.getUncheckedServiceListByUserId(user.getId());
         NewsMessage newsMessage = new NewsMessage();
         newsMessage.setToUserName(fromUserName);
         newsMessage.setFromUserName(toUserName);
         newsMessage.setCreateTime(new Date().getTime());
         newsMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
         newsMessage.setFuncFlag(0);
-        List<Article> articleList = new ArrayList<Article>();
-        Article article = new Article();
-        article.setTitle("服务单目前状态");
-        article.setDescription("点击查看您的服务单目前状态");
-        article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
-        article.setUrl(PropertyHolder.SERVER + "/pages/index.html?openId=" + fromUserName);
-        articleList.add(article);
+        List<Article> articleList = new ArrayList<>();
+        if (null == serviceList || serviceList.isEmpty()) {
+            Article article = new Article();
+            article.setTitle("服务单目前状态");
+            article.setDescription("您当前还没有待处理的订单");
+            article.setPicUrl(PropertyHolder.SERVER + "/repository/images/order.jpg");
+            articleList.add(article);
+        } else {
+            Article article = new Article();
+            article.setTitle("服务单目前状态");
+            article.setPicUrl(PropertyHolder.SERVER + "/repository/images/order.jpg");
+            articleList.add(article);
+
+            for (com.renovator.pojo.Service service : serviceList) {
+                Article record = new Article();
+                record.setTitle(String.format("日期 ：%s 商品 ：%s", service.getTs(), service.getProduct().getName()));
+                articleList.add(record);
+                Article status = new Article();
+                status.setTitle(String.format("订单状态 ：%s", service.getStatus()));
+                articleList.add(status);
+            }
+
+        }
+
+
         newsMessage.setArticleCount(articleList.size());
         newsMessage.setArticles(articleList);
         return MessageUtil.messageToXml(newsMessage);
@@ -300,8 +324,8 @@ public class RenovatorTestService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("会员卡消费记录");
-        article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
+        article.setTitle("会员卡余额");
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/vip_card.jpg");
         articleList.add(article);
 
         Article username = new Article();
@@ -309,7 +333,7 @@ public class RenovatorTestService {
         articleList.add(username);
 
         Article balance = new Article();
-        balance.setTitle(String.format("会员卡余额 ：{}元", user.getBalance()));
+        balance.setTitle(String.format("会员卡余额 ：%s 元", user.getBalance()));
         articleList.add(balance);
 
         newsMessage.setArticleCount(articleList.size());
@@ -323,19 +347,36 @@ public class RenovatorTestService {
         if (user == null) {
             throw new UserNotFoundException("User not found");
         }
+        List<com.renovator.pojo.Service> serviceList = serviceService.getServiceListByUserId(user.getId(), 3);
         NewsMessage newsMessage = new NewsMessage();
         newsMessage.setToUserName(fromUserName);
         newsMessage.setFromUserName(toUserName);
         newsMessage.setCreateTime(new Date().getTime());
         newsMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
         newsMessage.setFuncFlag(0);
-        List<Article> articleList = new ArrayList<Article>();
-        Article article = new Article();
-        article.setTitle("会员卡消费记录");
-        article.setDescription("点击查看您的消费记录");
-        article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
-        article.setUrl(PropertyHolder.SERVER + "/pages/index.html?openId=" + fromUserName);
-        articleList.add(article);
+        List<Article> articleList = new ArrayList<>();
+        if (null == serviceList || serviceList.isEmpty()) {
+            Article article = new Article();
+            article.setTitle("会员卡消费记录");
+            article.setDescription("您还没有消费过哦");
+            article.setPicUrl(PropertyHolder.SERVER + "/repository/images/expense.jpg");
+            articleList.add(article);
+        } else {
+            Article article = new Article();
+            article.setTitle("会员卡消费记录");
+            article.setDescription("点击查看您的所有消费记录");
+            article.setPicUrl(PropertyHolder.SERVER + "/repository/images/expense.jpg");
+            article.setUrl(PropertyHolder.SERVER + "/expense/expense_record.html?openId=" + fromUserName);
+            articleList.add(article);
+
+            //list the latest three expense record
+            for (com.renovator.pojo.Service service : serviceList) {
+                Article record = new Article();
+                record.setTitle(String.format("日期 ：%s 商品 ：%s", service.getTs(), service.getProduct().getName()));
+                articleList.add(record);
+            }
+        }
+
         newsMessage.setArticleCount(articleList.size());
         newsMessage.setArticles(articleList);
         return MessageUtil.messageToXml(newsMessage);

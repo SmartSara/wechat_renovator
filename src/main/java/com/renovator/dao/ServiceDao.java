@@ -66,9 +66,9 @@ public class ServiceDao {
         }
     }
 
-    public List<Service> getServiceListByUserId(int userId) {
+    public List<Service> getServiceListByUserId(int userId, int limit) {
         try {
-            List<Service> serviceList = sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.Service where user.id=" + userId).list();
+            List<Service> serviceList = sessionFactory.getCurrentSession().createQuery(String.format("from com.renovator.pojo.Service where user.id=%d %s order by ts desc", userId, limit == 0 ? "" : "limit " + limit)).list();
             logger.debug("Get service list of userId {}", userId);
             logger.debug(serviceList.toString());
             return serviceList;
@@ -102,6 +102,10 @@ public class ServiceDao {
             criteria.createCriteria("product").add(Restrictions.like("name", "%" + productName + "%"));
         }
         return criteria.list();
+    }
+
+    public List<Service> getUncheckedServiceListByUserId(int userId) {
+        return sessionFactory.getCurrentSession().createQuery(String.format("from com.renovator.pojo.Service where user.id = %d and status != '%s'", userId, Service.Status.CHECKED)).list();
     }
 }
 

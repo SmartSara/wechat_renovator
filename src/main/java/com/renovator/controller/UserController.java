@@ -79,14 +79,14 @@ public class UserController {
     boolean bindAccount(@RequestParam("username") String username, @RequestParam("mobile") String contact,
                      @RequestParam("email") String email, @RequestParam("openId") String openId, HttpServletRequest request, HttpServletResponse response) {
         logger.info("username {}, mobile {}, email {}, openId {}", username, contact, email, openId);
-//        try {
-//            userService.bindAccount(username, contact, email, openId);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            response.setHeader(PropertyHolder.HEADER_MSG, e.getMessage());
-//            response.setStatus(HttpStatus.CONFLICT.value());
-//            return false;
-//        }
+        try {
+            userService.bindAccount(username, contact, email, openId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setHeader(PropertyHolder.HEADER_MSG, e.getMessage());
+            response.setStatus(HttpStatus.CONFLICT.value());
+            return false;
+        }
 
         return true;
     }

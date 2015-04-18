@@ -305,7 +305,7 @@ public class RenovatorTestService {
         articleList.add(article);
 
         Article username = new Article();
-        username.setTitle("会员名 ：" + user.getName());
+        username.setTitle(String.format("会员名 ：%s", user.getName()));
         articleList.add(username);
 
         Article balance = new Article();

@@ -230,7 +230,7 @@ a.sign-up:hover{
 	padding:0;
 }
 .banner{	
-	background:url(../images/placeholder.png) bottom no-repeat;
+	/*background:url(/repository/images/start_item.png) bottom no-repeat;*/
 	width: 100%;
 	min-height: 425px;
 	background-size:cover;
@@ -388,7 +388,7 @@ label.cat-in{
 }
 /*----*/
 .in-left{	
-	background:url(../images/placeholder1.jpg) 0px 0px;
+	/*background:url(../images/placeholder1.jpg) 0px 0px;*/
 	width: 100%;
 	min-height: 425px;
 	background-size:cover;

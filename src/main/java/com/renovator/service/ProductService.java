@@ -28,8 +28,8 @@ public class ProductService {
     }
 
     @Transactional
-    public List<Product> getProductList() {
-        return productDao.getProductList();
+    public List<Product> getProductList(int limit) {
+        return productDao.getProductList(limit);
     }
 
     @Transactional

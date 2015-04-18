@@ -29,8 +29,9 @@ public class ProductDao {
         return (Product) sessionFactory.getCurrentSession().get(Product.class, id);
     }
 
-    public List<Product> getProductList() {
-        return (List<Product>) sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.Product").list();
+    public List<Product> getProductList(int limit) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.Product order by ts");
+        return limit==0?query.list():query.setMaxResults(limit).list();
     }
 
     public boolean addProduct(Product product) {
@@ -90,7 +91,23 @@ public class ProductDao {
 
 
     public List<Product> getProductListByCategory(String category, int limit) {
-        Query query = sessionFactory.getCurrentSession().createQuery(String.format("from Product where category='%s'", category));
+        switch (category.toLowerCase().trim()) {
+            case "shoe":
+                category = Product.Category.CATEGORY_SHOE;
+                break;
+            case "bag":
+                category = Product.Category.CATEGORY_BAG;
+                break;
+            case "leather":
+                category = Product.Category.CATEGORY_LEATHER;
+                break;
+            case "coat":
+                category = Product.Category.CATEGORY_COAT;
+                break;
+            default:
+                category = Product.Category.CATEGORY_SHOE;
+        }
+        Query query = sessionFactory.getCurrentSession().createQuery(String.format("from Product where category='%s' order by ts desc", category));
         return limit == 0 ? query.list() : query.setMaxResults(limit).list();
     }
 }

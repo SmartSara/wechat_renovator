@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="MallModule">
 <head>
     <title>雷诺维特奢侈品护理</title>
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery.min.js"></script>
     <!-- Custom Theme files -->
@@ -24,7 +24,7 @@
     <link href='http://fonts.useso.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <!--//fonts-->
 </head>
-<body>
+<body ng-controller="homeController">
 <!--header-->
 <div class="header">
     <div class="header-top">
@@ -88,74 +88,18 @@
                         <p>我们的最新商品都在这里.</p>
                     </div>
                     <div class="lady-in">
-                        <div class="col-md-4 you-para">
-                            <a href="single.html"><img class="img-responsive pic-in" src="images/placeholder.png"
-                                                       alt=" "></a>
+                        <div class="col-md-4 you-para" ng-repeat="item in itemMainShow">
+                            <a href="single.html"><img class="img-responsive pic-in" ng-src="/repository/product_images/{{item.picurl}}"></a>
 
-                            <div class="you-in">
-                                <span>15<label>%</label></span>
-                                <small>off</small>
-                            </div>
-                            <p>雷诺维特商品</p>
-                            <span>179.00元  | <label class="cat-in"> </label> <a href="#">购买 </a></span>
-                        </div>
-                        <div class="col-md-4 you-para">
-                            <a href="single.html"><img class="img-responsive pic-in" src="images/placeholder.png"
-                                                       alt=" "></a>
-
-                            <div class="you-in">
-                                <span>15<label>%</label></span>
-                                <small>off</small>
-                            </div>
-                            <p>雷诺维特商品</p>
-                            <span>179.00元  | <label class="cat-in"> </label> <a href="#">购买 </a></span>
-                        </div>
-                        <div class="col-md-4 you-para para-grid">
-                            <a href="single.html"><img class="img-responsive pic-in" src="images/placeholder.png"
-                                                       alt=" "></a>
-
-                            <div class="you-in">
-                                <span>15<label>%</label></span>
-                                <small>off</small>
-                            </div>
-                            <p>雷诺维特商品</p>
-                            <span>179.00元  | <label class="cat-in"> </label> <a href="#">购买 </a></span>
+                            <!--<div class="you-in">-->
+                                <!--<span>{{items[0].discount}}<label>%</label></span>-->
+                                <!--<small>off</small>-->
+                            <!--</div>-->
+                            <p>{{item.name}}</p>
+                            <span>{{item.price}}元  | <label class="cat-in"> </label> <a href="#">购买 </a></span>
                         </div>
 
-                        <div class="col-md-4 you-para">
-                            <a href="single.html"><img class="img-responsive pic-in" src="images/placeholder.png"
-                                                       alt=" "></a>
-
-                            <div class="you-in">
-                                <span>15<label>%</label></span>
-                                <small>off</small>
-                            </div>
-                            <p>雷诺维特商品</p>
-                            <span>179.00元  | <label class="cat-in"> </label> <a href="#">购买 </a></span>
-                        </div>
-                        <div class="col-md-4 you-para">
-                            <a href="single.html"><img class="img-responsive pic-in" src="images/placeholder.png"
-                                                       alt=" "></a>
-
-                            <div class="you-in">
-                                <span>15<label>%</label></span>
-                                <small>off</small>
-                            </div>
-                            <p>雷诺维特商品</p>
-                            <span>179.00元  | <label class="cat-in"> </label> <a href="#">购买 </a></span>
-                        </div>
-                        <div class="col-md-4 you-para para-grid">
-                            <a href="single.html"><img class="img-responsive pic-in" src="images/placeholder.png"
-                                                       alt=" "></a>
-
-                            <div class="you-in">
-                                <span>15<label>%</label></span>
-                                <small>off</small>
-                            </div>
-                            <p>雷诺维特商品</p>
-                            <span>179.00元  | <label class="cat-in"> </label> <a href="#">购买 </a></span>
-                        </div>
-                        <div class="clearfix"></div>
+                            <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
@@ -166,41 +110,14 @@
                     <div class="cool">
                     </div>
                 </div>
-                <div class="discount">
-                    <a href="single.html"><img class="img-responsive pic-in" src="images/placeholder1.jpg" alt=" ">
+                <div class="discount" ng-repeat="item in itemLatest">
+                    <a href="single.html"><img class="img-responsive pic-in" ng-src="/repository/product_images/{{item.picurl}}">
                     </a>
 
                     <p class="no-more">独家 <b>折扣</b> <span>新品</span></p>
                     <a href="#" class="know-more">详情</a>
                 </div>
-                <div class="discount">
-                    <a href="single.html"><img class="img-responsive pic-in" src="images/placeholder1.jpg" alt=" ">
-                    </a>
 
-                    <p class="no-more">独家 <b>折扣</b> <span>新品</span></p>
-                    <a href="#" class="know-more">详情</a>
-                </div>
-                <!--<div class="twitter-in">-->
-                <!--<h5>TWITTER UPDATES</h5>-->
-                <!--<span class="twitter-ic">	</span>-->
-
-                <!--<div class="up-date">-->
-                <!--<p>@suniljoshi Looks like nice and dicent design</p>-->
-                <!--<a href="#">http://bit.ly/sun</a>-->
-
-                <!--<p class="ago">About 1 hour ago via twitterfeed</p>-->
-                <!--</div>-->
-                <!--<div class="up-date">-->
-                <!--<p>@suniljoshi Looks like nice and dicent design</p>-->
-                <!--<a href="#">http://bit.ly/sun</a>-->
-
-                <!--<p class="ago">About 1 hour ago via twitterfeed</p>-->
-                <!--</div>-->
-                <!--<a href="#" class="tweets">More Tweets</a>-->
-
-                <!--<div class="clearfix"></div>-->
-                <!--</div>-->
-            </div>
             <div class="clearfix"></div>
         </div>
         <!---->
@@ -211,37 +128,19 @@
                 <p>查看我们其他的商品.</p>
             </div>
             <ul id="flexiselDemo1">
-                <li><a href="#"><img class="img-responsive women" src="images/men.jpg" alt=""></a>
+                <li ng-repeat="item in itemOthers">
+                    <a href="#">
+                        <img class="img-responsive women" ng-src="/repository/product_images/{{item.picurl}}" alt="">
+                    </a>
 
                     <div class="hide-in">
-                        <p>其他商品</p>
-                        <span>179.00元  |  <a href="#">立即购买 </a></span>
-                    </div>
-                </li>
-                <li><a href="#"><img class="img-responsive women" src="images/men.jpg" alt=""></a>
-
-                    <div class="hide-in">
-                        <p>其他商品</p>
-                        <span>179.00元  |  <a href="#">立即购买 </a></span>
-                    </div>
-                </li>
-                <li><a href="#"><img class="img-responsive women" src="images/men.jpg" alt=""></a>
-
-                    <div class="hide-in">
-                        <p>其他商品</p>
-                        <span>179.00元  |  <a href="#">立即购买 </a></span>
-                    </div>
-                </li>
-                <li><a href="#"><img class="img-responsive women" src="images/men.jpg" alt=""></a>
-
-                    <div class="hide-in">
-                        <p>其他商品</p>
-                        <span>179.00元  |  <a href="#">立即购买 </a></span>
+                        <p>{{item.name}}</p>
+                        <span>{{item.price}}元  |  <a href="#">立即购买</a></span>
                     </div>
                 </li>
             </ul>
             <script type="text/javascript">
-                $(window).load(function () {
+                $(window).ready(function () {
                     $("#flexiselDemo1").flexisel({
                         visibleItems: 4,
                         animationSpeed: 1000,
@@ -294,6 +193,7 @@
         </div>
     </div>
 </div>
-
+<script src="/repository/javascript/angular.js" type="text/javascript"></script>
+<script src="js/mall.js" type="text/javascript"></script>
 </body>
 </html>

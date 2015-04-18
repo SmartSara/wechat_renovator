@@ -25,11 +25,11 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(value = "list", method = RequestMethod.GET)
+    @RequestMapping(value = "list/{limit}", method = RequestMethod.GET)
     public
     @ResponseBody
-    List<Product> getProductList(HttpServletRequest request, HttpServletResponse response) {
-        return productService.getProductList();
+    List<Product> getProductList(@PathVariable("limit") int limit, HttpServletRequest request, HttpServletResponse response) {
+        return productService.getProductList(limit);
     }
 
     @RequestMapping(value = "list/{category}/{limit}", method = RequestMethod.GET)

@@ -50,12 +50,18 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
+  `category` varchar(45) DEFAULT NULL,
   `description` text,
   `price` double DEFAULT NULL,
   `discount` float DEFAULT NULL,
   `ts` datetime DEFAULT NULL,
+  `picurl` varchar(255) DEFAULT NULL,
+  `picurl_zoom` varchar(255) DEFAULT NULL,
+  `picurl1` varchar(255) DEFAULT NULL,
+  `picurl2` varchar(255) DEFAULT NULL,
+  `picurl3` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +70,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'灵达的神器','猪猪的最爱',37.5,0.85,'2015-04-04 00:00:00'),(2,'印钞机','一天最多1000张',123,0.1,'2015-04-12 00:00:00'),(3,'时光机','轮回一万年',500,0.4,'2015-04-18 00:00:00');
+INSERT INTO `product` VALUES (1,'灵达的神器','皮衣','猪猪的最爱',37.5,0.85,'2015-04-04 00:00:00','印钞机.jpg','印钞机.jpg','印钞机1.jpg','印钞机1.jpg','印钞机1.jpg'),(2,'印钞机','皮具','一天最多1000张',123,0.1,'2015-04-12 00:00:00','印钞机.jpg','印钞机.jpg','印钞机1.jpg','印钞机1.jpg','印钞机1.jpg'),(3,'时光机','皮衣','轮回一万年',500,0.4,'2015-04-18 00:00:00','印钞机.jpg','印钞机.jpg','印钞机1.jpg','印钞机1.jpg','印钞机1.jpg'),(4,'粉色包','包类','粉色包',100,1,'2015-04-18 15:15:14','粉色包.jpg','粉色包.jpg','粉色包1.jpg','粉色包1.jpg','粉色包1.jpg'),(5,'黑色包','包类','黑色包',100,1,'2015-04-18 15:19:27','黑色包.jpg','黑色包.jpg','黑色包1.jpg','黑色包1.jpg','黑色包1.jpg'),(6,'黑金包','包类','黑金包',100,1,'2015-04-18 15:19:56','黑金包.jpg','黑金包.jpg','黑金包1.jpg','黑金包1.jpg','黑金包1.jpg'),(7,'红色包','包类','红色包',100,1,'2015-04-18 15:21:29','红色包.jpg','红色包.jpg','红色包1.jpg','红色包1.jpg','红色包1.jpg'),(8,'白点包','包类','白点包',100,1,'2015-04-18 15:21:58','白点包.jpg','白点包.jpg','白点包1.jpg','白点包1.jpg','白点包1.jpg'),(10,'皮夹子','皮具','皮夹子',100,1,'2015-04-18 15:25:36','皮夹子.jpg','皮夹子.jpg','皮夹子1.jpg','皮夹子1.jpg','皮夹子1.jpg'),(11,'白鞋','鞋类','白鞋',100,1,'2015-04-18 15:26:24','白鞋.jpg','白鞋.jpg','白鞋1.jpg','白鞋1.jpg','白鞋1.jpg'),(12,'黑鞋','鞋类','黑鞋',100,1,'2015-04-18 15:26:43','黑鞋.jpg','黑鞋.jpg','黑鞋1.jpg','黑鞋1.jpg','黑鞋1.jpg');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +100,7 @@ CREATE TABLE `service` (
 
 LOCK TABLES `service` WRITE;
 /*!40000 ALTER TABLE `service` DISABLE KEYS */;
-INSERT INTO `service` VALUES (1,'12345567','已发货','sale',87.5,'2015-04-04 00:00:00',15,1),(2,'12345','已下单','free',37.5,'2015-04-04 00:00:00',15,2),(3,'1213545','派送中','sale',400,'2015-04-18 11:43:20',15,3),(4,'573831','已收货','normal',200,'2015-04-18 11:45:06',15,2);
+INSERT INTO `service` VALUES (1,'12345567','已发货','sale',87.5,'2015-04-04 00:00:00',15,7),(2,'12345','已下单','free',37.5,'2015-04-04 00:00:00',15,2),(3,'1213545','派送中','sale',400,'2015-04-18 11:43:20',15,3),(4,'573831','已收货','normal',200,'2015-04-18 11:45:06',15,5);
 /*!40000 ALTER TABLE `service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +121,7 @@ CREATE TABLE `user` (
   `open_id` varchar(128) DEFAULT NULL,
   `email` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,8 +143,7 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-18 11:53:26
-
+-- Dump completed on 2015-04-18 20:46:43
 
 DROP TABLE IF EXISTS `article`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

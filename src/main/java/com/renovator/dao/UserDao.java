@@ -69,7 +69,7 @@ public class UserDao {
     public User getUserWithOpenId(String openId) {
         User user = null;
         try {
-            user = (User) sessionFactory.getCurrentSession().createQuery("from com.renovator.pojo.User u where u.openId = " + openId).uniqueResult();
+            user = (User) sessionFactory.getCurrentSession().createQuery(String.format("from com.renovator.pojo.User u where u.openId = '%s'", openId)).uniqueResult();
         } catch (Exception e) {
             logger.error(e.getMessage());
         }

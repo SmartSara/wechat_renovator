@@ -32,10 +32,17 @@ public class ProductController {
         return productService.getProductList();
     }
 
+    @RequestMapping(value = "list/{category}/{limit}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<Product> getProductListByCatogory(@PathVariable("category") String category, @PathVariable("limit") int limit, HttpServletRequest request, HttpServletResponse response) {
+        return productService.getProductListByCategory(category, limit);
+    }
+
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public
     @ResponseBody
-    Product getProductList(@PathVariable("id") int productId, HttpServletRequest request, HttpServletResponse response) {
+    Product getProduct(@PathVariable("id") int productId, HttpServletRequest request, HttpServletResponse response) {
         return productService.getProduct(productId);
     }
 

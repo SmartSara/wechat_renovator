@@ -138,7 +138,7 @@ public class RenovatorTestService {
         Article article = new Article();
         article.setTitle("公司简介");
         article.setDescription("点击查看店铺地址、联系方式、营业时间");
-        article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
+        article.setPicUrl(PropertyHolder.SERVER + "/images/logo.jpg");
         article.setUrl(PropertyHolder.SERVER + "/mall/index.html");
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
@@ -195,7 +195,7 @@ public class RenovatorTestService {
         Article article = new Article();
         article.setTitle("寄卖商品展示");
         article.setDescription("点击查看寄卖商品展示");
-        article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/mall.jpg");
         article.setUrl(PropertyHolder.SERVER + "/mall/index.html");
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
@@ -218,8 +218,8 @@ public class RenovatorTestService {
         Article article = new Article();
         article.setTitle("会员卡提醒（生日月提醒、会员卡到期提醒）");
         article.setDescription("点击设置会员卡提醒（生日月提醒、会员卡到期提醒）");
-        article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
-        article.setUrl(PropertyHolder.SERVER + "/pages/index.html?openId=" + fromUserName);
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/notification.jpeg");
+        article.setUrl(PropertyHolder.SERVER + "/notification/setting.html?openId=" + fromUserName);
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
         newsMessage.setArticles(articleList);
@@ -241,8 +241,8 @@ public class RenovatorTestService {
         Article article = new Article();
         article.setTitle("预约上门收货/送货");
         article.setDescription("点击预约上门收货/送货");
-        article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
-        article.setUrl(PropertyHolder.SERVER + "/pages/index.html?openId=" + fromUserName);
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/appointment.jpg");
+        article.setUrl(PropertyHolder.SERVER + "/appointment/appointment.html?openId=" + fromUserName);
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
         newsMessage.setArticles(articleList);

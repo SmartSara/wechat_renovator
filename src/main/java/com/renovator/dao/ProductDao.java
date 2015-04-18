@@ -2,6 +2,7 @@ package com.renovator.dao;
 
 import com.renovator.pojo.Product;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -88,5 +89,9 @@ public class ProductDao {
     }
 
 
+    public List<Product> getProductListByCategory(String category, int limit) {
+        Query query = sessionFactory.getCurrentSession().createQuery(String.format("from Product where category='%s'", category));
+        return limit == 0 ? query.list() : query.setMaxResults(limit).list();
+    }
 }
 

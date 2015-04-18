@@ -18,12 +18,72 @@ public class Product {
     private String name;
     @Column(name = "description")
     private String description;
+    @Column(name = "category")
+    private String category;
     @Column(name = "price")
     private double price;
     @Column(name = "discount")
     private float discount;
     @Column(name = "ts")
     private Date ts;
+    @Column(name = "picurl")
+    private String picurl;
+    @Column(name = "picurl_zoom")
+    private String picurlZoom;
+    @Column(name = "picurl1")
+    private String picurl1;
+    @Column(name = "picurl2")
+    private String picurl2;
+    @Column(name = "picurl3")
+    private String picurl3;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getPicurl3() {
+        return picurl3;
+    }
+
+    public void setPicurl3(String picurl3) {
+        this.picurl3 = picurl3;
+    }
+
+    public String getPicurl() {
+        return picurl;
+    }
+
+    public void setPicurl(String picurl) {
+        this.picurl = picurl;
+    }
+
+    public String getPicurlZoom() {
+        return picurlZoom;
+    }
+
+    public void setPicurlZoom(String picurlZoom) {
+        this.picurlZoom = picurlZoom;
+    }
+
+    public String getPicurl1() {
+        return picurl1;
+    }
+
+    public void setPicurl1(String picurl1) {
+        this.picurl1 = picurl1;
+    }
+
+    public String getPicurl2() {
+        return picurl2;
+    }
+
+    public void setPicurl2(String picurl2) {
+        this.picurl2 = picurl2;
+    }
 
     public Date getTs() {
         return ts;
@@ -80,9 +140,23 @@ public class Product {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
                 ", price=" + price +
                 ", discount=" + discount +
                 ", ts=" + ts +
+                ", picurl='" + picurl + '\'' +
+                ", picurlZoom='" + picurlZoom + '\'' +
+                ", picurl1='" + picurl1 + '\'' +
+                ", picurl2='" + picurl2 + '\'' +
+                ", picurl3='" + picurl3 + '\'' +
                 '}';
     }
+
+    public class Category {
+        public static final String CATEGORY_SHOE = "鞋类";
+        public static final String CATEGORY_COAT = "皮衣";
+        public static final String CATEGORY_BAG = "包类";
+        public static final String CATEGORY_LEATHER = "皮具";
+    }
+
 }

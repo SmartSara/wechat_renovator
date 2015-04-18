@@ -51,4 +51,9 @@ public class ProductService {
     public List<Product> searchProduct(String name, String description, String price, String discount, String ts) throws ParseException {
         return productDao.searchProduct(name, description, price, discount, ts);
     }
+
+    @Transactional
+    public List<Product> getProductListByCategory(String category, int limit) {
+        return productDao.getProductListByCategory(category, limit);
+    }
 }

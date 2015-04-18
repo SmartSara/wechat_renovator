@@ -68,7 +68,10 @@ public class UserService {
     }
 
     @Transactional
-    public void bindAccount(String username, String contact, String email, String openId) {
+    public void bindAccount(String username, String contact, String email, String openId) throws Exception {
+        if(userDao.getUserByContact(contact)!=null){
+            throw new Exception("该手机号已经注册！");
+        }
         User user=new User();
         user.setName(username);
         user.setContact(contact);

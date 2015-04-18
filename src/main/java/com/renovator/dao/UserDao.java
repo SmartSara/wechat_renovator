@@ -96,5 +96,9 @@ public class UserDao {
         }
         return criteria.list();
     }
+
+    public User getUserByContact(String contact) {
+        return (User) sessionFactory.getCurrentSession().createQuery(String.format("from User where contact = '%s'", contact)).uniqueResult();
+    }
 }
 

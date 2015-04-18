@@ -7,7 +7,7 @@
 }
 
 body {
-    background: url(../../repository/images/logo.png) no-repeat center center fixed;
+    background: url(../../repository/images/background.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -25,4 +25,15 @@ section {
 #submit {
     width: 100%;
     margin-top: 6%;
+    height: 50px;
+}
+
+.input-group{
+    margin-bottom: 2%;
+    height:60px;
+}
+
+#username,#mobile,#email{
+    height: 60px;
+    font-size: 40px;
 }

@@ -157,33 +157,40 @@
 							id="cancelBtn">关闭</button>
 						<button type="button" class="btn btn-primary" id="saveBtn">
 							保存</button>
+						<button type="button" class="btn btn-primary" id="updateBtn" style="display:none">
+							保存</button>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+			<script id="singleArticleEditTemplate" type="text/x-jsrender">
+							<div class="col-md-2 singleArticle" data-id={{>id}}> <div>{{>title}}
+								<i class="glyphicon glyphicon-remove del" style="display:none;float:right;margin-left:4px" ></i>
+ 								<i class="glyphicon glyphicon-edit edit"   style="display:none;float:right" ></i>		
+							</div> <a class="thumbnail"> <img src="/pic/{{>cover}}"> <i></i></a> </div>
+			</script>
 		<div class="row" id="materials">
 			<div class="col-md-2" id="addItem">
 				<div>新增</div>
 				<a class="thumbnail"> <img id="addIcon"
-					src="../../images/add.png"> <img id="singleAdd"
-					src="../../images/singleArticle.png" usemap="#optionsMap"
+					src="../../repository/images/add.png"> <img id="singleAdd"
+					src="../../repository/images/singleArticle.png" usemap="#optionsMap"
 					style="display: none">
 				</a>
-<!-- 				<map name="optionsMap"> -->
-<!-- 					<area id="singleAdd" shape="rect" coords="0,0,64,128" title="单图文消息"> -->
-<!-- 					<area id="mutliAdd" shape="rect" coords="64,0,128,128" -->
-<!-- 						title="多图文消息"> -->
-<!-- 				</map> -->
 			</div>
 		</div>
 
 	</div>
+	
+	
 
 </body>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="../javascript/lib/jquery.min.js"></script>
+<script src="../javascript/lib/jsrender.js"></script>
 <script src="../javascript/lib/jquery.hotkeys.js"></script>
 <script src="../javascript/lib/bootstrap-dialog.js"></script>
 <script src="../javascript/lib/bootstrap.min.js"></script>

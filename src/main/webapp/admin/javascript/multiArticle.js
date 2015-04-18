@@ -4,6 +4,8 @@ var pushMessageType =  "MULTI_ARTICLE";
 
 var expandNo = -1;
 
+var addArticleInPushMessages=false;
+
 $(function() {
 	_initialPage();
 	_initEvent();
@@ -70,6 +72,7 @@ function getArticleList(){
 		type : "post",
 		url : "../../material/article/list",
 		success : function(data) {
+			$("#alreadySingleMaterials").empty();
 			$("#singleMaterials").html($("#singleArticleAddTemplate").render(data));
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -83,25 +86,50 @@ function getArticleList(){
 
 function initSaveBtnEvent() {
 	$("#saveBtn").click(function() {
-		var notifaction =  {};
-		notifaction.type = "MULTI_ARTICLE";
-		notifaction.msg = articles.join(",");
-		notifaction.scheduledTime = new Date();
-		$.ajax({
-			type : "post",
-			url : "../../pushMessage/add",
-			data : JSON.stringify(notifaction),
-			contentType : "application/json",
-			success : function(data) {
-				location.reload();
-			},
-			error : function(XMLHttpRequest, textStatus, errorThrown) {
-				console.log(textStatus);
-				console.log(XMLHttpRequest.status);
-				console.log(XMLHttpRequest.responseText);
-			}
-		});
+		
+		if(addArticleInPushMessages ==  false){
+			//增加pushMessageTask
+			addPushMessageTask();
+		}else{
+//			//增加某一个task的article
+			var pushMessageTaskId =  $("#addDialog").data("pushMessageTaskId");
+			 var msgs= $("#alreadySingleMaterials").find(".singleArticle").map(function(){
+				 return $(this).data("id");
+			 }).get().join(",");
+			 var data = {pushMessageTaskId : pushMessageTaskId,msgs: msgs};
+			 $.ajax({
+						url : "../../pushMessage/update/msgs/",
+						data : data,
+						success : function() {
+							location.reload();
+						}
+					})
+		}
+		
+		
 	})
+}
+
+function addPushMessageTask(){
+
+	var pushMessageTask =  {};
+	pushMessageTask.type = "MULTI_ARTICLE";
+	pushMessageTask.msg = articles.join(",");
+	pushMessageTask.scheduledTime = new Date();
+	$.ajax({
+		type : "post",
+		url : "../../pushMessage/add",
+		data : JSON.stringify(pushMessageTask),
+		contentType : "application/json",
+		success : function(data) {
+			location.reload();
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			console.log(textStatus);
+			console.log(XMLHttpRequest.status);
+			console.log(XMLHttpRequest.responseText);
+		}
+	});
 }
 
 function initUpdateArticleBtnBtnEvent(){
@@ -154,10 +182,23 @@ function initCancelBtnEvent(){
 function initSingleMaterialsEvnent(){
 	//Add
 	$("#singleMaterials").on("click",".add.singleArticle",function(){
-		if($(this).hasClass("checked")){
-			$(this).removeClass("checked");
+		
+		var selectedArticle =  $(this);
+		if(selectedArticle.hasClass("checked")){
+			if(addArticleInPushMessages == true){
+				$("#alreadySingleMaterials").find(".selected").each(function(index,ele){
+					if(selectedArticle.data("id") ==  $(ele).data("id")){
+						ele.remove();
+					}
+				})
+			}
+			selectedArticle.removeClass("checked");
 			removeItem(articles,$(this).data("id"));
+			
 		}else{
+			if(addArticleInPushMessages == true){
+				$("#alreadySingleMaterials").append($(this).clone().addClass("selected"));
+			}
 			articles.push($(this).data("id"));
 			$(this).addClass("checked");
 		}
@@ -256,17 +297,18 @@ function initPreviewEvent(){
 		if(i.hasClass("edit")){
 			url = "../../pushMessage/MULTI_ARTICLE/preview/"+pushMessageTaskId;
 			$.ajax(url).done(function(data){
-				$("#singleMaterials").html($("#singleArticleEditTemplate").render(data));
+				$("#singleMaterials").empty().html($("#singleArticleEditTemplate").render(data));
+				$("#alreadySingleMaterials").empty();
 				$("#addDialog").modal("show").data("pushMessageTaskId",pushMessageTaskId);
 			})
 		}else if(i.hasClass("add")){
 			url = "../../pushMessage/MULTI_ARTICLE/preview/"+pushMessageTaskId;
 			$.ajax(url).done(function(data){
-				$("#alreadySingleMaterials").html($("#singleArticleEditTemplate").render(data));
+				$("#alreadySingleMaterials").html($("#singleArticleAddTemplate").render(data));
 				getArticleMaterials(pushMessageTaskId);
 			})
 			
-			url = ""
+			addArticleInPushMessages = true;
 			
 		}else if (i.hasClass("del")){
 			url = "../../pushMessage/delete/MULTI_ARTICLE/"+pushMessageTaskId;
@@ -288,7 +330,7 @@ function getArticleMaterials(pushMessageTaskId){
 		type : "post",
 		url : "../../material/article/list",
 		success : function(data) {
-			$("#singleMaterials").append($("#singleArticleAddTemplate").render(data));
+			$("#singleMaterials").empty().append($("#singleArticleAddTemplate").render(data));
 			$("#addDialog").modal("show").data("pushMessageTaskId",pushMessageTaskId);
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -296,44 +338,6 @@ function getArticleMaterials(pushMessageTaskId){
 	});	
 }
 
-
-function xx(){
-	$("#pushMessageContainer").on("click",".preview",function(){
-		
-		var preview =$(this);
-		var img = $(this).find("img");
-		var id = $(this).attr("id");
-		if(id == expandNo){
-			return ;
-		}else{
-			expandNo = id;
-		}
-		
-		var url = "../../pushMessage/MULTI_ARTICLE/preview/"+id;
-		$.ajax(url).done(function(data){
-			$("#expandPushMessage").html($("#expandArticleTemplate").render(data));
-			var A_top = $(img).offset().top + $(img).outerHeight(true);
-			var A_left = $(img).offset().left;
-			
-			$("body").append(
-					$("<i id='removeBtn_"+id+"' class='glyphicon glyphicon-resize-small'></i>").css({
-						"position":"absolute",
-						"top": preview.offset().top,
-						"left":preview.offset().left+preview.outerWidth(true),
-						"z-index": 100
-					}));
-
-			$("#expandPushMessage img").css("width",img.outerWidth(true));
-			$("#expandPushMessage").show().css({
-					"position" : "absolute",
-					"top" : (A_top+4) + "px",
-					"left" : (A_left-4) + "px",
-					"z-index" : 100
-				});
-		})
-		
-	});
-}
 
 
 function initExpandPreviewEvent(){

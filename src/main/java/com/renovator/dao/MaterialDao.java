@@ -108,4 +108,14 @@ public class MaterialDao {
 		}
 	}
 
+    public Object deleteArticleByID(int articleId) {
+        sessionFactory.getCurrentSession().createQuery("delete Article  where id = ? ").setParameter(0, articleId).executeUpdate();
+        return "ok";
+    }
+
+    public Object deleteArticle(int articleId) {
+        sessionFactory.getCurrentSession().createQuery("delete Article where id = ?").setParameter(0, articleId).executeUpdate();
+        return "ok";
+    }
+
 }

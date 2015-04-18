@@ -13,9 +13,7 @@ $(function() {
 function _initialPage() {
 	
 	$.ajax("../../material/article/preview").done(function(result){
-		result.forEach(function(entry){
-			initMaterialsContain(entry.cover,entry.title,entry.id);
-		})
+		$("#materials").append($("#singleArticleEditTemplate").render(result));
 	});
 	
 	$("#editor").wysiwyg();
@@ -25,6 +23,8 @@ function _initEvent() {
 
 	initAddEvent();
 
+	initPreviewEvent();
+	
 	initSaveBtnEvent();
 	
 	initCancelBtnEvent();
@@ -32,7 +32,11 @@ function _initEvent() {
 	initCoverBtnEvent();
 
 	initCoverEvent();
-
+	
+	initMaterialsEvent();
+	
+	initUpdateArticleBtnEvent();
+	
 }
 
 function initAddEvent() {
@@ -46,16 +50,25 @@ function initAddEvent() {
 	});
 
 	// event
-
 	$("#singleAdd").click(function() {
+		$("#addDialog").find("#updateBtn").hide();
+		$("#addDialog").find("#addBtn").show();
 		$("#addDialog").modal("show");
 	});
 
 }
 
+function initPreviewEvent(){
+	$("#materials").on('mouseover',".singleArticle",function(){
+		$(this).find(".glyphicon").show();
+	}).on("mouseout",".singleArticle",function(){
+		$(this).find(".glyphicon").hide();
+	});
+}
+
 function initSaveBtnEvent() {
 	$("#saveBtn").click(function() {
-
+	
 		var formData = new FormData();
 		var cover = $("#cover").get(0).files[0];
 		var title = $("#title").val();
@@ -149,4 +162,71 @@ function doClearWork() {
 	var replacement;
 	cover.replaceWith(replacement = cover.clone(true));
 	$("#coverPreview").hide();
+}
+
+function initMaterialsEvent(){
+	//Remove
+		$("#materials").on("click",".del",function(){
+			
+			var articleId = $(this).parents(".singleArticle").data("id");
+			var url =  "../../material/article/del/"+articleId;
+			$.ajax(url).done(
+					function(data){
+						location.reload();
+					});
+		}
+	)
+		//Edit
+	$("#materials").on("click",".edit",function(event){
+		event.stopPropagation();
+		var articleId = $(this).parents(".singleArticle").data("id");
+		$.ajax("../../material/article/"+articleId).done(function(data){
+			$("#addDialog").data("id",data.id);
+			$("#addDialog").data("type","edit");
+			$("#addDialog #title").val(data.title);
+			$("#addDialog #coverPreview").attr("src","/pic/"+data.cover).show();
+			$("#addDialog #editor").html(data.content);
+			$("#addDialog").find("#saveBtn").hide();
+			$("#addDialog").find("#updateBtn").show();
+			$("#addDialog").modal("show");
+		});
+		
+	}
+)
+}
+
+function initUpdateArticleBtnEvent(){
+	$("#updateBtn").click(function(){
+		if($(this).parents("#addDialog").data("type")=="add"){
+			return ;
+		}
+		var url; 
+		var formData =  new FormData();
+		var id = $("#addDialog").data("id");
+		var title = $("#addDialog #title").val();
+		var content = $("#addDialog #editor").html();
+		
+		formData.append("id",id);
+		formData.append("title",title);
+		formData.append("content",content);
+		//no new cover image uploaded ,do nothing
+		if($("#addDialog #cover").get(0).files.length!=0){
+			formData.append("cover",$("#addDialog #cover").get(0).files[0]);
+			url = "../../material/article/update";
+		}else{
+			url= "../../material/article/noCover/update";
+		}
+		//upload
+		$.ajax({
+			type: "post",
+			url: url,
+			contentType: false,
+			data: formData,
+			processData: false,
+			success: function (data){
+				location.reload();
+			}
+		})
+		
+	});
 }

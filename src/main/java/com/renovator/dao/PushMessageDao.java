@@ -111,4 +111,10 @@ public class PushMessageDao {
 		 return "ok";
 	}
 
+    public Object updatePushMessageTaskMsgs(int pushMessageTaskId, String msgs) {
+        sessionFactory.getCurrentSession().createQuery("update PushMessageTask set msg = ? where id = ?")
+            .setParameter(0, msgs).setParameter(1, pushMessageTaskId).executeUpdate();
+        return "ok";
+    }
+
 }

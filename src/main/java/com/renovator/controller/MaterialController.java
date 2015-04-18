@@ -138,5 +138,14 @@ public class MaterialController {
 
 		 return articlePreviews;
 	}
+	
+	@RequestMapping(value="/article/del/{articleId}")
+	public @ResponseBody Object articleDelByID(@PathVariable int articleId){
+	    
+	    return materialService.deleteArticle(articleId);
+	    
+	}
+	    
+	    
 
 }

@@ -69,4 +69,9 @@ public class MaterialService {
 		materialDao.updateArticle(article);
 	}
 
+	@Transactional
+    public Object deleteArticle(int articleId) {
+        return materialDao.deleteArticle(articleId);
+    }
+
 }

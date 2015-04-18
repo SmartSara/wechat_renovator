@@ -68,5 +68,11 @@ public class PushMessageController {
 		return pushMessageService.deletePushMessage(type,pushMessageTaskId);
 	}
 	
+	@RequestMapping(value= "/update/msgs")
+	public @ResponseBody Object updatePushMessageTaskMsgs(@RequestParam int pushMessageTaskId ,@RequestParam String msgs){
+	    
+	   return  pushMessageService.updatePushMessageTaskMsgs(pushMessageTaskId,msgs);
+	    
+	}
 
 }

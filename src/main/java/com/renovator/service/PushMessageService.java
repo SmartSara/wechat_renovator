@@ -59,4 +59,9 @@ public class PushMessageService {
 		return pushMessageDao.deletePushMessage(type,pushMessageTaskId);
 	}
 
+	@Transactional
+    public Object updatePushMessageTaskMsgs(int pushMessageTaskId, String msgs) {
+	    return pushMessageDao.updatePushMessageTaskMsgs(pushMessageTaskId,msgs);
+    }
+
 }

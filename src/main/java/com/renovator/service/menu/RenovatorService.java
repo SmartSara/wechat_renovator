@@ -55,6 +55,14 @@ public class RenovatorService {
             if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)) {
                 String eventType = requestMap.get("Event");
                 if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
+                    String respContent = "您好，欢迎关注雷诺维特奢侈品护理！";
+                    TextMessage textMessage = new TextMessage();
+                    textMessage.setToUserName(fromUserName);
+                    textMessage.setFromUserName(toUserName);
+                    textMessage.setCreateTime(new Date().getTime());
+                    textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
+                    textMessage.setContent(respContent);
+                    return MessageUtil.messageToXml(textMessage);
                 } else if (eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)) {
                 } else if (eventType.equals(MessageUtil.EVENT_TYPE_CLICK)) {
                     String eventKey = requestMap.get("EventKey");
@@ -91,9 +99,10 @@ public class RenovatorService {
                 return MessageUtil.messageToXml(textMessage);
             }
         } catch (UserNotFoundException e) {
+            e.printStackTrace();
             return doMembershipBinding(fromUserName, toUserName);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            e.printStackTrace();
             return doErrorHandler(fromUserName, toUserName);
         }
         return null;

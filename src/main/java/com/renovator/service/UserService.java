@@ -1,7 +1,14 @@
 package com.renovator.service;
 
 import com.renovator.dao.UserDao;
+import com.renovator.pojo.AccessToken;
 import com.renovator.pojo.User;
+import com.renovator.util.PropertyHolder;
+import com.renovator.util.WeixinUtil;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +24,8 @@ import java.util.List;
  */
 @Service
 public class UserService {
+
+    private static final String GET_OPEN_IDS_URL = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=ACCESS_TOKEN&next_openid=NEXT_OPENID";
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
@@ -53,7 +63,6 @@ public class UserService {
     }
 
     /**
-     *
      * @param name
      * @param contact
      * @param address
@@ -69,14 +78,38 @@ public class UserService {
 
     @Transactional
     public void bindAccount(String username, String contact, String email, String openId) throws Exception {
-        if(userDao.getUserByContact(contact)!=null){
-            throw new Exception("该手机号已经注册！");
+        if (userDao.getUserByContact(contact) != null) {
+            throw new Exception("璇ユ墜鏈哄彿宸叉敞鍐岋紒");
         }
-        User user=new User();
+        User user = new User();
         user.setName(username);
         user.setContact(contact);
         user.setEmail(email);
         user.setOpenId(openId);
         userDao.addUser(user);
+    }
+
+    public List<String> getAllFansOpenIds() {
+        AccessToken at = WeixinUtil.getAccessToken(PropertyHolder.APPID, PropertyHolder.APPSECRET);
+        String url = GET_OPEN_IDS_URL.replace("ACCESS_TOKEN", at.getToken()).replace("NEXT_OPENID", "");
+        JSONObject jsonObject = WeixinUtil.httpRequest(url, "GET", null);
+        List<String> fansOpenIds = new ArrayList<>();
+        if (null != jsonObject) {
+            try {
+                if (jsonObject.has("errcode") && 0 != jsonObject.getInt("errcode")) {
+                    logger.error("Error getting fans' open ids. errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
+                } else {
+                    logger.debug("Total fans {}, fetched fans {}", jsonObject.getInt("total"), jsonObject.getInt("count"));
+                    JSONArray jsonArray = jsonObject.getJSONObject("data").getJSONArray("openid");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        fansOpenIds.add(jsonArray.getString(i));
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        logger.info(fansOpenIds.toString());
+        return fansOpenIds;
     }
 }

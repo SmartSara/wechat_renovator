@@ -6,6 +6,7 @@ package com.renovator.util;
 
 import com.renovator.pojo.AccessToken;
 import com.renovator.pojo.button.Menu;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -26,21 +28,34 @@ import java.net.URL;
  * 公众平台通用接口工具类
  */
 public class WeixinUtil {
-    private static Logger log = LoggerFactory.getLogger(WeixinUtil.class);
+
+    public static String              ACCESS_TOKEN      = "ACCESS_TOKEN";
+    public static String              POST      = "POST";
+    public static String       GET               = "GET";
+
+    private static Logger      log               = LoggerFactory.getLogger(WeixinUtil.class);
 
     // 获取access_token的接口地址（GET） 限200（次/天）
-    public final static String access_token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
+    public final static String access_token_url  = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
 
     // 菜单创建（POST） 限100（次/天）
-    public static String menu_create_url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
+    public static String       menu_create_url   = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=ACCESS_TOKEN";
 
+    // 获取组消息
+    public static String       group_list_url    = "https://api.weixin.qq.com/cgi-bin/groups/get?access_token=ACCESS_TOKEN";
+    // 获取素材
+    public static String       material_list_url = "https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=ACCESS_TOKEN";
+    // 上传图文消息
+    public static String       upload_news_url   = "https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token=ACCESS_TOKEN";
+    // 分组上传
+    public static String       send_by_group_url = "https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=ACCESS_TOKEN";
 
     /**
      * 发起https请求并获取结果
      *
-     * @param requestUrl    请求地址
+     * @param requestUrl 请求地址
      * @param requestMethod 请求方式（GET、POST）
-     * @param outputStr     提交的数据
+     * @param outputStr 提交的数据
      * @return JSONObject(通过JSONObject.get(key)的方式获取json对象的属性值)
      */
     public static JSONObject httpRequest(String requestUrl, String requestMethod, String outputStr) {
@@ -48,7 +63,7 @@ public class WeixinUtil {
         StringBuffer buffer = new StringBuffer();
         try {
             // 创建SSLContext对象，并使用我们指定的信任管理器初始化
-            TrustManager[] tm = {new MyX509TrustManager()};
+            TrustManager[] tm = { new MyX509TrustManager() };
             SSLContext sslContext = SSLContext.getInstance("SSL", "SunJSSE");
             sslContext.init(null, tm, new java.security.SecureRandom());
             // 从上述SSLContext对象中得到SSLSocketFactory对象
@@ -64,8 +79,7 @@ public class WeixinUtil {
             // 设置请求方式（GET/POST）
             httpUrlConn.setRequestMethod(requestMethod);
 
-            if ("GET".equalsIgnoreCase(requestMethod))
-                httpUrlConn.connect();
+            if ("GET".equalsIgnoreCase(requestMethod)) httpUrlConn.connect();
 
             // 当有数据需要提交时
             if (null != outputStr) {
@@ -99,11 +113,10 @@ public class WeixinUtil {
         return jsonObject;
     }
 
-
     /**
      * 获取access_token
      *
-     * @param appid     凭证
+     * @param appid 凭证
      * @param appsecret 密钥
      * @return
      */
@@ -122,7 +135,8 @@ public class WeixinUtil {
                 accessToken = null;
                 // 获取token失败
                 try {
-                    log.error("Failed to get token. errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
+                    log.error("Failed to get token. errcode:{} errmsg:{}", jsonObject.getInt("errcode"),
+                              jsonObject.getString("errmsg"));
                 } catch (JSONException e1) {
                     e1.printStackTrace();
                 }
@@ -131,11 +145,10 @@ public class WeixinUtil {
         return accessToken;
     }
 
-
     /**
      * 创建菜单
      *
-     * @param menu        菜单实例
+     * @param menu 菜单实例
      * @param accessToken 有效的access_token
      * @return 0表示成功，其他值表示失败
      */
@@ -153,7 +166,8 @@ public class WeixinUtil {
             try {
                 if (0 != jsonObject.getInt("errcode")) {
                     result = jsonObject.getInt("errcode");
-                    log.error("Error creating menu. errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
+                    log.error("Error creating menu. errcode:{} errmsg:{}", jsonObject.getInt("errcode"),
+                              jsonObject.getString("errmsg"));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -162,4 +176,5 @@ public class WeixinUtil {
 
         return result;
     }
+
 }

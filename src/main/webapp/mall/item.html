@@ -1,0 +1,68 @@
+<div class="  col-m-on">
+    <div class="in-line">
+        <div class="para-all">
+            <h3>新品</h3>
+
+            <p>我们的新品.</p>
+        </div>
+        <div class="lady-on">
+            <div class="col-md-4 you-men" ng-repeat="item in itemMain">
+                <a href="single.html"><img class="img-responsive pic-in"
+                                           ng-src="/repository/product_images/{{item.picurl}}"></a>
+
+                <!--<div class="you-in">-->
+                <!--<span>{{items[0].discount}}<label>%</label></span>-->
+                <!--<small>off</small>-->
+                <!--</div>-->
+                <p>{{item.name}}</p>
+                <span>{{item.price}}元  | <label class="cat-in"> </label> <a href="#">购买 </a></span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!---->
+    <div class="lady-in-on">
+        <div class="buy-an">
+            <h3>其他商品</h3>
+
+            <p>查看我们其他的商品.</p>
+        </div>
+        <ul id="flexiselDemo1">
+            <li ng-repeat="item in itemOther">
+                <a href="#">
+                    <img class="img-responsive women" ng-src="/repository/product_images/{{item.picurl}}"
+                         alt="">
+                </a>
+
+                <div class="hide-in">
+                    <p>{{item.name}}</p>
+                    <span>{{item.price}}元  |  <a href="#">立即购买</a></span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#flexiselDemo1").flexisel({
+        visibleItems: 4,
+        animationSpeed: 1000,
+        autoPlay: true,
+        autoPlaySpeed: 3000,
+        pauseOnHover: true,
+        enableResponsiveBreakpoints: true,
+        responsiveBreakpoints: {
+            portrait: {
+                changePoint: 480,
+                visibleItems: 1
+            },
+            landscape: {
+                changePoint: 640,
+                visibleItems: 2
+            },
+            tablet: {
+                changePoint: 768,
+                visibleItems: 3
+            }
+        }
+    });
+</script>

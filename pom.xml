@@ -215,6 +215,13 @@
             <scope>system</scope>
             <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ueditor-mini.jar</systemPath>
         </dependency>
+        
+	     <!-- weixin SDK -->
+		<dependency>
+			<groupId>me.chanjar</groupId>
+			<artifactId>weixin-java-mp</artifactId>
+			<version>1.1.4</version>
+		</dependency>
 
     </dependencies>
 

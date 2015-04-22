@@ -2,6 +2,7 @@ package com.renovator.service;
 
 import com.renovator.dao.ProductDao;
 import com.renovator.pojo.Product;
+import com.renovator.pojo.ProductDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +56,15 @@ public class ProductService {
     @Transactional
     public List<Product> getProductListByCategory(String category, int limit) {
         return productDao.getProductListByCategory(category, limit);
+    }
+
+    @Transactional
+    public boolean addProductDetails(ProductDetails productDetails) {
+        return productDao.addProductDetails(productDetails);
+    }
+
+    @Transactional
+    public ProductDetails getProductDetails(int id) {
+        return productDao.getProductDetails(id);
     }
 }

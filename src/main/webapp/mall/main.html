@@ -1,0 +1,106 @@
+<div class="women-in">
+    <div class="col-md-9 col-d">
+        <div class="banner">
+            <div class="banner-matter">
+                <label>雷诺维特</label>
+
+                <h2>奢侈品护理</h2>
+
+                <p>您的奢侈品专业顾问</p>
+
+            </div>
+            <!--<div class="you">-->
+            <!--<span>40<label>%</label></span>-->
+            <!--<small>off</small>-->
+            <!--</div>-->
+            <p class="para-in">.</p>
+        </div>
+        <!---->
+        <div class="in-line">
+            <div class="para-an">
+                <h3>最新商品</h3>
+
+                <p>我们的最新商品都在这里.</p>
+            </div>
+            <div class="lady-in">
+                <div class="col-md-4 you-para" ng-repeat="item in itemMainShow">
+                    <a href="single.html"><img class="img-responsive pic-in"
+                                               ng-src="/repository/product_images/{{item.picurl}}"></a>
+
+                    <!--<div class="you-in">-->
+                    <!--<span>{{items[0].discount}}<label>%</label></span>-->
+                    <!--<small>off</small>-->
+                    <!--</div>-->
+                    <p>{{item.name}}</p>
+                    <span>{{item.price}}元  | <label class="cat-in"> </label> <a href="#">购买 </a></span>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-m-left">
+        <div class="in-left">
+            <p class="code">新品展示</p>
+
+            <div class="cool">
+            </div>
+        </div>
+        <div class="discount" ng-repeat="item in itemLatest">
+            <a href="single.html"><img class="img-responsive pic-in"
+                                       ng-src="/repository/product_images/{{item.picurl}}">
+            </a>
+
+            <p class="no-more">独家 <b>折扣</b> <span>新品</span></p>
+            <a href="#" class="know-more">详情</a>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+    <!---->
+    <div class="lady-in-on">
+        <div class="buy-an">
+            <h3>其他商品</h3>
+
+            <p>查看我们其他的商品.</p>
+        </div>
+        <ul id="flexiselDemo1">
+            <li ng-repeat="item in itemOthers">
+                <a href="#">
+                    <img class="img-responsive women" ng-src="/repository/product_images/{{item.picurl}}"
+                         alt="">
+                </a>
+
+                <div class="hide-in">
+                    <p>{{item.name}}</p>
+                    <span>{{item.price}}元  |  <a href="#">立即购买</a></span>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</div>
+<script type="text/javascript">
+    $("#flexiselDemo1").flexisel({
+        visibleItems: 4,
+        animationSpeed: 1000,
+        autoPlay: true,
+        autoPlaySpeed: 3000,
+        pauseOnHover: true,
+        enableResponsiveBreakpoints: true,
+        responsiveBreakpoints: {
+            portrait: {
+                changePoint: 480,
+                visibleItems: 1
+            },
+            landscape: {
+                changePoint: 640,
+                visibleItems: 2
+            },
+            tablet: {
+                changePoint: 768,
+                visibleItems: 3
+            }
+        }
+    });
+</script>

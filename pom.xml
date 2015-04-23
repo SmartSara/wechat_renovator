@@ -236,6 +236,8 @@
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<encoding>gbk</encoding>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 			<plugin>

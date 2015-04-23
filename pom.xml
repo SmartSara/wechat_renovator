@@ -234,6 +234,9 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<encoding>gbk</encoding>
+				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>

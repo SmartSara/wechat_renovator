@@ -9,7 +9,7 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
 /**
- * è¯ä¹¦ä¿¡ä»»ç®¡ç†å™¨ï¼ˆç”¨äºhttpsè¯·æ±‚ï¼‰
+ * Ö¤ÊéĞÅÈÎ¹ÜÀíÆ÷£¨ÓÃÓÚhttpsÇëÇó£©
  */
 public class MyX509TrustManager implements X509TrustManager {
 

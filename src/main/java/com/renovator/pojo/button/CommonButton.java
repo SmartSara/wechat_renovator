@@ -5,7 +5,7 @@ package com.renovator.pojo.button;
  */
 
 /**
- * 鏅�氭寜閽紙瀛愭寜閽級
+ * 普通按钮（子按钮）
  */
 public class CommonButton extends Button {
     private String type;

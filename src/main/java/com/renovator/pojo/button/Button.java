@@ -5,7 +5,7 @@ package com.renovator.pojo.button;
  */
 
 /**
- * æŒ‰é’®çš„åŸºç±»
+ * °´Å¥µÄ»ùÀà
  */
 public class Button {
     public static final String TYPE_CLICK = "click";

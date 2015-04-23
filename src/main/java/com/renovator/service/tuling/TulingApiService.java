@@ -15,12 +15,12 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 /**
- * è°ƒç”¨å›¾çµæœºå™¨äººapiæ¥å£ï¼Œè·å–æ™ºèƒ½å›å¤å†…å®¹
+ * µ÷ÓÃÍ¼Áé»úÆ÷ÈËapi½Ó¿Ú£¬»ñÈ¡ÖÇÄÜ»Ø¸´ÄÚÈİ
  */
 @Service
 public class TulingApiService {
     /**
-     * è°ƒç”¨å›¾çµæœºå™¨äººapiæ¥å£ï¼Œè·å–æ™ºèƒ½å›å¤å†…å®¹ï¼Œè§£æè·å–è‡ªå·±æ‰€éœ€ç»“æœ
+     * µ÷ÓÃÍ¼Áé»úÆ÷ÈËapi½Ó¿Ú£¬»ñÈ¡ÖÇÄÜ»Ø¸´ÄÚÈİ£¬½âÎö»ñÈ¡×Ô¼ºËùĞè½á¹û
      *
      * @param content
      * @return
@@ -38,7 +38,7 @@ public class TulingApiService {
                 connection.setConnectTimeout(10 * 1000);
                 connection.setReadTimeout(10 * 1000);
                 connection.connect();
-                // å–å¾—è¾“å…¥æµï¼Œå¹¶ä½¿ç”¨Readerè¯»å–
+                // È¡µÃÊäÈëÁ÷£¬²¢Ê¹ÓÃReader¶ÁÈ¡
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
                 StringBuffer sb = new StringBuffer();
                 String line;
@@ -46,18 +46,18 @@ public class TulingApiService {
                     sb.append(line);
                 }
                 reader.close();
-                // æ–­å¼€è¿æ¥
+                // ¶Ï¿ªÁ¬½Ó
                 connection.disconnect();
                 result = sb.toString();
                 break;
             } catch (Exception e) {
                 e.printStackTrace();
-                result = "å¯¹ä¸èµ·ï¼Œä½ è¯´çš„è¯çœŸæ˜¯å¤ªé«˜æ·±äº†â€¦â€¦";
+                result = "¶Ô²»Æğ£¬ÄãËµµÄ»°ÕæÊÇÌ«¸ßÉîÁË¡­¡­";
             }
         }
         try {
             JSONObject json = new JSONObject(result);
-            //ä»¥code=100000ä¸ºä¾‹ï¼Œå‚è€ƒå›¾çµæœºå™¨äººapiæ–‡æ¡£
+            //ÒÔcode=100000ÎªÀı£¬²Î¿¼Í¼Áé»úÆ÷ÈËapiÎÄµµ
             if (100000 == json.getInt("code")) {
                 result = json.getString("text");
             } else if (200000 == json.getInt("code")) {

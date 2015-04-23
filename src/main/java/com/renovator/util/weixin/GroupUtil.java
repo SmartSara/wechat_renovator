@@ -12,7 +12,7 @@ import com.renovator.util.task.AccessTokenService;
 
 /** 
  * @author wade 
- * @version 2015å¹´4æœˆ20æ—¥ ä¸‹åˆ11:46:34 
+ * @version 2015Äê4ÔÂ20ÈÕ ÏÂÎç11:46:34 
  */
 public class GroupUtil extends WeixinUtil {
     
@@ -52,6 +52,7 @@ public class GroupUtil extends WeixinUtil {
         JSONObject nameData = new JSONObject();
         nameData.put("id", groupid);
         groupPostData.put("group", nameData);
+        System.out.println(groupPostData.toString());
         JSONObject result= httpRequest(delete_group_url.replace(ACCESS_TOKEN, AccessTokenService.getAccessToken()), POST ,groupPostData.toString());
         
         return result.getString("errmsg");

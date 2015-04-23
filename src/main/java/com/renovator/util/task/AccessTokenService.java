@@ -4,10 +4,10 @@ import com.renovator.pojo.AccessToken;
 import com.renovator.util.WeixinUtil;
 
 /**
- * å®šæ—¶ä»»åŠ¡ è·å–accessToken
+ * ¶¨Ê±ÈÎÎñ »ñÈ¡accessToken
  * 
  * @author wade
- * @version 2015å¹´4æœˆ21æ—¥ ä¸Šåˆ12:08:20
+ * @version 2015Äê4ÔÂ21ÈÕ ÉÏÎç12:08:20
  */
 
 public class AccessTokenService {

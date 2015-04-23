@@ -5,12 +5,12 @@ package com.renovator.pojo;
  */
 
 /**
- * 微信通用接口凭证
+ * ΢��ͨ�ýӿ�ƾ֤
  */
 public class AccessToken {
-    // 获取到的凭证
+    // ��ȡ����ƾ֤
     private String token;
-    // 凭证有效时间，单位：秒
+    // ƾ֤��Чʱ�䣬��λ����
     private int expiresIn;
 
     public String getToken() {

@@ -5,7 +5,7 @@ package com.renovator.pojo.button;
  */
 
 /**
- * æŒ‰é’®çš„åŸºç±»
+ * °´Å¥µÄ»ùÀà
  */
 public class ClickButton extends Button {
     private String type = TYPE_CLICK;

@@ -30,17 +30,17 @@ public class WechatController {
 
     @RequestMapping(method = RequestMethod.GET)
     public void get(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // å¾®ä¿¡åŠ å¯†ç­¾å
+        // Î¢ĞÅ¼ÓÃÜÇ©Ãû
         String signature = request.getParameter("signature");
-        // æ—¶é—´æˆ³
+        // Ê±¼ä´Á
         String timestamp = request.getParameter("timestamp");
-        // éšæœºæ•°
+        // Ëæ»úÊı
         String nonce = request.getParameter("nonce");
-        // éšæœºå­—ç¬¦ä¸²
+        // Ëæ»ú×Ö·û´®
         String echostr = request.getParameter("echostr");
 
         PrintWriter out = response.getWriter();
-        // è¯·æ±‚æ ¡éªŒï¼Œè‹¥æ ¡éªŒæˆåŠŸåˆ™åŸæ ·è¿”å›echostrï¼Œè¡¨ç¤ºæ¥å…¥æˆåŠŸï¼Œå¦åˆ™æ¥å…¥å¤±è´¥
+        // ÇëÇóĞ£Ñé£¬ÈôĞ£Ñé³É¹¦ÔòÔ­Ñù·µ»Øechostr£¬±íÊ¾½ÓÈë³É¹¦£¬·ñÔò½ÓÈëÊ§°Ü
         if (SignUtil.checkSignature(signature, timestamp, nonce)) {
             out.print(echostr);
         }
@@ -50,7 +50,7 @@ public class WechatController {
 
     @RequestMapping(method = RequestMethod.POST)
     public void respond(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // å°†è¯·æ±‚ã€å“åº”çš„ç¼–ç å‡è®¾ç½®ä¸ºUTF-8ï¼ˆé˜²æ­¢ä¸­æ–‡ä¹±ç ï¼‰
+        // ½«ÇëÇó¡¢ÏìÓ¦µÄ±àÂë¾ùÉèÖÃÎªUTF-8£¨·ÀÖ¹ÖĞÎÄÂÒÂë£©
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");

@@ -5,7 +5,7 @@ package com.renovator.pojo.button;
  */
 
 /**
- * å¤æ‚æŒ‰é’®ï¼ˆçˆ¶æŒ‰é’®ï¼‰
+ * ¸´ÔÓ°´Å¥£¨¸¸°´Å¥£©
  */
 public class ComplexButton extends Button {
     private Button[] sub_button;

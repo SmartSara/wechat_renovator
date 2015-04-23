@@ -1,10 +1,15 @@
 package com.renovator.service;
 
 import com.renovator.pojo.User;
+import com.renovator.pojo.dto.NotificationType;
 import com.renovator.pojo.message.resp.Article;
 import com.renovator.pojo.message.resp.NewsMessage;
 import com.renovator.util.MessageUtil;
 import com.renovator.util.PropertyHolder;
+
+import me.chanjar.weixin.common.api.WxConsts;
+import me.chanjar.weixin.common.exception.WxErrorException;
+
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,25 +26,42 @@ import java.util.List;
 @Service
 public class NotificationService {
 
-    private static final Logger logger = LoggerFactory.getLogger(NotificationService.class);
+    private static final Logger logger                       = LoggerFactory.getLogger(NotificationService.class);
 
     private static final double BALANCE_NOTIFICATION_BALANCE = 100;
 
     @Autowired
-    private MessageService messageService;
+    private MessageService      messageService;
     @Autowired
-    private UserService userService;
+    private UserService         userService;
+
+    @Autowired
+    private PushMessageService  pushMessageService;
+
+    public void nofityOneTimeTask() {
+
+        List<com.renovator.pojo.dto.material.Article> articles = pushMessageService.getArticles(NotificationType.dev);
+        
+        try {
+            WeixinService.send(WxConsts.MASS_MSG_NEWS,articles);
+        } catch (WxErrorException e) {
+            logger.error(e.getMessage(),e);
+        }
+
+    }
 
     public void notifyBalance() {
         logger.info("Notify balance");
         List<User> userList = userService.getUserList();
         for (User user : userList) {
             if (user.getBalance() < BALANCE_NOTIFICATION_BALANCE) {
-                sendNotificationMessage(PropertyHolder.APPID, user.getOpenId(), "余额不足" + BALANCE_NOTIFICATION_BALANCE + "元", "您的当前余额不足，请及时充值", PropertyHolder.SERVER + "/images/logo.png", PropertyHolder.SERVER + "/product_showcase/introduction.html");
+                sendNotificationMessage(PropertyHolder.APPID, user.getOpenId(), "余额不足" + BALANCE_NOTIFICATION_BALANCE
+                                                                                + "元", "您的当前余额不足，请及时充值",
+                                        PropertyHolder.SERVER + "/images/logo.png",
+                                        PropertyHolder.SERVER + "/product_showcase/introduction.html");
             }
         }
     }
-
 
     public void notifyBirthday() {
         logger.info("Notify birthday");
@@ -48,12 +70,15 @@ public class NotificationService {
             DateTime birthday = new DateTime(user.getBirthday());
             DateTime today = new DateTime();
             if (birthday.getDayOfYear() == today.getDayOfYear()) {
-                sendNotificationMessage(PropertyHolder.APPID, user.getOpenId(), "生日快乐", user.getName() + ",祝您生日快乐！", PropertyHolder.SERVER + "/images/logo.png", PropertyHolder.SERVER + "/product_showcase/introduction.html");
+                sendNotificationMessage(PropertyHolder.APPID, user.getOpenId(), "生日快乐", user.getName() + ",祝您生日快乐！",
+                                        PropertyHolder.SERVER + "/images/logo.png",
+                                        PropertyHolder.SERVER + "/product_showcase/introduction.html");
             }
         }
     }
 
-    private void sendNotificationMessage(String appid, String toOpenId, String title, String description, String picUrl, String url) {
+    private void sendNotificationMessage(String appid, String toOpenId, String title, String description,
+                                         String picUrl, String url) {
         NewsMessage newsMessage = new NewsMessage();
         newsMessage.setToUserName(toOpenId);
         newsMessage.setFromUserName(appid);

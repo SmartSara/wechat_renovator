@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.renovator.dao.MaterialDao;
 import com.renovator.dao.PushMessageDao;
+import com.renovator.pojo.dto.NotificationType;
 import com.renovator.pojo.dto.Preview;
 import com.renovator.pojo.dto.PushMessageTask;
 import com.renovator.pojo.dto.material.Article;
@@ -62,6 +63,12 @@ public class PushMessageService {
 	@Transactional
     public Object updatePushMessageTaskMsgs(int pushMessageTaskId, String msgs) {
 	    return pushMessageDao.updatePushMessageTaskMsgs(pushMessageTaskId,msgs);
+    }
+
+    public List<Article> getArticles(NotificationType type) {
+        
+       return  pushMessageDao.getArticles(type);
+        
     }
 
 }

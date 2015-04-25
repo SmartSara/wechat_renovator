@@ -27,13 +27,13 @@ $(function () {
             url: "/user/account/bind",
             data: userInfo,
             success: function (data, status) {
-                $('.container').html("<h3 class='text-center header_msg'>会员账号绑定成功</h3>");
+                $('.container').html("<h3 class='text-center header_msg'>浼氬憳璐﹀彿缁戝畾鎴愬姛</h3>");
             },
             error: function (data) {
                 var errorMsg = data;
                 $('.container').html("<h3 class='text-center header_msg'>" + errorMsg + "</h3>");
             }
         });
-        $('#submit').val("绑定成功，若无跳转，请关闭此页面");
+        $('#submit').val("缁戝畾鎴愬姛锛岃嫢鏃犺烦杞紝璇峰叧闂椤甸潰");
     });
 })

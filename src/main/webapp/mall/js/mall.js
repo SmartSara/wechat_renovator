@@ -41,6 +41,16 @@ mallModule.controller('itemController', function ($scope, $http, $routeParams, $
 
 })
 
+mallModule.controller('singleController', function ($scope, $http, $routeParams, $location, $rootScope) {
+
+    var itemId = $routeParams.item_id;
+    $http.get('/product/' + itemId).success(function (data, status, headers, config) {
+        $scope.item = data;
+    });
+
+
+})
+
 mallModule.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {
@@ -50,6 +60,10 @@ mallModule.config(['$routeProvider', function ($routeProvider) {
         .when('/:item', {
             controller: 'itemController',
             templateUrl: 'item.html'
+        })
+        .when('/single/:item_id', {
+            controller: 'singleController',
+            templateUrl: 'single.html'
         })
         .otherwise({
             redirectTo: '/'

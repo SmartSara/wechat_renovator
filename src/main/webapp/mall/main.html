@@ -24,7 +24,7 @@
             </div>
             <div class="lady-in">
                 <div class="col-md-4 you-para" ng-repeat="item in itemMainShow">
-                    <a href="single.html"><img class="img-responsive pic-in"
+                    <a href="#/single/{{item.id}}"><img class="img-responsive pic-in"
                                                ng-src="/repository/product_images/{{item.picurl}}"></a>
 
                     <!--<div class="you-in">-->
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="discount" ng-repeat="item in itemLatest">
-            <a href="single.html"><img class="img-responsive pic-in"
+            <a href="#/single/{{item.id}}"><img class="img-responsive pic-in"
                                        ng-src="/repository/product_images/{{item.picurl}}">
             </a>
 
@@ -66,7 +66,7 @@
         </div>
         <ul id="flexiselDemo1">
             <li ng-repeat="item in itemOthers">
-                <a href="#">
+                <a href="#/single/{{item.id}}">
                     <img class="img-responsive women" ng-src="/repository/product_images/{{item.picurl}}"
                          alt="">
                 </a>

@@ -1,4 +1,4 @@
-<div class="  col-m-on">
+<div class="col-m-on">
     <div class="in-line">
         <div class="para-all">
             <h3>新品</h3>
@@ -7,7 +7,7 @@
         </div>
         <div class="lady-on">
             <div class="col-md-4 you-men" ng-repeat="item in itemMain">
-                <a href="single.html"><img class="img-responsive pic-in"
+                <a href="#/single/{{item.id}}"><img class="img-responsive pic-in"
                                            ng-src="/repository/product_images/{{item.picurl}}"></a>
 
                 <!--<div class="you-in">-->
@@ -29,7 +29,7 @@
         </div>
         <ul id="flexiselDemo1">
             <li ng-repeat="item in itemOther">
-                <a href="#">
+                <a href="#/single/{{item.id}}">
                     <img class="img-responsive women" ng-src="/repository/product_images/{{item.picurl}}"
                          alt="">
                 </a>

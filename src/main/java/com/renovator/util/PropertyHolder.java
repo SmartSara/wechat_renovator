@@ -49,6 +49,8 @@ public class PropertyHolder {
     public static final String MENU_ABOUT_US_KEY = prop.getProperty("menu.about_us_key");
 
     public static final String MATERIAL_PICTURE_DIR = prop.getProperty("material.picture.dir");
+    
+    public static final Boolean IS_DEBUG_MODE = Boolean.valueOf(prop.getProperty("debug"));
 
 
 }

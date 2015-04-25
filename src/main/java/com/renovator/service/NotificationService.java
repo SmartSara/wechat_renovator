@@ -37,18 +37,10 @@ public class NotificationService {
 
     @Autowired
     private PushMessageService  pushMessageService;
+    
+    @Autowired
+    private WeixinService weixinService;
 
-    public void nofityOneTimeTask() {
-
-        List<com.renovator.pojo.dto.material.Article> articles = pushMessageService.getArticles(NotificationType.dev);
-        
-        try {
-            WeixinService.send(WxConsts.MASS_MSG_NEWS,articles);
-        } catch (WxErrorException e) {
-            logger.error(e.getMessage(),e);
-        }
-
-    }
 
     public void notifyBalance() {
         logger.info("Notify balance");

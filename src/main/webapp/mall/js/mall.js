@@ -47,6 +47,11 @@ mallModule.controller('singleController', function ($scope, $http, $routeParams,
     $http.get('/product/' + itemId).success(function (data, status, headers, config) {
         $scope.item = data;
     });
+    //$('.e_img_1>img').attr('src', $scope.item.picurl);
+    //$('.e_img_2>img').attr('src', $scope.item.picurl1);
+    //$('.e_img_3>img').attr('src', $scope.item.picurl2);
+    //$('.e_img_4>img').attr('src', $scope.item.picurl3);
+
 
 
 });

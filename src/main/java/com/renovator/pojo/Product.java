@@ -154,10 +154,10 @@ public class Product {
     }
 
     public class Category {
-        public static final String CATEGORY_SHOE = "鞋类";
-        public static final String CATEGORY_COAT = "皮衣";
-        public static final String CATEGORY_BAG = "包类";
-        public static final String CATEGORY_LEATHER = "皮具";
+        public static final String CATEGORY_SHOE = "闉嬬被";
+        public static final String CATEGORY_COAT = "鐨。";
+        public static final String CATEGORY_BAG = "鍖呯被";
+        public static final String CATEGORY_LEATHER = "鐨叿";
     }
 
 }

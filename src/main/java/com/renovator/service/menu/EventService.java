@@ -36,8 +36,8 @@ public class EventService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("Çë°ó¶¨ÕËºÅ");
-        article.setDescription("°ó¶¨»áÔ±ÕËºÅ£¬Ê¹ÓÃÎ¢ĞÅ»ñÈ¡¸ü¶àĞÅÏ¢");
+        article.setTitle("è¯·ç»‘å®šè´¦å·");
+        article.setDescription("ç»‘å®šä¼šå‘˜è´¦å·ï¼Œä½¿ç”¨å¾®ä¿¡è·å–æ›´å¤šä¿¡æ¯");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/account_binding/index.html?open_id=" + fromUserName);
         articleList.add(article);
@@ -55,8 +55,8 @@ public class EventService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("¹«Ë¾¼ò½é");
-        article.setDescription("µã»÷²é¿´µêÆÌµØÖ·¡¢ÁªÏµ·½Ê½¡¢ÓªÒµÊ±¼ä");
+        article.setTitle("å…¬å¸ç®€ä»‹");
+        article.setDescription("ç‚¹å‡»æŸ¥çœ‹åº—é“ºåœ°å€ã€è”ç³»æ–¹å¼ã€è¥ä¸šæ—¶é—´");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.jpg");
         article.setUrl(PropertyHolder.SERVER + "/mall/index.html");
         articleList.add(article);
@@ -74,8 +74,8 @@ public class EventService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("¼ÄÂôÉÌÆ·²éÑ¯");
-        article.setDescription("µã»÷²éÑ¯¼ÄÂôÉÌÆ·");
+        article.setTitle("å¯„å–å•†å“æŸ¥è¯¢");
+        article.setDescription("ç‚¹å‡»æŸ¥è¯¢å¯„å–å•†å“");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/mall/index.html");
         articleList.add(article);
@@ -93,8 +93,8 @@ public class EventService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("µ±Ç°ÕıÔÚ½øĞĞµÄµêÆÌ»î¶¯");
-        article.setDescription("µã»÷²é¿´µ±Ç°ÕıÔÚ½øĞĞµÄµêÆÌ»î¶¯");
+        article.setTitle("å½“å‰æ­£åœ¨è¿›è¡Œçš„åº—é“ºæ´»åŠ¨");
+        article.setDescription("ç‚¹å‡»æŸ¥çœ‹å½“å‰æ­£åœ¨è¿›è¡Œçš„åº—é“ºæ´»åŠ¨");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/mall/index.html");
         articleList.add(article);
@@ -112,8 +112,8 @@ public class EventService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("¼ÄÂôÉÌÆ·Õ¹Ê¾");
-        article.setDescription("µã»÷²é¿´¼ÄÂôÉÌÆ·Õ¹Ê¾");
+        article.setTitle("å¯„å–å•†å“å±•ç¤º");
+        article.setDescription("ç‚¹å‡»æŸ¥çœ‹å¯„å–å•†å“å±•ç¤º");
         article.setPicUrl(PropertyHolder.SERVER + "/repository/images/mall.jpg");
         article.setUrl(PropertyHolder.SERVER + "/mall/index.html");
         articleList.add(article);
@@ -135,8 +135,8 @@ public class EventService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("»áÔ±¿¨ÌáĞÑ£¨ÉúÈÕÔÂÌáĞÑ¡¢»áÔ±¿¨µ½ÆÚÌáĞÑ£©");
-        article.setDescription("µã»÷ÉèÖÃ»áÔ±¿¨ÌáĞÑ£¨ÉúÈÕÔÂÌáĞÑ¡¢»áÔ±¿¨µ½ÆÚÌáĞÑ£©");
+        article.setTitle("ä¼šå‘˜å¡æé†’ï¼ˆç”Ÿæ—¥æœˆæé†’ã€ä¼šå‘˜å¡åˆ°æœŸæé†’ï¼‰");
+        article.setDescription("ç‚¹å‡»è®¾ç½®ä¼šå‘˜å¡æé†’ï¼ˆç”Ÿæ—¥æœˆæé†’ã€ä¼šå‘˜å¡åˆ°æœŸæé†’ï¼‰");
         article.setPicUrl(PropertyHolder.SERVER + "/repository/images/notification.jpeg");
         article.setUrl(PropertyHolder.SERVER + "/notification/setting.html?openId=" + fromUserName);
         articleList.add(article);
@@ -158,8 +158,8 @@ public class EventService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("Ô¤Ô¼ÉÏÃÅÊÕ»õ/ËÍ»õ");
-        article.setDescription("µã»÷Ô¤Ô¼ÉÏÃÅÊÕ»õ/ËÍ»õ");
+        article.setTitle("é¢„çº¦ä¸Šé—¨æ”¶è´§/é€è´§");
+        article.setDescription("ç‚¹å‡»é¢„çº¦ä¸Šé—¨æ”¶è´§/é€è´§");
         article.setPicUrl(PropertyHolder.SERVER + "/repository/images/appointment.jpg");
         article.setUrl(PropertyHolder.SERVER + "/appointment/appointment.html?openId=" + fromUserName);
         articleList.add(article);
@@ -177,7 +177,7 @@ public class EventService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("·şÎñÆ÷ÕıÔÚĞİÏ¢ÖĞ£¬ÉÔºóÔÙÊÔ°É~~");
+        article.setTitle("æœåŠ¡å™¨æ­£åœ¨ä¼‘æ¯ä¸­ï¼Œç¨åå†è¯•å§~~");
         article.setDescription("OooooOoooOooOo.");
         article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/pages/index.html");
@@ -203,19 +203,19 @@ public class EventService {
         List<Article> articleList = new ArrayList<>();
         if (null == serviceList || serviceList.isEmpty()) {
             Article article = new Article();
-            article.setTitle("·şÎñµ¥Ä¿Ç°×´Ì¬");
-            article.setDescription("Äúµ±Ç°»¹Ã»ÓĞ´ı´¦ÀíµÄ¶©µ¥");
+            article.setTitle("æœåŠ¡å•ç›®å‰çŠ¶æ€");
+            article.setDescription("æ‚¨å½“å‰è¿˜æ²¡æœ‰å¾…å¤„ç†çš„è®¢å•");
             article.setPicUrl(PropertyHolder.SERVER + "/repository/images/order.jpg");
             articleList.add(article);
         } else {
             Article article = new Article();
-            article.setTitle("·şÎñµ¥Ä¿Ç°×´Ì¬");
+            article.setTitle("æœåŠ¡å•ç›®å‰çŠ¶æ€");
             article.setPicUrl(PropertyHolder.SERVER + "/repository/images/order.jpg");
             articleList.add(article);
 
             for (com.renovator.pojo.Service service : serviceList) {
                 Article record = new Article();
-                record.setTitle(String.format("ÈÕÆÚ £º%s\nÉÌÆ· £º%s\n¶©µ¥×´Ì¬ £º%s", service.getTs(), service.getProduct().getName(), service.getStatus()));
+                record.setTitle(String.format("æ—¥æœŸ ï¼š%s\nå•†å“ ï¼š%s\nè®¢å•çŠ¶æ€ ï¼š%s", service.getTs(), service.getProduct().getName(), service.getStatus()));
                 articleList.add(record);
             }
 
@@ -240,16 +240,16 @@ public class EventService {
         newsMessage.setFuncFlag(0);
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
-        article.setTitle("»áÔ±¿¨Óà¶î");
+        article.setTitle("ä¼šå‘˜å¡ä½™é¢");
         article.setPicUrl(PropertyHolder.SERVER + "/repository/images/vip_card.jpg");
         articleList.add(article);
 
         Article username = new Article();
-        username.setTitle(String.format("»áÔ±Ãû £º%s", user.getName()));
+        username.setTitle(String.format("ä¼šå‘˜å ï¼š%s", user.getName()));
         articleList.add(username);
 
         Article balance = new Article();
-        balance.setTitle(String.format("»áÔ±¿¨Óà¶î £º%s Ôª", user.getBalance()));
+        balance.setTitle(String.format("ä¼šå‘˜å¡ä½™é¢ ï¼š%s å…ƒ", user.getBalance()));
         articleList.add(balance);
 
         newsMessage.setArticleCount(articleList.size());
@@ -273,14 +273,14 @@ public class EventService {
         List<Article> articleList = new ArrayList<>();
         if (null == serviceList || serviceList.isEmpty()) {
             Article article = new Article();
-            article.setTitle("»áÔ±¿¨Ïû·Ñ¼ÇÂ¼");
-            article.setDescription("Äú»¹Ã»ÓĞÏû·Ñ¹ıÅ¶");
+            article.setTitle("ä¼šå‘˜å¡æ¶ˆè´¹è®°å½•");
+            article.setDescription("æ‚¨è¿˜æ²¡æœ‰æ¶ˆè´¹è¿‡å“¦");
             article.setPicUrl(PropertyHolder.SERVER + "/repository/images/expense.jpg");
             articleList.add(article);
         } else {
             Article article = new Article();
-            article.setTitle("»áÔ±¿¨Ïû·Ñ¼ÇÂ¼");
-            article.setDescription("µã»÷²é¿´ÄúµÄËùÓĞÏû·Ñ¼ÇÂ¼");
+            article.setTitle("ä¼šå‘˜å¡æ¶ˆè´¹è®°å½•");
+            article.setDescription("ç‚¹å‡»æŸ¥çœ‹æ‚¨çš„æ‰€æœ‰æ¶ˆè´¹è®°å½•");
             article.setPicUrl(PropertyHolder.SERVER + "/repository/images/expense.jpg");
             article.setUrl(PropertyHolder.SERVER + "/expense/expense_record.html?openId=" + fromUserName);
             articleList.add(article);
@@ -288,7 +288,7 @@ public class EventService {
             //list the latest three expense record
             for (com.renovator.pojo.Service service : serviceList) {
                 Article record = new Article();
-                record.setTitle(String.format("ÈÕÆÚ £º%s\nÉÌÆ· £º%s", service.getTs(), service.getProduct().getName()));
+                record.setTitle(String.format("æ—¥æœŸ ï¼š%s\nå•†å“ ï¼š%s", service.getTs(), service.getProduct().getName()));
                 articleList.add(record);
             }
         }

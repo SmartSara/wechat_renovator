@@ -28,14 +28,40 @@ public class Product {
     private Date ts;
     @Column(name = "picurl")
     private String picurl;
-    @Column(name = "picurl_zoom")
-    private String picurlZoom;
     @Column(name = "picurl1")
     private String picurl1;
     @Column(name = "picurl2")
     private String picurl2;
     @Column(name = "picurl3")
     private String picurl3;
+    @Column(name = "html")
+    private String html;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                ", price=" + price +
+                ", discount=" + discount +
+                ", ts=" + ts +
+                ", picurl='" + picurl + '\'' +
+                ", picurl1='" + picurl1 + '\'' +
+                ", picurl2='" + picurl2 + '\'' +
+                ", picurl3='" + picurl3 + '\'' +
+                ", html='" + html + '\'' +
+                '}';
+    }
+
+    public String getHtml() {
+        return html;
+    }
+
+    public void setHtml(String html) {
+        this.html = html;
+    }
 
     public String getCategory() {
         return category;
@@ -61,13 +87,6 @@ public class Product {
         this.picurl = picurl;
     }
 
-    public String getPicurlZoom() {
-        return picurlZoom;
-    }
-
-    public void setPicurlZoom(String picurlZoom) {
-        this.picurlZoom = picurlZoom;
-    }
 
     public String getPicurl1() {
         return picurl1;
@@ -132,24 +151,6 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", category='" + category + '\'' +
-                ", price=" + price +
-                ", discount=" + discount +
-                ", ts=" + ts +
-                ", picurl='" + picurl + '\'' +
-                ", picurlZoom='" + picurlZoom + '\'' +
-                ", picurl1='" + picurl1 + '\'' +
-                ", picurl2='" + picurl2 + '\'' +
-                ", picurl3='" + picurl3 + '\'' +
-                '}';
     }
 
     public class Category {

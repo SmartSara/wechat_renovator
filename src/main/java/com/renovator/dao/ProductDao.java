@@ -1,7 +1,6 @@
 package com.renovator.dao;
 
 import com.renovator.pojo.Product;
-import com.renovator.pojo.ProductDetails;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -112,10 +111,10 @@ public class ProductDao {
         return limit == 0 ? query.list() : query.setMaxResults(limit).list();
     }
 
-    public boolean addProductDetails(ProductDetails productDetails) {
+    public boolean addProductDetails(Product product) {
         try {
-            Serializable productId = sessionFactory.getCurrentSession().save(productDetails);
-            logger.debug("Add product {} {}", productId, productDetails.toString());
+            Serializable productId = sessionFactory.getCurrentSession().save(product);
+            logger.debug("Add product {} {}", productId, product.toString());
             return true;
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -123,8 +122,8 @@ public class ProductDao {
         }
     }
 
-    public ProductDetails getProductDetails(int id) {
-        return (ProductDetails) sessionFactory.getCurrentSession().get(ProductDetails.class, id);
+    public Product getProductDetails(int id) {
+        return (Product) sessionFactory.getCurrentSession().get(Product.class, id);
     }
 }
 

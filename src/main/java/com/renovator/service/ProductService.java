@@ -2,7 +2,9 @@ package com.renovator.service;
 
 import com.renovator.dao.ProductDao;
 import com.renovator.pojo.Product;
-import com.renovator.pojo.ProductDetails;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,12 +61,33 @@ public class ProductService {
     }
 
     @Transactional
-    public boolean addProductDetails(ProductDetails productDetails) {
-        return productDao.addProductDetails(productDetails);
+    public boolean addProductDetails(Product product) {
+        Document doc = Jsoup.parse(product.getHtml());
+        Elements elements = doc.getElementsByTag("img");
+        if (!elements.isEmpty()) {
+            String srcDefault = elements.get(0).attr("src");
+            product.setPicurl(srcDefault);
+            product.setPicurl1(srcDefault);
+            product.setPicurl2(srcDefault);
+            product.setPicurl3(srcDefault);
+
+            try {
+                String imgSrc1 = elements.get(1).attr("src");
+                product.setPicurl1(imgSrc1);
+                String imgSrc2 = elements.get(2).attr("src");
+                product.setPicurl2(imgSrc2);
+                String imgSrc3 = elements.get(3).attr("src");
+                product.setPicurl3(imgSrc3);
+            } catch (Exception e) {
+                logger.debug(e.getMessage());
+            }
+
+        }
+        return productDao.addProductDetails(product);
     }
 
     @Transactional
-    public ProductDetails getProductDetails(int id) {
+    public Product getProductDetails(int id) {
         return productDao.getProductDetails(id);
     }
 }

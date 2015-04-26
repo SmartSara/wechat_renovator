@@ -8,7 +8,7 @@
         <div class="lady-on">
             <div class="col-md-4 you-men" ng-repeat="item in itemMain">
                 <a href="#/single/{{item.id}}"><img class="img-responsive pic-in"
-                                           ng-src="/repository/product_images/{{item.picurl}}"></a>
+                                           ng-src="{{item.picurl}}"></a>
 
                 <!--<div class="you-in">-->
                 <!--<span>{{items[0].discount}}<label>%</label></span>-->
@@ -30,7 +30,7 @@
         <ul id="flexiselDemo1">
             <li ng-repeat="item in itemOther">
                 <a href="#/single/{{item.id}}">
-                    <img class="img-responsive women" ng-src="/repository/product_images/{{item.picurl}}"
+                    <img class="img-responsive women" ng-src="{{item.picurl}}"
                          alt="">
                 </a>
 

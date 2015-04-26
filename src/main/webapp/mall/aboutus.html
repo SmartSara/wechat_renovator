@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="article-top">
+        <h3>这是我们</h3>
+
+        <div class="article-bottom">
+            <div class="col-md-4 article-para">
+                <img src="/repository/images/introduction.jpg" alt="image" class="img-responsive zoom-img">
+            </div>
+            <div class="col-md-8 article-head">
+                <h4>$.ajax() 函数依赖服务器提供的信息来处理返回的数据。如果服务器报告说返回的数据是 XML</h4>
+
+                <p>通过 dataType 选项还可以指定其他不同数据处理方式。除了单纯的 XML，还可以指定 html、json、jsonp、script 或者 text。
+                    其中，text 和 xml 类型返回的数据不会经过处理。数据仅仅简单的将 XMLHttpRequest 的 responseText 或 responseHTML 属性传递给 success
+                    回调函数。
+                    注意：我们必须确保网页服务器报告的 MIME 类型与我们选择的 dataType 所匹配。比如说，XML的话，服务器端就必须声明 text/xml 或者 application/xml
+                    来获得一致的结果。
+                    如果指定为 html 类型，任何内嵌的 JavaScript 都会在 HTML 作为一个字符串返回之前执行。类似地，指定 script 类型的话，也会先执行服务器端生成
+                    JavaScript，然后再把脚本作为一个文本数据返回。
+                    如果指定为 json 类型，则会把获取到的数据作为一个 JavaScript 对象来解析，并且把构建好的对象作为结果返回。为了实现这个目的，它首先尝试使用
+                    JSON.parse()。如果浏览器不支持，则使用一个函数来构建。
+                    JSON 数据是一种能很方便通过 JavaScript 解析的结构化数据。如果获取的数据文件存放在远程服务器上（域名不同，也就是跨域获取数据），则需要使用 jsonp
+                    类型。使用这种类型的话，会创建一个查询字符串参数 callback=? ，这个参数会加在请求的 URL 后面。服务器端应当在 JSON 数据前加上回调函数名，以便完成一个有效的 JSONP
+                    请求。如果要指定回调函数的参数名来取代默认的 callback，可以通过设置 $.ajax() 的 jsonp 参数。</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="article-bottom">
+
+            <div class="col-md-8 article-head">
+                <h4>发送数据到服务器</h4>
+
+                <p>默认情况下，Ajax 请求使用 GET 方法。如果要使用 POST 方法，可以设定 type 参数值。这个选项也会影响 data 选项中的内容如何发送到服务器。
+                    data 选项既可以包含一个查询字符串，比如 key1=value1&key2=value2 ，也可以是一个映射，比如 {key1: 'value1', key2: 'value2'}
+                    。如果使用了后者的形式，则数据再发送器会被转换成查询字符串。这个处理过程也可以通过设置 processData 选项为 false 来回避。如果我们希望发送一个 XML
+                    对象给服务器时，这种处理可能并不合适。并且在这种情况下，我们也应当改变 contentType 选项的值，用其他合适的 MIME 类型来取代默认的
+                    application/x-www-form-urlencoded 。</p>
+            </div>
+            <div class="col-md-4 article-para">
+                <img src="/repository/images/introduction_2.jpg" alt="image" class="img-responsive zoom-img">
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="article-bottom">
+            <div class="col-md-4 article-para">
+                <img src="/repository/images/luxury_lc.jpg" alt="image" class="img-responsive zoom-img">
+            </div>
+            <div class="col-md-8 article-head">
+                <h4>$.ajax() 函数依赖服务器提供的信息来处理返回的数据。如果服务器报告说返回的数据是 XML</h4>
+
+                <p>通过 dataType 选项还可以指定其他不同数据处理方式。除了单纯的 XML，还可以指定 html、json、jsonp、script 或者 text。
+                    其中，text 和 xml 类型返回的数据不会经过处理。数据仅仅简单的将 XMLHttpRequest 的 responseText 或 responseHTML 属性传递给 success
+                    回调函数。
+                    注意：我们必须确保网页服务器报告的 MIME 类型与我们选择的 dataType 所匹配。比如说，XML的话，服务器端就必须声明 text/xml 或者 application/xml
+                    来获得一致的结果。
+                    如果指定为 html 类型，任何内嵌的 JavaScript 都会在 HTML 作为一个字符串返回之前执行。类似地，指定 script 类型的话，也会先执行服务器端生成
+                    JavaScript，然后再把脚本作为一个文本数据返回。
+                    如果指定为 json 类型，则会把获取到的数据作为一个 JavaScript 对象来解析，并且把构建好的对象作为结果返回。为了实现这个目的，它首先尝试使用
+                    JSON.parse()。如果浏览器不支持，则使用一个函数来构建。
+                    JSON 数据是一种能很方便通过 JavaScript 解析的结构化数据。如果获取的数据文件存放在远程服务器上（域名不同，也就是跨域获取数据），则需要使用 jsonp
+                    类型。使用这种类型的话，会创建一个查询字符串参数 callback=? ，这个参数会加在请求的 URL 后面。服务器端应当在 JSON 数据前加上回调函数名，以便完成一个有效的 JSONP
+                    请求。如果要指定回调函数的参数名来取代默认的 callback，可以通过设置 $.ajax() 的 jsonp 参数。</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="article-bottom">
+
+            <div class="col-md-8 article-head">
+                <h4>发送数据到服务器</h4>
+
+                <p>默认情况下，Ajax 请求使用 GET 方法。如果要使用 POST 方法，可以设定 type 参数值。这个选项也会影响 data 选项中的内容如何发送到服务器。
+                    data 选项既可以包含一个查询字符串，比如 key1=value1&key2=value2 ，也可以是一个映射，比如 {key1: 'value1', key2: 'value2'}
+                    。如果使用了后者的形式，则数据再发送器会被转换成查询字符串。这个处理过程也可以通过设置 processData 选项为 false 来回避。如果我们希望发送一个 XML
+                    对象给服务器时，这种处理可能并不合适。并且在这种情况下，我们也应当改变 contentType 选项的值，用其他合适的 MIME 类型来取代默认的
+                    application/x-www-form-urlencoded 。</p>
+            </div>
+            <div class="col-md-4 article-para">
+                <img src="/repository/images/map.jpg" alt="image" class="img-responsive zoom-img">
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+    </div>
+</div>

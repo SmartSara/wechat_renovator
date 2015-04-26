@@ -1,7 +1,6 @@
 package com.renovator.controller;
 
 import com.renovator.pojo.Product;
-import com.renovator.pojo.ProductDetails;
 import com.renovator.service.ProductService;
 import com.renovator.util.PropertyHolder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,14 +77,14 @@ public class ProductController {
     }
 
     @RequestMapping(value = "add/details", method = RequestMethod.POST, headers = "Content-Type=application/json")
-    public void addProductDetails(@RequestBody ProductDetails productDetails, HttpServletRequest request, HttpServletResponse response) {
+    public void addProductDetails(@RequestBody Product productDetails, HttpServletRequest request, HttpServletResponse response) {
         productService.addProductDetails(productDetails);
     }
 
     @RequestMapping(value = "details/{id}", method = RequestMethod.GET)
     public
     @ResponseBody
-    ProductDetails getProductDetails(@PathVariable("id") int productDetailsId, HttpServletRequest request, HttpServletResponse response) {
+    Product getProductDetails(@PathVariable("id") int productDetailsId, HttpServletRequest request, HttpServletResponse response) {
         return productService.getProductDetails(productDetailsId);
     }
 }

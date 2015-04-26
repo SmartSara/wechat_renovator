@@ -20,14 +20,16 @@ import me.chanjar.weixin.mp.bean.result.WxMpMassUploadResult;
 
 import com.renovator.pojo.dto.material.Article;
 import com.renovator.util.PropertyHolder;
+import org.springframework.stereotype.Service;
 
 /**
  * @author wade
  * @version 2015年4月23日 上午12:24:29
  */
+@Service
 public class WeixinService {
 
-    private static final Logger    logger = LoggerFactory.getLogger(WeixinService.class);
+    private static final Logger logger = LoggerFactory.getLogger(WeixinService.class);
 
     private static WxMpServiceImpl wxMpService;
 
@@ -128,7 +130,7 @@ public class WeixinService {
             WxMpMassSendResult massResult = wxMpService.massGroupMessageSend(massGroupMessage);
             System.out.println(massResult.getErrorMsg());
         } catch (WxErrorException e) {
-            logger.error(e.getMessage(),e);
+            logger.error(e.getMessage(), e);
         }
 
     }

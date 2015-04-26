@@ -40,7 +40,7 @@
 				<value>com.renovator.pojo.dto.material.Article</value>
 				<value>com.renovator.pojo.dto.PushMessageTask</value>
 				<value>com.renovator.pojo.Administrator</value>
-                <value>com.renovator.pojo.ProductDetails</value>
+                <!--<value>com.renovator.pojo.ProductDetails</value>-->
 			</list>
 		</property>
 		<property name="hibernateProperties">

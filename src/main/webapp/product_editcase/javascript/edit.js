@@ -19,7 +19,7 @@ function _initialPage(){
 
 
 function _submit(){
-    alert("hi");
+    //alert("hi");
     var productDetails = {};
     productDetails.html = UM.getEditor('editor').getContent();
     productDetails.name = $("#name").val();
@@ -35,10 +35,11 @@ function _submit(){
         contentType: "application/json",
         data: JSON.stringify(productDetails),
         success: function (data) {
-            location.reload();
+            //location.reload();
+            $('body').html('新添商品成功！');
         },
         error: function (data) {
-            alert(data.status);
+            alert('新添商品成功！');
         }
     });
 }

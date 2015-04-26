@@ -22,7 +22,7 @@ mallModule.controller('homeController', function ($scope, $http, $location, $roo
     });
 
 
-})
+});
 
 mallModule.controller('itemController', function ($scope, $http, $routeParams, $location, $rootScope) {
     var limit = 15;
@@ -39,7 +39,7 @@ mallModule.controller('itemController', function ($scope, $http, $routeParams, $
     });
 
 
-})
+});
 
 mallModule.controller('singleController', function ($scope, $http, $routeParams, $location, $rootScope) {
 
@@ -49,7 +49,17 @@ mallModule.controller('singleController', function ($scope, $http, $routeParams,
     });
 
 
-})
+});
+
+mallModule.controller('aboutusController', function ($scope, $http, $routeParams, $location, $rootScope) {
+
+    var limit = 4;
+
+    $http.get('/product/list/' + limit).success(function (data, status, headers, config) {
+        $scope.itemOthers = data;
+    })
+
+});
 
 mallModule.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
@@ -57,13 +67,17 @@ mallModule.config(['$routeProvider', function ($routeProvider) {
             controller: 'homeController',
             templateUrl: 'main.html'
         })
-        .when('/:item', {
+        .when('/item/:item', {
             controller: 'itemController',
             templateUrl: 'item.html'
         })
         .when('/single/:item_id', {
             controller: 'singleController',
             templateUrl: 'single.html'
+        })
+        .when('/aboutus', {
+            controller: 'aboutusController',
+            templateUrl: 'aboutus.html'
         })
         .otherwise({
             redirectTo: '/'

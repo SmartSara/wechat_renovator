@@ -26,7 +26,7 @@ import java.io.PrintWriter;
 public class WechatController {
 
     @Autowired
-    private RenovatorService renovatorService;
+    private RenovatorTestService renovatorService;
 
     @RequestMapping(method = RequestMethod.GET)
     public void get(HttpServletRequest request, HttpServletResponse response) throws IOException {

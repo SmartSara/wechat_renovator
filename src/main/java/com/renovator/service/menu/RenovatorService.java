@@ -52,7 +52,7 @@ public class RenovatorService {
             if (msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)) {
                 String eventType = requestMap.get("Event");
                 if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
-                    String respContent = "ÄúºÃ£¬»¶Ó­¹Ø×¢À×ÅµÎ¬ÌØÉİ³ŞÆ·»¤Àí£¡";
+                    String respContent = "æ‚¨å¥½ï¼Œæ¬¢è¿å…³æ³¨é›·è¯ºç»´ç‰¹å¥¢ä¾ˆå“æŠ¤ç†ï¼";
                     TextMessage textMessage = new TextMessage();
                     textMessage.setToUserName(fromUserName);
                     textMessage.setFromUserName(toUserName);
@@ -86,7 +86,7 @@ public class RenovatorService {
             } else {
                 String content = requestMap.get("Content").trim();
                 String respContent = tulingApiService.getTulingResult(content);
-                // »Ø¸´ÎÄ±¾ÏûÏ¢
+                // å›å¤æ–‡æœ¬æ¶ˆæ¯
                 TextMessage textMessage = new TextMessage();
                 textMessage.setToUserName(fromUserName);
                 textMessage.setFromUserName(toUserName);

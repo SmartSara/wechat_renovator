@@ -73,16 +73,16 @@ public class RenovatorTestService {
             textMessage.setFromUserName(toUserName);
             textMessage.setCreateTime(new Date().getTime());
             textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
-            String respContent = String.format("Çë»Ø¸´Êı×Ö\n" +
-                            "»Ø¸´%s£º%s\n" +
-                            "»Ø¸´%s£º%s\n" +
-                            "»Ø¸´%s£º%s\n" +
-                            "»Ø¸´%s£º%s\n" +
-                            "»Ø¸´%s£º%s\n" +
-                            "»Ø¸´%s£º%s\n" +
-                            "»Ø¸´%s£º%s\n" +
-                            "»Ø¸´%s£º%s\n" +
-                            "»Ø¸´%s£º%s\n",
+            String respContent = String.format("è¯·å›å¤æ•°å­—\n" +
+                            "å›å¤%sï¼š%s\n" +
+                            "å›å¤%sï¼š%s\n" +
+                            "å›å¤%sï¼š%s\n" +
+                            "å›å¤%sï¼š%s\n" +
+                            "å›å¤%sï¼š%s\n" +
+                            "å›å¤%sï¼š%s\n" +
+                            "å›å¤%sï¼š%s\n" +
+                            "å›å¤%sï¼š%s\n" +
+                            "å›å¤%sï¼š%s\n",
                     PropertyHolder.MENU_MEMBERSHIP_BALANCE_KEY, PropertyHolder.MENU_MEMBERSHIP_BALANCE,
                     PropertyHolder.MENU_MEMBERSHIP_EXPENSE_KEY, PropertyHolder.MENU_MEMBERSHIP_EXPENSE,
                     PropertyHolder.MENU_CURRENT_ORDER_STATUS_KEY, PropertyHolder.MENU_CURRENT_ORDER_STATUS,

@@ -8,8 +8,8 @@ $(function () {
 });
 
 function _initialNav() {
-    $('#nav').load("nav.html", function () {
-        $("#userNav").addClass("active");
+    $('#nav').load("/admin/html/nav.html", function () {
+        $("#productEditNav").addClass("active");
     });
 }
 

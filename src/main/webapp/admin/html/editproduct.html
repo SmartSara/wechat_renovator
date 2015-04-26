@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>UEditorMINI</title>
+    <link href="/product_editcase/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/product_editcase/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link href="/product_editcase/css/select2.css" rel="stylesheet">
+    <link href="/product_editcase/umeditor/themes/default/css/umeditor.min.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <div id="nav"></div>
+
+    <br/><br/>
+    <div style="width: 1400px; margin: 0px auto">
+        <form>
+            <dl class="dl-horizontal">
+                <div class="form-group">
+                    <dt>
+                        <label class="control-label">商品名称</label>
+                    </dt>
+                    <dd>
+                        <input id="name" class="form-control" placeholder="输入商品名称" style="width: 80%" required>
+                    </dd>
+                </div>
+            </dl>
+            <dl class="dl-horizontal">
+                <div class="form-group">
+                    <dt>
+                        <label class="control-label">商品类型</label>
+                    </dt>
+                    <dd>
+                        <select id="category" style="width: 80%" required>
+                            <option value="0">皮具</option>
+                            <option value="1">皮衣</option>
+                            <option value="2">鞋类</option>
+                            <option value="3">包类</option>
+                        </select>
+                    </dd>
+                </div>
+            </dl>
+            <dl class="dl-horizontal">
+                <div class="form-group">
+                    <dt>
+                        <label class="control-label">商品描述</label>
+                    </dt>
+                    <dd>
+                        <input id="desc" class="form-control" placeholder="输入商品描述" style="width: 80%" required>
+                    </dd>
+                </div>
+            </dl>
+            <dl class="dl-horizontal">
+                <div class="form-group">
+                    <dt>
+                        <label class="control-label">商品价格</label>
+                    </dt>
+                    <dd>
+                        <input id="price" class="form-control" placeholder="输入商品价格" style="width: 80%" required>
+                    </dd>
+                </div>
+            </dl>
+            <dl class="dl-horizontal">
+                <div class="form-group">
+                    <dt>
+                        <label class="control-label">商品折扣</label>
+                    </dt>
+                    <dd>
+                        <input id="discount" class="form-control" placeholder="输入商品折扣" style="width: 80%" required>
+                    </dd>
+                </div>
+            </dl>
+            <dl class="dl-horizontal">
+                <div class="form-group">
+                    <dt>
+                        <label class="control-label">详细信息</label>
+                    </dt>
+                    <dd>
+                        <script type="text/plain" id="editor" style="width: 80%"></script>
+                    </dd>
+                </div>
+            </dl>
+            <div style="width: 50%">
+                <button id="submit" class="btn btn-primary btn-lg" onclick="_submit()" style="float: right;">
+                    <span></span>提交
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+    
+
+
+</body>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" charset="utf-8" src="/product_editcase/umeditor/third-party/jquery.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/product_editcase/umeditor/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/product_editcase/umeditor/umeditor.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/product_editcase/umeditor/lang/zh-cn/zh-cn.js"></script>
+<script src="/product_editcase/javascript/lib/jquery.tmpl.min.js"></script>
+<script src="/product_editcase/javascript/lib/bootstrap-dialog.js"></script>
+<script src="/product_editcase/javascript/lib/bootstrap.min.js"></script>
+<script src="/product_editcase/javascript/lib/select2.js"></script>
+<script src="/product_editcase/javascript/edit.js"></script>
+<!--Script For ueditor-->
+<script type="text/javascript">
+    var ue = UM.getEditor('editor');
+</script>
+</html>

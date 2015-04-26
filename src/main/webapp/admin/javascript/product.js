@@ -25,7 +25,7 @@ function _initialPage() {
     //init table
     $.ajax({
         type: "get",
-        url: "/product/list",
+        url: "/product/list/0",
         dataType: "json",
         success: function (data) {
             $("#productTemplate").tmpl(data).appendTo("#productList");

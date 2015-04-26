@@ -38,7 +38,7 @@ public class EventService {
         Article article = new Article();
         article.setTitle("请绑定账号");
         article.setDescription("绑定会员账号，使用微信获取更多信息");
-        article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/account_binding/index.html?open_id=" + fromUserName);
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
@@ -57,8 +57,8 @@ public class EventService {
         Article article = new Article();
         article.setTitle("公司简介");
         article.setDescription("点击查看店铺地址、联系方式、营业时间");
-        article.setPicUrl(PropertyHolder.SERVER + "/images/logo.jpg");
-        article.setUrl(PropertyHolder.SERVER + "/mall/index.html");
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/logo.jpg");
+        article.setUrl(PropertyHolder.SERVER + "/mall/index.html#/aboutus");
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
         newsMessage.setArticles(articleList);
@@ -76,7 +76,7 @@ public class EventService {
         Article article = new Article();
         article.setTitle("寄卖商品查询");
         article.setDescription("点击查询寄卖商品");
-        article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/mall/index.html");
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
@@ -95,7 +95,7 @@ public class EventService {
         Article article = new Article();
         article.setTitle("当前正在进行的店铺活动");
         article.setDescription("点击查看当前正在进行的店铺活动");
-        article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/mall/index.html");
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
@@ -179,7 +179,7 @@ public class EventService {
         Article article = new Article();
         article.setTitle("服务器正在休息中，稍后再试吧~~");
         article.setDescription("OooooOoooOooOo.");
-        article.setPicUrl(PropertyHolder.SERVER + "/images/logo.png");
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/logo.png");
         article.setUrl(PropertyHolder.SERVER + "/pages/index.html");
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());

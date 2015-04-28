@@ -61,4 +61,9 @@ public class ServiceService {
     public List<Service> getUncheckedServiceListByUserId(int userId) {
         return serviceDao.getUncheckedServiceListByUserId(userId);
     }
+
+    @Transactional
+    public List<Service> getServiceListByOpenId(String openId) {
+        return serviceDao.getServiceListByOpenId(openId);
+    }
 }

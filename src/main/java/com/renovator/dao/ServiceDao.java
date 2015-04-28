@@ -109,5 +109,18 @@ public class ServiceDao {
     public List<Service> getUncheckedServiceListByUserId(int userId) {
         return sessionFactory.getCurrentSession().createQuery(String.format("from com.renovator.pojo.Service where user.id = %d and status != '%s'", userId, Service.Status.CHECKED)).list();
     }
+
+    public List<Service> getServiceListByOpenId(String openId) {
+        try {
+            Query query = sessionFactory.getCurrentSession().createQuery(String.format("from com.renovator.pojo.Service where user.openId='%s' order by ts desc", openId));
+            List<Service> serviceList = query.list();
+            logger.debug("Get service list of openId {}", openId);
+            logger.debug(serviceList.toString());
+            return serviceList;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+    }
 }
 

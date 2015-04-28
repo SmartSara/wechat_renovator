@@ -1,7 +1,6 @@
 package com.renovator.controller;
 
-import com.renovator.service.menu.RenovatorService;
-import com.renovator.service.menu.RenovatorTestService;
+import com.renovator.service.RenovatorTestService;
 import com.renovator.util.SignUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

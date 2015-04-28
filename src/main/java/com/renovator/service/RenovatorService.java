@@ -1,12 +1,7 @@
-package com.renovator.service.menu;
+package com.renovator.service;
 
 import com.renovator.exception.UserNotFoundException;
-import com.renovator.pojo.User;
 import com.renovator.pojo.message.req.TextMessage;
-import com.renovator.pojo.message.resp.Article;
-import com.renovator.pojo.message.resp.NewsMessage;
-import com.renovator.service.ServiceService;
-import com.renovator.service.UserService;
 import com.renovator.service.tuling.TulingApiService;
 import com.renovator.util.MessageUtil;
 import com.renovator.util.PropertyHolder;
@@ -16,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**

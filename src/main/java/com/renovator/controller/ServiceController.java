@@ -39,6 +39,13 @@ public class ServiceController {
         return serviceService.getServiceListByUserId(userId, 0);
     }
 
+    @RequestMapping(value = "list/open_id/{open_id}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    List<Service> getServiceListByOpenId(@PathVariable("open_id") String openId, HttpServletRequest request, HttpServletResponse response) {
+        return serviceService.getServiceListByOpenId(openId);
+    }
+
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public
     @ResponseBody
@@ -65,10 +72,10 @@ public class ServiceController {
     public
     @ResponseBody
     List<Service> getUserList(@RequestParam("order_id") String orderId, @RequestParam("type") String type,
-                           @RequestParam("price") String price, @RequestParam("ts") String ts,
-                           @RequestParam("username") String username, @RequestParam("mobile") String contact,
-                           @RequestParam("product_name") String productName,
-                           HttpServletRequest request, HttpServletResponse response) {
+                              @RequestParam("price") String price, @RequestParam("ts") String ts,
+                              @RequestParam("username") String username, @RequestParam("mobile") String contact,
+                              @RequestParam("product_name") String productName,
+                              HttpServletRequest request, HttpServletResponse response) {
         try {
             return serviceService.searchServices(orderId, type, price, ts, username, contact, productName);
         } catch (Exception e) {

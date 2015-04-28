@@ -1,4 +1,4 @@
-package com.renovator.service.menu;
+package com.renovator.service;
 
 import com.renovator.exception.UserNotFoundException;
 import com.renovator.pojo.User;
@@ -282,7 +282,7 @@ public class EventService {
             article.setTitle("会员卡消费记录");
             article.setDescription("点击查看您的所有消费记录");
             article.setPicUrl(PropertyHolder.SERVER + "/repository/images/expense.jpg");
-            article.setUrl(PropertyHolder.SERVER + "/expense/expense_record.html?openId=" + fromUserName);
+            article.setUrl(PropertyHolder.SERVER + "/expense/expense_record.html?open_id=" + fromUserName);
             articleList.add(article);
 
             //list the latest three expense record

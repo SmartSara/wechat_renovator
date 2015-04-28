@@ -1,0 +1,39 @@
+.all_center {
+    width: auto;
+
+    /*display: table;*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body {
+    background: url(../../repository/images/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+section {
+    margin-top: 20%;
+}
+
+.header_title, .header_msg {
+    color: wheat;
+}
+
+#submit {
+    width: 100%;
+    margin-top: 6%;
+    height: 50px;
+}
+
+.input-group{
+    margin-bottom: 2%;
+    height:60px;
+}
+
+#birthday,#mobile,#email{
+    height: 60px;
+    font-size: 40px;
+}

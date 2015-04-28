@@ -138,7 +138,7 @@ public class EventService {
         article.setTitle("会员卡提醒（生日月提醒、会员卡到期提醒）");
         article.setDescription("点击设置会员卡提醒（生日月提醒、会员卡到期提醒）");
         article.setPicUrl(PropertyHolder.SERVER + "/repository/images/notification.jpeg");
-        article.setUrl(PropertyHolder.SERVER + "/notification/setting.html?openId=" + fromUserName);
+        article.setUrl(PropertyHolder.SERVER + "/notification/setting.html?open_id=" + fromUserName);
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
         newsMessage.setArticles(articleList);

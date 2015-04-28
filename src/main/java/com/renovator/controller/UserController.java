@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -77,10 +78,29 @@ public class UserController {
     public
     @ResponseBody
     boolean bindAccount(@RequestParam("username") String username, @RequestParam("mobile") String contact,
-                     @RequestParam("email") String email, @RequestParam("openId") String openId, HttpServletRequest request, HttpServletResponse response) {
+                        @RequestParam("email") String email, @RequestParam("openId") String openId, HttpServletRequest request, HttpServletResponse response) {
         logger.info("username {}, mobile {}, email {}, openId {}", username, contact, email, openId);
         try {
             userService.bindAccount(username, contact, email, openId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setHeader(PropertyHolder.HEADER_MSG, e.getMessage());
+            response.setStatus(HttpStatus.CONFLICT.value());
+            return false;
+        }
+
+        return true;
+    }
+
+    @RequestMapping(value = "account/birthday", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    boolean bindAccount(@RequestParam("birthday") String birthday, @RequestParam("openId") String openId, HttpServletRequest request, HttpServletResponse response) {
+        logger.info("openId {}, birthday {}", openId, birthday);
+        try {
+            User user = userService.getUserWithOpenId(openId);
+            user.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse(birthday));
+            userService.updateUser(user);
         } catch (Exception e) {
             e.printStackTrace();
             response.setHeader(PropertyHolder.HEADER_MSG, e.getMessage());

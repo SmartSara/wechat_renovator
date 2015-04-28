@@ -27,6 +27,31 @@ public class Service {
     @OneToOne
     @JoinColumn(name = "product_id")
     private Product product;
+    @Column(name = "to_address")
+    private String toAddress;
+
+    @Override
+    public String toString() {
+        return "Service{" +
+                "id=" + id +
+                ", orderId='" + orderId + '\'' +
+                ", status='" + status + '\'' +
+                ", type='" + type + '\'' +
+                ", price=" + price +
+                ", ts=" + ts +
+                ", user=" + user +
+                ", product=" + product +
+                ", toAddress='" + toAddress + '\'' +
+                '}';
+    }
+
+    public String getToAddress() {
+        return toAddress;
+    }
+
+    public void setToAddress(String toAddress) {
+        this.toAddress = toAddress;
+    }
 
     public Date getTs() {
         return ts;
@@ -90,20 +115,6 @@ public class Service {
 
     public void setProduct(Product product) {
         this.product = product;
-    }
-
-    @Override
-    public String toString() {
-        return "Service{" +
-                "id=" + id +
-                ", orderId='" + orderId + '\'' +
-                ", status='" + status + '\'' +
-                ", type='" + type + '\'' +
-                ", price=" + price +
-                ", ts=" + ts +
-                ", user=" + user +
-                ", product=" + product +
-                '}';
     }
 
     public class Status {

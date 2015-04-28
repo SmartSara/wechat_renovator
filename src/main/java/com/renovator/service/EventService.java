@@ -161,7 +161,7 @@ public class EventService {
         article.setTitle("预约上门收货/送货");
         article.setDescription("点击预约上门收货/送货");
         article.setPicUrl(PropertyHolder.SERVER + "/repository/images/appointment.jpg");
-        article.setUrl(PropertyHolder.SERVER + "/appointment/appointment.html?openId=" + fromUserName);
+        article.setUrl(PropertyHolder.SERVER + "/appointment/appointment.html?open_id=" + fromUserName);
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
         newsMessage.setArticles(articleList);

@@ -1,16 +1,15 @@
-.all_center {
-    width: auto;
-
-    /*display: table;*/
-    margin-left: auto;
-    margin-right: auto;
+img {
+    max-height: 200px;
+    max-width: 200px;
 }
 
-.header_title, .header_msg {
-    color: wheat;
+td[rowspan] {
+    width: 200px;
 }
 
-img{
-    max-width:200px;
-    max-height: 150px;
+hr {
+    height: 10px;
+    border: none;
+    border-top: 10px groove skyblue;
 }
+

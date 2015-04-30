@@ -10,5 +10,4 @@ serviceModule.controller('serviceController', function ($scope, $http, $location
         $scope.services = data;
     });
 
-
 });

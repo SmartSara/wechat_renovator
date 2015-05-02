@@ -20,12 +20,12 @@
         </thead>
         <tbody>
         <tr ng-repeat="service in services">
-            <td>{{service.orderId}}</td>
-            <td>{{service.status}}</td>
-            <td>{{service.type}}</td>
-            <td>{{service.price | currency : '￥'}}</td>
-            <td>{{service.ts | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-            <td>{{service.product.name}}</td>
+            <td ng-bind="service.orderId"></td>
+            <td ng-bind="service.status"></td>
+            <td ng-bind="service.type"></td>
+            <td ng-bind="service.price | currency : '￥'"></td>
+            <td ng-bind="service.ts | date:'yyyy-MM-dd HH:mm:ss'"></td>
+            <td ng-bind="service.product.name"></td>
         </tr>
         </tbody>
     </table>

@@ -47,7 +47,7 @@ public class PushMessageDao {
         if (type.contains("ARTICLE")) {
             table = "article";
         }
-        String sql = String.format("select pushMessageTask.id as id ,title ,cover,scheduled_time as scheduledTime,status from pushMessageTask , article where %s.id = SUBSTRING_INDEX(pushMessageTask.msg,',',1) order by pushMessageTask.id desc",
+        String sql = String.format("select pushMessageTask.id as id ,title ,cover,scheduled_time as scheduledTime,status from pushmessagetask , article where %s.id = SUBSTRING_INDEX(pushMessageTask.msg,',',1) order by pushMessageTask.id desc",
                                    table, table);
         @SuppressWarnings("unchecked")
         List<Preview> previews = sessionFactory.getCurrentSession().createSQLQuery(sql).setResultTransformer(Transformers.aliasToBean(Preview.class)).list();
@@ -130,7 +130,7 @@ public class PushMessageDao {
     }
 
     public PushMessageTask getEarliestTask() {
-        Integer pushMessageTaskId =  (Integer) sessionFactory.getCurrentSession().createSQLQuery("select id from PushMessageTask where status='READY' and scheduled_time < DATE_ADD(CURRENT_TIMESTAMP() , INTERVAL 2 DAY_HOUR )  order by scheduled_time,id desc limit 1").uniqueResult();
+        Integer pushMessageTaskId =  (Integer) sessionFactory.getCurrentSession().createSQLQuery("select id from pushmessagetask where status='READY' and scheduled_time < DATE_ADD(CURRENT_TIMESTAMP() , INTERVAL 2 DAY_HOUR )  order by scheduled_time,id desc limit 1").uniqueResult();
         if(pushMessageTaskId == null){
             return null;
         }

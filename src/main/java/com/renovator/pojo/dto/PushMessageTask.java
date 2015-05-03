@@ -13,7 +13,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import com.renovator.util.CustomDateSerializer;
 
 @Entity
-@Table(name = "pushMessageTask")
+@Table(name = "pushmessagetask")
 public class PushMessageTask {	
 	@Id
 	@GeneratedValue

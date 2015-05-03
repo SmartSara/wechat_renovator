@@ -40,7 +40,7 @@
 				<value>com.renovator.pojo.dto.material.Article</value>
 				<value>com.renovator.pojo.dto.PushMessageTask</value>
 				<value>com.renovator.pojo.Administrator</value>
-                <!--<value>com.renovator.pojo.ProductDetails</value>-->
+				<!--<value>com.renovator.pojo.ProductDetails</value> -->
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -56,7 +56,12 @@
 		<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</bean>
 
-
+	<task:scheduled-tasks scheduler="myScheduler">
+		<task:scheduled  fixed-delay="60000" ref="weixinTask" method="doSendJob" initial-delay="1000" />
+		<task:scheduled fixed-delay="60000" ref="weixinTask" method="doSendToWadeJob" initial-delay="1000" />
+		<task:scheduled ref="weixinTask" method="resetJob"
+			cron="0 59 23 * * ?" />
+	</task:scheduled-tasks>
 	<bean id="notificationService" class="com.renovator.service.NotificationService" />
 	<!--<task:scheduled-tasks scheduler="myScheduler"> -->
 	<!--<task:scheduled ref="notificationService" method="notifyBalance" fixed-delay="5000" 
@@ -68,6 +73,6 @@
 
 	<!--<task:annotation-driven executor="myExecutor" scheduler="myScheduler"/> -->
 	<!--<task:executor id="myExecutor" pool-size="5"/> -->
-	<!--<task:scheduler id="myScheduler" pool-size="10"/> -->
+	<task:scheduler id="myScheduler" pool-size="4"/>
 
 </beans>

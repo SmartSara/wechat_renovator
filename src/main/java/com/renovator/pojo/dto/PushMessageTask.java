@@ -8,6 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.renovator.util.CustomDateSerializer;
+
 @Entity
 @Table(name = "pushMessageTask")
 public class PushMessageTask {	
@@ -20,7 +24,8 @@ public class PushMessageTask {
 
 	@Column(name = "msg")
 	private String msg;
-
+	
+    @JsonSerialize(using=CustomDateSerializer.class)
 	@Column(name = "scheduled_time")
 	private Date scheduledTime;
 
@@ -47,7 +52,6 @@ public class PushMessageTask {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-
 	public Date getScheduledTime() {
 		return scheduledTime;
 	}

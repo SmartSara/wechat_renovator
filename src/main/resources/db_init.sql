@@ -111,7 +111,8 @@ CREATE TABLE `pushmessagetask` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(255) NOT NULL,
   `msg` varchar(2550) NOT NULL,
-  `scheduled_time` date DEFAULT NULL,
+  `scheduled_time` timestamp ,
+  `status` varchar(255) DEFAULT	'READY',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

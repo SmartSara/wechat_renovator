@@ -6,9 +6,16 @@ var expandNo = -1;
 
 var addArticleInPushMessages=false;
 
+var warningDialogEle='<div class="modal fade delDialog" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="false"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> <h4 class="modal-title" id="title">提醒</h4> </div> <div class="modal-body text-center">####</div> <div class="modal-footer"> <button type="button" class="btn btn-default" data-dismiss="modal">OK</button> </div> </div> </div>';
+
+var _product;
+
+var isUpdateArticle = false ;
+
 $(function() {
 	_initialPage();
 	_initEvent();
+	_initialNav();
 });
 
 function _initialPage() {
@@ -16,13 +23,45 @@ function _initialPage() {
 	
 	initPushMessageContainer();
 	
+	initDateTimePicker();
+	
 	$("#editor").wysiwyg();
 }
 
+
+function _initialNav() {
+    $('#nav').load("nav.html", function () {
+        $("#multiArticleNav").addClass("active");
+    });
+}
+
 function initPushMessageContainer(){
-	$.ajax("../../pushMessage/MULTI_ARTICLE/preview").done(function(result){
-		$("#pushMessageContainer").append($("#pushMessageTemplate").render(result));
+//	$.ajax("../../pushMessage/MULTI_ARTICLE/preview").done(function(result){
+//		$("#pushMessageContainer").append($("#pushMessageTemplate").render(result));
+//	
+		$.ajax("../../pushMessage/MULTI_ARTICLE/preview").done(function(result){
+			 $("#pushMessageTaskTemplate").tmpl(result).appendTo("#pushMessageTaskContainer tbody");
+			 _product = result;
+			 _pageTable();
+		
 });
+}
+
+function initDateTimePicker(){
+	$('#scheduledTimeDialog .datetimepicker').datetimepicker({"minDate":new Date()}).next().on("click",
+			function() {
+				if ($._data(this, "events").click.length > 1 || $("#sendRightNowCheck").prop("checked"))
+					return
+				else
+					$(this).prev().focus();
+			});
+	$('#modifyScheduledTimeDialog .datetimepicker').datetimepicker({"minDate":new Date()}).next().on("click",
+			function() {
+		if ($._data(this, "events").click.length > 1)
+			return
+			else
+				$(this).prev().focus();
+	});
 }
 
 
@@ -38,6 +77,8 @@ function _initEvent() {
 	initCancelBtnEvent();
 	
 	initSingleMaterialsEvnent();
+	
+	initPushMessageTaskContainerEvent();
 
 	initCoverBtnEvent();
 
@@ -46,18 +87,22 @@ function _initEvent() {
 	initPreviewEvent();
 	
 //	initExpandPreviewEvent();
+	
+	initScheduleTimeEvent();
+	
+	initModifyScheduledTimeDialogEvent();
 
 }
 
 function initAddEvent() {
 
-	$("#addItem").mouseover(function() {
-		$("#addIcon").hide();
-		$("#multiAdd").show();
-	}).mouseout(function() {
-		$("#addIcon").show();
-		$("#multiAdd").hide();
-	});
+//	$("#addItem").mouseover(function() {
+//		$("#addIcon").hide();
+//		$("#multiAdd").show();
+//	}).mouseout(function() {
+//		$("#addIcon").show();
+//		$("#multiAdd").hide();
+//	});
 
 	$("#multiAdd").click(function() {
 		getArticleList();
@@ -85,29 +130,42 @@ function getArticleList(){
 
 
 function initSaveBtnEvent() {
-	$("#saveBtn").click(function() {
-		
-		if(addArticleInPushMessages ==  false){
-			//增加pushMessageTask
-			addPushMessageTask();
-		}else{
-//			//增加某一个task的article
-			var pushMessageTaskId =  $("#addDialog").data("pushMessageTaskId");
-			 var msgs= $("#alreadySingleMaterials").find(".singleArticle").map(function(){
-				 return $(this).data("id");
-			 }).get().join(",");
-			 var data = {pushMessageTaskId : pushMessageTaskId,msgs: msgs};
-			 $.ajax({
-						url : "../../pushMessage/update/msgs/",
-						data : data,
-						success : function() {
-							location.reload();
-						}
-					})
-		}
-		
-		
-	})
+	$(" #saveBtn").click(
+			function() {
+
+				if (isUpdateArticle == false) {
+
+					if (addArticleInPushMessages == false) {
+
+						$("#addDialog").modal("hide");
+						$("#scheduledTimeDialog").modal("show");
+					} else {
+						// //增加某一个task的article
+
+						var pushMessageTaskId = $("#addDialog").data(
+								"pushMessageTaskId");
+						var msgs = $("#alreadySingleMaterials").find(
+								".singleArticle").map(function() {
+							return $(this).data("id");
+						}).get().join(",");
+						var data = {
+							pushMessageTaskId : pushMessageTaskId,
+							msgs : msgs
+						};
+						$.ajax({
+							url : "../../pushMessage/update/msgs/",
+							data : data,
+							success : function() {
+								location.reload();
+							}
+						})
+
+					}
+				}else{
+					$("#addDialog").modal("hide");
+				}
+
+			})
 }
 
 function addPushMessageTask(){
@@ -115,7 +173,14 @@ function addPushMessageTask(){
 	var pushMessageTask =  {};
 	pushMessageTask.type = "MULTI_ARTICLE";
 	pushMessageTask.msg = articles.join(",");
-	pushMessageTask.scheduledTime = new Date();
+	if($("#sendRightNowCheck").is(":checked")){
+		pushMessageTask.scheduledTime = moment().add('minutes',2)._d;
+	}else{
+		pushMessageTask.scheduledTime=$('#scheduledTimeDialog .datetimepicker').data("DateTimePicker").getDate()._d;
+	}
+//	pushMessageTask.scheduledTime = new Date();
+
+	console.log(pushMessageTask.scheduledTime);
 	$.ajax({
 		type : "post",
 		url : "../../pushMessage/add",
@@ -141,6 +206,13 @@ function initUpdateArticleBtnBtnEvent(){
 		var title = $("#editDailog #title").val();
 		var content = $("#editDailog #editor").html();
 		
+		
+		var checkResult = checkUpdateInputs();
+		if(checkResult){
+			var dialog=  warningDialogEle.replace("####",checkResult);
+			$(dialog).modal("show");
+			return ;
+		}
 		
 		formData.append("id",id);
 		formData.append("title",title);
@@ -212,13 +284,17 @@ function initSingleMaterialsEvnent(){
 			var singleArticle = $(this).parents(".singleArticle");
 			var articleId = singleArticle.data("id");
 			var url =  "../../pushMessage/del/"+pushMessageTaskId+"/"+articleId;
-			$.ajax(url).done(
-					function(data){
-						if(data=="del"){
-							location.reload();
-						}
-						singleArticle.remove();
-					});
+			
+			var delDialogEle='<div class="modal fade delDialog" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="false"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> <h4 class="modal-title" id="title">提醒</h4> </div> <div class="modal-body text-center">您确定要删除？</div> <div class="modal-footer"> <button type="button" class="no btn btn-default" data-dismiss="modal">取消</button><button type="button" class="ok btn btn-default" data-dismiss="modal">确定</button> </div> </div> </div>';
+			$(delDialogEle).modal("show").on("click",".ok",function(){
+				$.ajax(url).done(
+						function(data){
+							if(data=="del"){
+								location.reload();
+							}
+							singleArticle.remove();
+						});
+			});
 			
 		}
 	)
@@ -311,15 +387,69 @@ function initPreviewEvent(){
 			addArticleInPushMessages = true;
 			
 		}else if (i.hasClass("del")){
-			url = "../../pushMessage/delete/MULTI_ARTICLE/"+pushMessageTaskId;
-			$.ajax(url).done(function(data){
-				//Dialog
-				$.ajax(url).done(function(data){
-					preview.remove();
-				});
-			})
+			
+			var delDialogEle='<div class="modal fade delDialog" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="false"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> <h4 class="modal-title" id="title">提醒</h4> </div> <div class="modal-body text-center">您确定要删除？</div> <div class="modal-footer"> <button type="button" class="no btn btn-default" data-dismiss="modal">取消</button><button type="button" class="ok btn btn-default" data-dismiss="modal">确定</button> </div> </div> </div>';
+			$(delDialogEle).modal("show").on("click",".ok",function(){
+				$.ajax(url).done(
+						function(data){			
+						url = "../../pushMessage/delete/MULTI_ARTICLE/"+pushMessageTaskId;
+						$.ajax(url).done(function(data){
+							//Dialog
+							$.ajax(url).done(function(data){
+								preview.remove();
+							});
+						})});
+			});
+			
 		}
 	})
+	
+}
+
+
+function initPushMessageTaskContainerEvent(){
+	$("#pushMessageTaskContainer").on("click",".add",function(){
+
+		isUpdateArticle = false;
+		var pushMessageTaskId = $(this).data("id");
+		var url = "../../pushMessage/MULTI_ARTICLE/preview/"+pushMessageTaskId;
+		$.ajax(url).done(function(data){
+			$("#alreadySingleMaterials").html($("#singleArticleAddTemplate").render(data));
+			getArticleMaterials(pushMessageTaskId);
+			$("#singleMaterials").addClass("alreadySelectedMaterials");
+		})
+		
+		addArticleInPushMessages = true;
+	})
+	
+	$("#pushMessageTaskContainer").on("click",".del",function(){
+		url = "../../pushMessage/delete/MULTI_ARTICLE/"+$(this).data("id");
+		var trEle = $(this).parents("tr");
+		//Dialog
+		isUpdateArticle = false;
+		var delDialogEle='<div class="modal fade delDialog" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="false"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> <h4 class="modal-title" id="title">提醒</h4> </div> <div class="modal-body text-center">您确定要删除？</div> <div class="modal-footer"> <button type="button" class="no btn btn-default" data-dismiss="modal">取消</button><button type="button" class="ok btn btn-default" data-dismiss="modal">确定</button> </div> </div> </div>';
+		$(delDialogEle).modal("show").on("click",".ok",function(){
+			$.ajax(url).done(function(data){
+				trEle.remove();
+			})
+		});
+		
+	})
+	$("#pushMessageTaskContainer").on("click",".edit",function(){
+		isUpdateArticle = true;
+		var pushMessageTaskId = $(this).data("id");
+		var url = "../../pushMessage/MULTI_ARTICLE/preview/"+pushMessageTaskId;
+		$.ajax(url).done(function(data){
+			$("#singleMaterials").empty().html($("#singleArticleEditTemplate").render(data));
+			$("#alreadySingleMaterials").empty();
+			$("#addDialog").modal("show").data("pushMessageTaskId",pushMessageTaskId);
+		})
+	})
+	
+		$("#pushMessageTaskContainer").on("click",".modifyTime",function(){
+			var pushMessageTaskId = $(this).data("id");
+			$("#modifyScheduledTimeDialog").modal("show").data("pushMessageTaskId",pushMessageTaskId);
+		})
 	
 }
 
@@ -385,4 +515,93 @@ function doClearWork() {
 	var replacement;
 	cover.replaceWith(replacement = cover.clone(true));
 	$("#coverPreview").hide();
+}
+
+function initScheduleTimeEvent(){
+	
+	$("#sendRightNowCheck").change(function(){
+		if($(this).is(":checked")){
+			$("#scheduledTime").val("").prop("readonly",true);
+			$('.datetimepicker').data("DateTimePicker").disable();
+		}else{
+			$("#scheduledTime").prop("readonly",false);
+			$('.datetimepicker').data("DateTimePicker").enable();
+		}
+	}).click();
+	
+	$("#saveScheduledTimeBtn").click(function(){
+		addPushMessageTask()
+	})
+	
+	$("#cancelScheduledTimeBtn").click(function(){
+		$("#addDialog").modal("show");
+	})
+		
+	
+}
+
+function initModifyScheduledTimeDialogEvent(){
+	
+	$("#modifyScheduledTimeBtn").click(function(){
+		var  scheduledTime=$('#modifyScheduledTimeDialog .datetimepicker').data("DateTimePicker").getDate()._d;
+
+		if(scheduledTime == null){
+			alert("请选择时间");
+			return ;
+		}
+		
+		var pushMessageTaskId = $("#modifyScheduledTimeDialog").data("pushMessageTaskId");
+		
+		var data =  {pushMessageTaskId : pushMessageTaskId,modifyScheduledTime : scheduledTime};
+		$.ajax({
+		type : "post",
+		url : "../../pushMessage/update/scheduledTime",
+		data: data,
+		success : function(result) {
+			location.reload();
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			console.log(textStatus);
+			console.log(XMLHttpRequest.status);
+			console.log(XMLHttpRequest.responseText);
+		}
+	});
+	});	
+}
+
+function _pageTable(numPerPage) {
+    $("#pagination").pagination(_product.length, {
+        callback: pageSelectCallback,
+        items_per_page: numPerPage,
+        prev_text: "上一页",
+        next_text: "下一页"
+    });
+}
+function pageSelectCallback(page_index) {
+    var numPerPage = $("#numPerPage").val();
+    $("#productList tr").hide();
+    if (page_index == 0) {
+        $("#productList tr:lt(" + numPerPage + ")").show();
+    } else {
+        $("#productList tr:gt(" + (page_index * numPerPage - 1) + ")").show();
+        $("#productList tr:gt(" + ((page_index + 1) * numPerPage - 1) + ")").hide();
+    }
+}
+
+function checkUpdateInputs(){
+	
+	if($("#title").val() == ''){
+		return "标题不为空";
+	}
+
+	var inputFiles =  $("#editDailog #cover").get(0).files;
+	if(inputFiles.length > 0){
+		if(inputFiles[0].name.match(".gif")){
+			return "输入图片格式不允许";
+		}
+	}
+	
+	if($("#editor").html() == ''){
+		return "消息内容不为空";
+	}
 }

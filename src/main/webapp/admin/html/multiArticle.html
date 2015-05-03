@@ -10,9 +10,11 @@
 <title>多图文消息</title>
 <!-- Bootstrap core CSS -->
 <link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap-datetimepicker.css" rel="stylesheet">
 <link href="../css/pagination.css" rel="stylesheet">
 <link href="../css/bootstrap-datepicker.css" rel="stylesheet">
 <link href="../css/font/font-awesome.css" rel="stylesheet">
+<link href="../css/pagination.css" rel="stylesheet">
 <link href="../css/material.css" rel="stylesheet">
 
 
@@ -24,26 +26,63 @@
 		<div id="loading" class="background">
 			<div class="loading"></div>
 		</div>
-		<ol class="breadcrumb">
-			<li class="active">素材管理</li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">多图文 <b class="caret"></b>
-				</a>
-					<ul class="dropdown-menu">
-						<li><a href="#">单图文</a></li>
-					</ul></li>
-		</ol>
+
+  <!--pagination-->
+    <div id="pagination" style="float: right;" class="pagination"></div>
+    <span class="pagination" style="float: right;">
+        每页显示：<input type="text" style="width: 40%" id="numPerPage" onkeydown="paginationEnter(event, $(this).val());" value="10"> 个
+    </span>
+    
+    <div>
+        <button class="btn btn-primary btn-md-width" id ="multiAdd" >新增消息发送
+        </button>
+    </div>
+
+    <!--Product Table-->
+		<table class="table table-bordered table-hover"
+			id="pushMessageTaskContainer">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>封面</th>
+					<th>标题</th>
+					<th>发送时间</th>
+					<th>状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody id = "productList" >
+				<script id="pushMessageTaskTemplate" type="text/x-jquery-tmpl">
+          <tr>
+            <td>${id}</td>
+            <td><img height ="80px" src =/pic/${cover} /></td>
+            <td>${title}</td>
+            <td>${formatDate(new Date(scheduledTime), 'yyyy-MM-dd hh:mm:ss')}</td>
+			<td>${status}</td>
+            <td>
+                <button class="add btn btn-success  btn-md-width" data-id="${id}">添加</button>
+                <button class="edit btn btn-warning btn-md-width"  data-id="${id}">修改</button>
+                <button class="modifyTime btn btn-info btn-md-width"  data-id="${id}">更改时间</button>
+                <button class="del btn btn-danger btn-md-width"  data-id="${id}">删除</button>
+            </td>
+          </tr>
+        </script>
+			</tbody>
+		</table>
+		<div id="pagination" class="pagination"></div>
+	
 
 
-	<div class="modal fade" id="addDialog" tabindex="-1" role="dialog"
+	<div class="modal fade" id="addDialog" style="dispaly:none" tabindex="-1" role="dialog"
 			aria-labelledby="dialogTitle" aria-hidden="false">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="dialogTitle">编辑推送消息</h4>
-					</div>
+						<h4 class="modal-title" id="dialogTitle">编辑推送消息
+							</h4>
+				</div>
 					<div class="modal-body">
 					<script id="singleArticleAddTemplate" type="text/x-jsrender">
 							<div class="col-md-2 singleArticle add" data-id={{>id}}> <div>{{>title}}
@@ -56,10 +95,10 @@
 							</div> <a class="thumbnail"> <img src="/pic/{{>cover}}"> <i></i></a> </div>
 					</script>
 					
-					<div class="row" id="alreadySingleMaterials">
+					<div class="row" id="alreadySingleMaterials" style= "margin-left:2px ;margin-right: 2px">
 					 </div>
 					
-					<div class="row" id="singleMaterials">
+					<div class="row" id="singleMaterials" >
 					 </div>
 						
 					</div>
@@ -201,28 +240,28 @@
 			</div>
 		</div>
 
-		<div class="row" id="pushMessageContainer">
-			<div class="col-md-2" id="addItem">
-				<div>新增</div>
-				<a class="thumbnail"> <img id="addIcon"
-					src="../../repository/images/add.png"> <img id="multiAdd"
-					src="../../repository/images/multiArticle.png"
-					style="display: none">
-				</a>
-			</div>
-			<script id="pushMessageTemplate" type="text/x-jsrender">
-				<div class="col-md-2 preview" id="{{>id}}">
-					<div>{{>title}}
- 						<i class="glyphicon glyphicon-remove del" style="float:right;margin-left:4px;display:none" ></i>
- 						<i class="glyphicon glyphicon-plus add"   style="float:right;margin-left:4px;display:none" ></i>
- 						<i class="glyphicon glyphicon-edit edit"   style="float:right;display:none" ></i>
-					</div>
-						<a class="thumbnail"> 
-							<img src="/pic/{{>cover}}" id="img_{{>id}}">
-					</a>
-				</div>
-			</script>
-		</div>
+<!-- 		<div class="row" id="pushMessageContainer"> -->
+<!-- 			<div class="col-md-2" id="addItem"> -->
+<!-- 				<div>新增</div> -->
+<!-- 				<a class="thumbnail"> <img id="addIcon" -->
+<!-- 					src="../../repository/images/add.png"> <img id="multiAdd" -->
+<!-- 					src="../../repository/images/multiArticle.png" -->
+<!-- 					style="display: none"> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
+<!-- 			<script id="pushMessageTemplate" type="text/x-jsrender"> -->
+<!-- 				<div class="col-md-2 preview" id="{{>id}}"> -->
+<!-- 					<div>{{>title}} -->
+<!--  						<i class="glyphicon glyphicon-remove del" style="float:right;margin-left:4px;display:none" ></i> -->
+<!--  						<i class="glyphicon glyphicon-plus add"   style="float:right;margin-left:4px;display:none" ></i> -->
+<!--  						<i class="glyphicon glyphicon-edit edit"   style="float:right;display:none" ></i> -->
+<!-- 					</div> -->
+<!-- 						<a class="thumbnail">  -->
+<!-- 							<img src="/pic/{{>cover}}" id="img_{{>id}}"> -->
+<!-- 					</a> -->
+<!-- 				</div> -->
+<!-- 			</script> -->
+<!-- 		</div> -->
 		
 		<div id="expandPushMessage"  style="background-color:white;display:none">
 			<div>Title</div>
@@ -238,6 +277,83 @@
 			</script>		
 	</div>
 
+	<div class="modal fade" id="scheduledTimeDialog" tabindex="-1" role="dialog"
+		aria-labelledby="dialogTitle" aria-hidden="false">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="dialogTitle">选择发送时间</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-offset-2 col-md-2 checkbox">
+							<label> <input type="checkbox" id = "sendRightNowCheck"> 立即发送
+							</label>
+						</div>
+					</div>	
+					<div class= "row">
+						<div class="col-md-offset-2 col-md-2 ">
+							<span>计划时间 :</span>
+						</div>
+						<div  class="col-md-offset-4  col-md-4 input-group">
+							<input class="form-control input-sm datetimepicker" type="text"
+								data-date-format="YYYY-MM-DD HH:mm" data-date-pickTime="true"
+								data-date-language="zh" id="scheduledTime"  autocomplete="off" />
+							<span class="input-group-addon"> <i
+								class="glyphicon glyphicon-calendar bigger-110"></i>
+							</span>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						id="cancelScheduledTimeBtn">关闭</button>
+					<button type="button" class="btn btn-primary" id="saveScheduledTimeBtn">
+						保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="modal fade" id="modifyScheduledTimeDialog" tabindex="-1" role="dialog"
+		aria-labelledby="dialogTitle" aria-hidden="false">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="dialogTitle">选择发送时间</h4>
+				</div>
+				<div class="modal-body">
+					<div class= "row">
+						<div class="col-md-offset-2 col-md-2 ">
+							<span>计划时间 :</span>
+						</div>
+						<div  class="col-md-offset-4  col-md-4 input-group">
+							<input class="form-control input-sm datetimepicker" type="text"
+								data-date-format="YYYY-MM-DD HH:mm" data-date-pickTime="true"
+								data-date-language="zh"   autocomplete="off" />
+							<span class="input-group-addon"> <i
+								class="glyphicon glyphicon-calendar bigger-110"></i>
+							</span>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal"
+						>关闭</button>
+					<button type="button" class="btn btn-primary" id="modifyScheduledTimeBtn">
+						保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </body>
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -246,12 +362,15 @@
 <script src="../javascript/lib/jquery.hotkeys.js"></script>
 <script src="../javascript/lib/jquery.gridly.js"></script>
 <script src="../javascript/lib/jsrender.js"></script>
+<script src="../javascript/lib/jquery.tmpl.min.js"></script>
+<script src="../javascript/lib/pagination.js"></script>
 <script src="../javascript/lib/bootstrap-dialog.js"></script>
 <script src="../javascript/lib/bootstrap.min.js"></script>
-<script src="../javascript/lib/util.js"></script>
-<script src="../javascript/lib/bootstrap-datepicker.min.js"></script>
-<script src="../javascript/lib/bootstrap-datepicker.zh-CN.min.js"></script>
 <script src="../javascript/lib/bootstrap-wysiwyg.js"></script>
+<script src="../javascript/lib/moment.min.js"></script>
+<script src="../javascript/lib/bootstrap-datetimepicker.min.js"></script>
+<script src="../javascript/lib/locales/bootstrap-datetimepicker.zh-cn.js"></script>
+<script src="../javascript/lib/util.js"></script>
 <script src="../javascript/multiArticle.js"></script>
 
 </html>

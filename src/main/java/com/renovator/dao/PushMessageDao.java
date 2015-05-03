@@ -1,6 +1,7 @@
 package com.renovator.dao;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,7 @@ public class PushMessageDao {
         if (type.contains("ARTICLE")) {
             table = "article";
         }
-        String sql = String.format("select pushMessageTask.id as id ,title ,cover from pushMessageTask , article where %s.id = SUBSTRING_INDEX(pushMessageTask.msg,',',1) order by pushMessageTask.id desc",
+        String sql = String.format("select pushMessageTask.id as id ,title ,cover,scheduled_time as scheduledTime,status from pushMessageTask , article where %s.id = SUBSTRING_INDEX(pushMessageTask.msg,',',1) order by pushMessageTask.id desc",
                                    table, table);
         @SuppressWarnings("unchecked")
         List<Preview> previews = sessionFactory.getCurrentSession().createSQLQuery(sql).setResultTransformer(Transformers.aliasToBean(Preview.class)).list();
@@ -115,9 +116,40 @@ public class PushMessageDao {
 
         PushMessageTask pushMessageTask = (PushMessageTask) sessionFactory.getCurrentSession().createQuery("from PushMessageTask where type = ? order by scheduled_time,id desc").setFirstResult(0).setMaxResults(1).setString(0,
                                                                                                                                                                                                                                type.toString()).uniqueResult();
-        String sql = String.format("select id ,title ,cover,content,ts from article where id in (%1$s) order by field(id,%1$s) ", pushMessageTask.getMsg());
+        String sql = String.format("select id ,title ,cover,content,ts from article where id in (%1$s) order by field(id,%1$s) ",
+                                   pushMessageTask.getMsg());
         List<Article> results = sessionFactory.getCurrentSession().createSQLQuery(sql).setResultTransformer(Transformers.aliasToBean(Article.class)).list();
         return results;
+    }
+
+    public List<Article> getToBeSendTaskArticles(PushMessageTask pushMessageTask) {
+        String sql = String.format("select id ,title ,cover,content,ts from article where id in (%1$s) order by field(id,%1$s) ",
+                                   pushMessageTask.getMsg());
+        List<Article> results = sessionFactory.getCurrentSession().createSQLQuery(sql).setResultTransformer(Transformers.aliasToBean(Article.class)).list();
+        return results;
+    }
+
+    public PushMessageTask getEarliestTask() {
+        Integer pushMessageTaskId =  (Integer) sessionFactory.getCurrentSession().createSQLQuery("select id from PushMessageTask where status='READY' and scheduled_time < DATE_ADD(CURRENT_TIMESTAMP() , INTERVAL 2 DAY_HOUR )  order by scheduled_time,id desc limit 1").uniqueResult();
+        if(pushMessageTaskId == null){
+            return null;
+        }
+        return (PushMessageTask) sessionFactory.getCurrentSession().get(PushMessageTask.class, pushMessageTaskId);
+    }
+
+    public void setTaskStatus(PushMessageTask task, String status) {
+
+        sessionFactory.getCurrentSession().createQuery("update PushMessageTask set status = ? where id = ?").setParameter(0, status).setParameter(1,
+                                                                                                               task.getId()).executeUpdate();
+    }
+
+    public Object updatePushMessageTaskScheduledTime(int pushMessageTaskId, Date modifyScheduledTime) {
+        PushMessageTask task = (PushMessageTask) sessionFactory.getCurrentSession().get(PushMessageTask.class,pushMessageTaskId);
+        
+        task.setScheduledTime(modifyScheduledTime);
+        sessionFactory.getCurrentSession().saveOrUpdate(task);
+        
+        return "ok";
     }
 
 }

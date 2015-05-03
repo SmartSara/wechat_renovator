@@ -2,8 +2,10 @@ package com.renovator.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
+import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,10 +67,31 @@ public class PushMessageService {
 	    return pushMessageDao.updatePushMessageTaskMsgs(pushMessageTaskId,msgs);
     }
 
+	@Transactional
     public List<Article> getArticles(NotificationType type) {
         
        return  pushMessageDao.getArticles(type);
         
     }
 
+	@Transactional 
+    public  List<Article> getToBeSendTaskArticles( PushMessageTask pushMessageTask) {
+	    return pushMessageDao.getToBeSendTaskArticles(pushMessageTask);
+    }
+    
+	@Transactional
+    public PushMessageTask getEarliestTask(){
+       return pushMessageDao.getEarliestTask();
+    }
+
+	@Transactional
+    public void setTaskStatus(PushMessageTask earliestTask, String status) {
+        pushMessageDao.setTaskStatus(earliestTask, status);
+        
+    }
+
+	@Transactional
+    public Object updatePushMessageTaskScheduledTime(int pushMessageTaskId, Date modifyScheduledTime) {
+        return pushMessageDao.updatePushMessageTaskScheduledTime(pushMessageTaskId,modifyScheduledTime);
+    }
 }

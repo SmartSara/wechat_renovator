@@ -96,7 +96,7 @@ public class WeixinService {
 
     }
 
-    public void massGroupMessageSend(List<com.renovator.pojo.dto.material.Article> articles) {
+    public String massGroupMessageSend(List<com.renovator.pojo.dto.material.Article> articles) {
 
         WxMpMassNews news = new WxMpMassNews();
 
@@ -128,11 +128,17 @@ public class WeixinService {
             }
 
             WxMpMassSendResult massResult = wxMpService.massGroupMessageSend(massGroupMessage);
+            
             System.out.println(massResult.getErrorMsg());
+            if(massResult.getErrorMsg().contains("success")){
+                return "ok";
+            }else{
+                return "error";
+            }
         } catch (WxErrorException e) {
             logger.error(e.getMessage(), e);
+            return "error";
         }
-
     }
 
 }

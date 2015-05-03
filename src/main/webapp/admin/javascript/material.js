@@ -3,12 +3,19 @@
  */
 
 var materialNo = 'blank';
+var warningDialogEle='<div class="modal fade delDialog" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="false"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> <h4 class="modal-title" id="title">提醒</h4> </div> <div class="modal-body text-center">####</div> <div class="modal-footer"> <button type="button" class="btn btn-default" data-dismiss="modal">OK</button> </div> </div> </div>';
 
 $(function() {
-	// _initialNav();
+	 _initialNav();
 	_initialPage();
 	_initEvent();
 });
+
+function _initialNav() {
+    $('#nav').load("nav.html", function () {
+        $("#materialNav").addClass("active");
+    });
+}
 
 function _initialPage() {
 	
@@ -69,6 +76,13 @@ function initPreviewEvent(){
 function initSaveBtnEvent() {
 	$("#saveBtn").click(function() {
 	
+		var checkResult = checkInputs();
+		if(checkResult){
+			var dialog=  warningDialogEle.replace("####",checkResult);
+			$(dialog).modal("show");
+			return ;
+		}
+		
 		var formData = new FormData();
 		var cover = $("#cover").get(0).files[0];
 		var title = $("#title").val();
@@ -168,12 +182,16 @@ function initMaterialsEvent(){
 	//Remove
 		$("#materials").on("click",".del",function(){
 			
-			var articleId = $(this).parents(".singleArticle").data("id");
-			var url =  "../../material/article/del/"+articleId;
-			$.ajax(url).done(
-					function(data){
-						location.reload();
-					});
+			var delDialogEle='<div class="modal fade delDialog" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="false"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> <h4 class="modal-title" id="title">提醒</h4> </div> <div class="modal-body text-center">您确定要删除？</div> <div class="modal-footer"> <button type="button" class="no btn btn-default" data-dismiss="modal">取消</button><button type="button" class="ok btn btn-default" data-dismiss="modal">确定</button> </div> </div> </div>';
+			$(delDialogEle).modal("show").on("click",".ok",function(){
+				var articleId = $(this).parents(".singleArticle").data("id");
+				var url =  "../../material/article/del/"+articleId;
+				$.ajax(url).done(
+						function(data){
+							location.reload();
+						});
+				
+			});
 		}
 	)
 		//Edit
@@ -200,6 +218,14 @@ function initUpdateArticleBtnEvent(){
 		if($(this).parents("#addDialog").data("type")=="add"){
 			return ;
 		}
+		
+		var checkResult = checkUpdateInputs();
+		if(checkResult){
+			var dialog=  warningDialogEle.replace("####",checkResult);
+			$(dialog).modal("show");
+			return ;
+		}
+		
 		var url; 
 		var formData =  new FormData();
 		var id = $("#addDialog").data("id");
@@ -230,3 +256,46 @@ function initUpdateArticleBtnEvent(){
 		
 	});
 }
+
+function checkInputs(){
+	
+	if($("#title").val() == ''){
+		return "标题不为空";
+	}
+
+
+	if($("#addDialog #cover").get(0).files.length==0){
+		return "封面不为空"
+	}
+	
+	var inputFiles =  $("#addDialog #cover").get(0).files;
+	if(inputFiles.length > 0){
+		if(inputFiles[0].name.match(".gif")){
+			return "输入图片格式不允许";
+		}
+	}
+	
+	if($("#editor").html() == ''){
+		return "消息内容不为空";
+	}
+}
+
+function checkUpdateInputs(){
+	
+	if($("#title").val() == ''){
+		return "标题不为空";
+	}
+
+	var inputFiles =  $("#addDialog #cover").get(0).files;
+	if(inputFiles.length > 0){
+		if(inputFiles[0].name.match(".gif")){
+			return "输入图片格式不允许";
+		}
+	}
+	
+	if($("#editor").html() == ''){
+		return "消息内容不为空";
+	}
+}
+
+

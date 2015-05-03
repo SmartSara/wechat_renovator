@@ -1,5 +1,8 @@
 package com.renovator.controller;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -17,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.renovator.pojo.dto.Preview;
 import com.renovator.pojo.dto.PushMessageTask;
 import com.renovator.service.PushMessageService;
-import com.renovator.util.MaterialType;
 
 /**
  * Created by darlingtld on 2015/4/4.
@@ -31,12 +33,12 @@ public class PushMessageController {
 	@Autowired
 	private PushMessageService pushMessageService;
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public @ResponseBody String addArticleMaterial(
-			@RequestBody PushMessageTask message) {
-		pushMessageService.addPushMessage(message);
-		return "ok";
-	}
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public @ResponseBody String addArticleMaterial( 
+                                                    @RequestBody PushMessageTask task) {
+        pushMessageService.addPushMessage(task);
+        return "ok";
+    }
 
 	@RequestMapping(value = "/{type}/preview")
 	public @ResponseBody Object getArticlePreview(@PathVariable String type) {
@@ -74,5 +76,12 @@ public class PushMessageController {
 	   return  pushMessageService.updatePushMessageTaskMsgs(pushMessageTaskId,msgs);
 	    
 	}
+	
+	   @RequestMapping(value= "/update/scheduledTime")
+	    public @ResponseBody Object updatePushMessageTaskScheduledTime(@RequestParam int pushMessageTaskId ,@RequestParam java.util.Date modifyScheduledTime){
+	        
+	       return  pushMessageService.updatePushMessageTaskScheduledTime(pushMessageTaskId,modifyScheduledTime);
+	        
+	    }
 
 }

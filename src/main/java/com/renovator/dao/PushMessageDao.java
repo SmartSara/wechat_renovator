@@ -47,7 +47,7 @@ public class PushMessageDao {
         if (type.contains("ARTICLE")) {
             table = "article";
         }
-        String sql = String.format("select pushmessagetask.id as id ,title ,cover,scheduled_time as scheduledTime,status from pushmessagetask , article where %s.id = SUBSTRING_INDEX(pushMessageTask.msg,',',1) order by pushMessageTask.id desc",
+        String sql = String.format("select pushmessagetask.id as id ,title ,cover,scheduled_time as scheduledTime,status from pushmessagetask , article where %s.id = SUBSTRING_INDEX(pushmessagetask.msg,',',1) order by pushmessagetask.id desc",
                                    table, table);
         @SuppressWarnings("unchecked")
         List<Preview> previews = sessionFactory.getCurrentSession().createSQLQuery(sql).setResultTransformer(Transformers.aliasToBean(Preview.class)).list();

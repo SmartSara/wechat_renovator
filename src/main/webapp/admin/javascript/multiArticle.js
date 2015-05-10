@@ -13,9 +13,9 @@ var _product;
 var isUpdateArticle = false ;
 
 $(function() {
+	_initialNav();
 	_initialPage();
 	_initEvent();
-	_initialNav();
 });
 
 function _initialPage() {

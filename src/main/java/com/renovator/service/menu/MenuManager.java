@@ -28,9 +28,9 @@ public class MenuManager {
             int result = WeixinUtil.createMenu(getMenu(), at.getToken());
 
             if (0 == result) {
-                log.info("菜单创建成功");
+                log.info("鑿滃崟鍒涘缓鎴愬姛");
             } else {
-                log.info("菜单创建失败，错误码：{}", result);
+                log.info("鑿滃崟鍒涘缓澶辫触锛岄敊璇爜锛歿}", result);
             }
         }
     }

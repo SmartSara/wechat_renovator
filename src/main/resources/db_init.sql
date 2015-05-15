@@ -142,6 +142,7 @@ CREATE TABLE `service` (
   `ts` datetime DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
+  `to_address` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -152,7 +153,7 @@ CREATE TABLE `service` (
 
 LOCK TABLES `service` WRITE;
 /*!40000 ALTER TABLE `service` DISABLE KEYS */;
-INSERT INTO `service` VALUES (1,'12345567','已发货','sale',87.5,'2015-04-04 00:00:00',15,7),(2,'12345','已下单','free',37.5,'2015-04-04 00:00:00',15,2),(3,'1213545','派送中','sale',400,'2015-04-18 11:43:20',15,3),(4,'573831','已收货','normal',200,'2015-04-18 11:45:06',15,5);
+INSERT INTO `service` VALUES (1,'12345567','已发货','sale',87.5,'2015-04-04 00:00:00',15,7,'SH'),(2,'12345','已下单','free',37.5,'2015-04-04 00:00:00',15,2,'SH'),(3,'1213545','派送中','sale',400,'2015-04-18 11:43:20',15,3,'SH'),(4,'573831','已收货','normal',200,'2015-04-18 11:45:06',15,5,'SH');
 /*!40000 ALTER TABLE `service` ENABLE KEYS */;
 UNLOCK TABLES;
 

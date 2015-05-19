@@ -2,11 +2,11 @@
  * Created by darlingtld on 2015/4/18.
  */
 var mallModule = angular.module('MallModule', ['ngRoute']);
-
+var app = '/wechat_renovator';
 mallModule.controller('homeController', function ($scope, $http, $location, $rootScope) {
     var limit = 15;
 
-    $http.get('/product/list/' + limit).success(function (data, status, headers, config) {
+    $http.get(app + '/product/list/' + limit).success(function (data, status, headers, config) {
         $scope.items = data;
         $scope.items.sort(function (a, b) {
             return b.ts - a.ts;
@@ -28,7 +28,7 @@ mallModule.controller('itemController', function ($scope, $http, $routeParams, $
     var limit = 15;
 
     var category = $routeParams.item;
-    $http.get('/product/list/' + category + '/' + limit).success(function (data, status, headers, config) {
+    $http.get(app + '/product/list/' + category + '/' + limit).success(function (data, status, headers, config) {
         $scope.items = data;
         $scope.items.sort(function (a, b) {
             return b.ts - a.ts;
@@ -44,7 +44,7 @@ mallModule.controller('itemController', function ($scope, $http, $routeParams, $
 mallModule.controller('singleController', function ($scope, $http, $routeParams, $location, $rootScope) {
 
     var itemId = $routeParams.item_id;
-    $http.get('/product/' + itemId).success(function (data, status, headers, config) {
+    $http.get(app + '/product/' + itemId).success(function (data, status, headers, config) {
         $scope.item = data;
     });
     //$('.e_img_1>img').attr('src', $scope.item.picurl);
@@ -53,14 +53,13 @@ mallModule.controller('singleController', function ($scope, $http, $routeParams,
     //$('.e_img_4>img').attr('src', $scope.item.picurl3);
 
 
-
 });
 
 mallModule.controller('aboutusController', function ($scope, $http, $routeParams, $location, $rootScope) {
 
     var limit = 4;
 
-    $http.get('/product/list/' + limit).success(function (data, status, headers, config) {
+    $http.get(app + '/product/list/' + limit).success(function (data, status, headers, config) {
         $scope.itemOthers = data;
     })
 
@@ -68,23 +67,23 @@ mallModule.controller('aboutusController', function ($scope, $http, $routeParams
 
 mallModule.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-        .when('/', {
+        .when(app + '/', {
             controller: 'homeController',
             templateUrl: 'main.html'
         })
-        .when('/item/:item', {
+        .when(app + '/item/:item', {
             controller: 'itemController',
             templateUrl: 'item.html'
         })
-        .when('/single/:item_id', {
+        .when(app + '/single/:item_id', {
             controller: 'singleController',
             templateUrl: 'single.html'
         })
-        .when('/aboutus', {
+        .when(app + '/aboutus', {
             controller: 'aboutusController',
             templateUrl: 'aboutus.html'
         })
         .otherwise({
-            redirectTo: '/'
+            redirectTo: app + '/'
         });
 }]);

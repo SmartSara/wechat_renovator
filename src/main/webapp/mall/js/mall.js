@@ -67,23 +67,23 @@ mallModule.controller('aboutusController', function ($scope, $http, $routeParams
 
 mallModule.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
-        .when(app + '/', {
+        .when('/', {
             controller: 'homeController',
             templateUrl: 'main.html'
         })
-        .when(app + '/item/:item', {
+        .when('/item/:item', {
             controller: 'itemController',
             templateUrl: 'item.html'
         })
-        .when(app + '/single/:item_id', {
+        .when('/single/:item_id', {
             controller: 'singleController',
             templateUrl: 'single.html'
         })
-        .when(app + '/aboutus', {
+        .when('/aboutus', {
             controller: 'aboutusController',
             templateUrl: 'aboutus.html'
         })
         .otherwise({
-            redirectTo: app + '/'
+            redirectTo: '/'
         });
 }]);

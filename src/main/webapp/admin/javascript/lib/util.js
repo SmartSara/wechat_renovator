@@ -1,6 +1,7 @@
 /**
  * Created by zhus1 on 2015/4/4.
  */
+app = '/wechat_renovator';
 function formatDate(date, format) {
     var o = {
         "M+": date.getMonth() + 1, //month
@@ -28,7 +29,7 @@ function getURLParameter(key) {
 function paginationEnter(evt, val) {
     var evt = evt ? evt : (window.event ? window.event : null);//兼容IE和FF
     if (evt.keyCode == 13) {
-        if(val < 1){
+        if (val < 1) {
             alert("请输入大于0的数！");
             return;
         }

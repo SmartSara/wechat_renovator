@@ -24,7 +24,7 @@ function _initialPage() {
     //init table
     $.ajax({
         type: "get",
-        url: "/service/list",
+        url: app + "/service/list",
         dataType: "json",
         success: function (data) {
             $("#orderTemplate").tmpl(data).appendTo("#orderList");
@@ -63,7 +63,7 @@ function _updateOrder() {
     service.ts = $("#orderTs").val();
     $.ajax({
         type: "post",
-        url: "/service/update",
+        url: app + "/service/update",
         contentType: "application/json",
         data: JSON.stringify(service),
         success: function (data) {
@@ -83,7 +83,7 @@ function _searchService() {
         + "&ts=" + ts + "&username=" + $("#searchUsername").val() + "&mobile=" + $("#searchMobile").val() + "&product_name=" + $("#searchProduct").val();
     $.ajax({
         type: "get",
-        url: "/service/search?" + params,
+        url: app + "/service/search?" + params,
         contentType: "application/json",
         success: function (data) {
             $("#orderList tr").empty();
@@ -110,7 +110,7 @@ function _deleteOrderById(id) {
                 $("#loading").removeClass("hidden");
                 $.ajax({
                     type: "post",
-                    url: "/service/delete?id=" + id,
+                    url: app + "/service/delete?id=" + id,
                     success: function (data) {
                         $("#loading").addClass("hidden");
                         dialogItself.close();

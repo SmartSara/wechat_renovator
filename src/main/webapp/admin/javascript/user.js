@@ -19,7 +19,7 @@ function _initialPage() {
     //init table
     $.ajax({
         type: "get",
-        url: "/user/list",
+        url: app + "/user/list",
         dataType: "json",
         success: function (data) {
             $("#userTemplate").tmpl(data).appendTo("#userList");
@@ -65,7 +65,7 @@ function _searchUser() {
         + "&birthday=" + birth + "&balance=" + $("#searchBalance").val();
     $.ajax({
         type: "get",
-        url: "/user/search?" + params,
+        url: app + '/user/search?' + params,
         contentType: "application/json",
         success: function (data) {
             $("#userList tr").empty();
@@ -91,7 +91,7 @@ function updateUser() {
     user.openId = $("#openId").val();
     $.ajax({
         type: "post",
-        url: "/user/update",
+        url: app + "/user/update",
         contentType: "application/json",
         data: JSON.stringify(user),
         success: function (data) {
@@ -115,7 +115,7 @@ function _deleteUserById(id) {
                 $("#loading").removeClass("hidden");
                 $.ajax({
                     type: "post",
-                    url: "/user/delete?id=" + id,
+                    url: app + "/user/delete?id=" + id,
                     success: function (data) {
                         $("#loading").addClass("hidden");
                         dialogItself.close();

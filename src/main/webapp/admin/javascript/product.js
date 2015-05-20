@@ -25,7 +25,7 @@ function _initialPage() {
     //init table
     $.ajax({
         type: "get",
-        url: "/product/list/0",
+        url: app + "/product/list/0",
         dataType: "json",
         success: function (data) {
             $("#productTemplate").tmpl(data).appendTo("#productList");
@@ -67,7 +67,7 @@ function _saveOrUpdateProduct() {
 
     $.ajax({
         type: "post",
-        url: "/product/" + _saveOrUpdate,
+        url: app + "/product/" + _saveOrUpdate,
         contentType: "application/json",
         data: JSON.stringify(product),
         success: function (data) {
@@ -87,7 +87,7 @@ function _searchProduct(){
         + "&ts=" + ts + "&discount=" + $("#searchDiscount").val();
     $.ajax({
         type: "get",
-        url: "/product/search?" + params,
+        url: app + "/product/search?" + params,
         contentType: "application/json",
         success: function (data) {
             $("#productList tr").empty();
@@ -114,7 +114,7 @@ function _deleteProductById(id) {
                 $("#loading").removeClass("hidden");
                 $.ajax({
                     type: "post",
-                    url: "/product/delete?id=" + id,
+                    url: app + "/product/delete?id=" + id,
                     success: function (data) {
                         $("#loading").addClass("hidden");
                         dialogItself.close();

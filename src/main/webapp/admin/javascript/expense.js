@@ -10,7 +10,7 @@ $(function () {
 function _initialPage(id) {
     $.ajax({
         type: "get",
-        url: "/service/list/" + id,
+        url: app + "/service/list/" + id,
         dataType: "json",
         success: function (data) {
             $("#expenseTemplate").tmpl(data).appendTo("#expenseList");

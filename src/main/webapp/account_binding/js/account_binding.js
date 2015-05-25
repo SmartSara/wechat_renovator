@@ -31,7 +31,8 @@ $(function () {
             },
             error: function (data) {
                 var errorMsg = data;
-                $('.container').html("<h3 class='text-center header_msg'>" + errorMsg + "</h3>");
+                console.log(errorMsg);
+                $('.container').html("<h3 class='text-center header_msg'>会员绑定失败，请重试</h3>");
             }
         });
         $('#submit').val("绑定成功，若无跳转，请关闭此页面");

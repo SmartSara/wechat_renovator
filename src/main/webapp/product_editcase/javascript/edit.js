@@ -8,7 +8,7 @@ $(function () {
 });
 
 function _initialNav() {
-    $('#nav').load("/admin/html/nav.html", function () {
+    $('#nav').load(app+"/admin/html/nav.html", function () {
         $("#productEditNav").addClass("active");
     });
 }
@@ -31,7 +31,7 @@ function _submit(){
 
     $.ajax({
         type: "post",
-        url: "/product/" + "add/details",
+        url: app+"/product/" + "add/details",
         contentType: "application/json",
         data: JSON.stringify(productDetails),
         success: function (data) {

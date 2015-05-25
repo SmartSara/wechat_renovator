@@ -11,7 +11,6 @@
 })(jQuery);
 
 $(function () {
-
     var openId = $.getUrlParam('open_id');
 
     $('#submit').click(function () {
@@ -24,7 +23,7 @@ $(function () {
 
         $.ajax({
             type: "POST",
-            url: "/user/account/bind",
+            url: app + "/user/account/bind",
             data: userInfo,
             success: function (data, status) {
                 $('.container').html("<h3 class='text-center header_msg'>会员账号绑定成功</h3>");

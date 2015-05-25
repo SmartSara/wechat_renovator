@@ -26,7 +26,7 @@ $(function () {
 
         $.ajax({
             type: "POST",
-            url: "/user/account/birthday",
+            url: app+"/user/account/birthday",
             data: userInfo,
             success: function (data, status) {
                 $('.container').html("<h3 class='text-center header_msg'>设置成功</h3>");

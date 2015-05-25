@@ -1,6 +1,8 @@
 /**
  * Created by tangld on 2015/4/28.
  */
+app = "/wechat_renovator";
+
 (function ($) {
     $.getUrlParam = function (name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");

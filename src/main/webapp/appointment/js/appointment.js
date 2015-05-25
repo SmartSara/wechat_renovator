@@ -14,7 +14,7 @@ module.controller('appointmentController', function ($scope, $http) {
     });
 
     var openId = $.getUrlParam('open_id');
-    $http.get('/service/list/open_id/' + openId).success(function (data, status, headers, config) {
+    $http.get(app+'/service/list/open_id/' + openId).success(function (data, status, headers, config) {
         $scope.services = data;
     });
 

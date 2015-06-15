@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -77,8 +78,8 @@ public class UserController {
     @RequestMapping(value = "account/bind", method = RequestMethod.POST)
     public
     @ResponseBody
-    boolean bindAccount(@RequestParam("username") String username, @RequestParam("mobile") String contact,
-                        @RequestParam("email") String email, @RequestParam("openId") String openId, HttpServletRequest request, HttpServletResponse response) {
+    String bindAccount(@RequestParam("username") String username, @RequestParam("mobile") String contact,
+                       @RequestParam("email") String email, @RequestParam("openId") String openId, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         logger.info("username {}, mobile {}, email {}, openId {}", username, contact, email, openId);
         try {
             userService.bindAccount(username, contact, email, openId);
@@ -86,10 +87,10 @@ public class UserController {
             e.printStackTrace();
             response.setHeader(PropertyHolder.HEADER_MSG, e.getMessage());
             response.setStatus(HttpStatus.CONFLICT.value());
-            return false;
+            return e.getMessage();
         }
 
-        return true;
+        return null;
     }
 
     @RequestMapping(value = "account/birthday", method = RequestMethod.POST)

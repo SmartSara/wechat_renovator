@@ -18,22 +18,31 @@ section {
     margin-top: 20%;
 }
 
-.header_title, .header_msg {
+.header_title {
     color: wheat;
+    font-size: 35px;
+}
+
+.header_msg {
+    color: wheat;
+    font-size: 25px;
 }
 
 #submit {
     width: 100%;
     margin-top: 6%;
     height: 50px;
+    color: #000;
+    background: wheat url("../../repository/images/renovator_logo.gif");
+    border-color: #B87333;
 }
-
-.input-group{
+.input-group {
     margin-bottom: 2%;
-    height:60px;
+    height: 60px;
 }
 
-#username,#mobile,#email{
+#username, #mobile, #email {
     height: 60px;
-    font-size: 40px;
+    font-size: 25px;
 }
+

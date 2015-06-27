@@ -38,7 +38,7 @@ public class EventService {
         Article article = new Article();
         article.setTitle("请绑定账号");
         article.setDescription("绑定会员账号，使用微信获取更多信息");
-        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/logo.png");
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/account_binding.jpg");
         article.setUrl(PropertyHolder.SERVER + "/account_binding/index.html?open_id=" + fromUserName);
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
@@ -76,7 +76,7 @@ public class EventService {
         Article article = new Article();
         article.setTitle("寄卖商品查询");
         article.setDescription("点击查询寄卖商品");
-        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/logo.png");
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/product_inquiry.jpg");
         article.setUrl(PropertyHolder.SERVER + "/mall/index.html");
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
@@ -95,7 +95,7 @@ public class EventService {
         Article article = new Article();
         article.setTitle("当前正在进行的店铺活动");
         article.setDescription("点击查看当前正在进行的店铺活动");
-        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/logo.png");
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/shop_activity.jpg");
         article.setUrl(PropertyHolder.SERVER + "/mall/index.html");
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
@@ -114,7 +114,7 @@ public class EventService {
         Article article = new Article();
         article.setTitle("寄卖商品展示");
         article.setDescription("点击查看寄卖商品展示");
-        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/mall.jpg");
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/product_showcase.jpg");
         article.setUrl(PropertyHolder.SERVER + "/mall/index.html");
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
@@ -137,7 +137,7 @@ public class EventService {
         Article article = new Article();
         article.setTitle("会员卡提醒（生日月提醒、会员卡到期提醒）");
         article.setDescription("点击设置会员卡提醒（生日月提醒、会员卡到期提醒）");
-        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/notification.jpeg");
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/membership_notification.jpg");
         article.setUrl(PropertyHolder.SERVER + "/notification/setting.html?open_id=" + fromUserName);
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
@@ -205,12 +205,12 @@ public class EventService {
             Article article = new Article();
             article.setTitle("服务单目前状态");
             article.setDescription("您当前还没有待处理的订单");
-            article.setPicUrl(PropertyHolder.SERVER + "/repository/images/order.jpg");
+            article.setPicUrl(PropertyHolder.SERVER + "/repository/images/order_status.jpg");
             articleList.add(article);
         } else {
             Article article = new Article();
             article.setTitle("服务单目前状态");
-            article.setPicUrl(PropertyHolder.SERVER + "/repository/images/order.jpg");
+            article.setPicUrl(PropertyHolder.SERVER + "/repository/images/order_status.jpg");
             articleList.add(article);
 
             for (com.renovator.pojo.Service service : serviceList) {
@@ -241,7 +241,7 @@ public class EventService {
         List<Article> articleList = new ArrayList<Article>();
         Article article = new Article();
         article.setTitle("会员卡余额");
-        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/vip_card.jpg");
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/membership_balance.jpg");
         articleList.add(article);
 
         Article username = new Article();
@@ -275,13 +275,13 @@ public class EventService {
             Article article = new Article();
             article.setTitle("会员卡消费记录");
             article.setDescription("您还没有消费过哦");
-            article.setPicUrl(PropertyHolder.SERVER + "/repository/images/expense.jpg");
+            article.setPicUrl(PropertyHolder.SERVER + "/repository/images/membership_expense.jpg");
             articleList.add(article);
         } else {
             Article article = new Article();
             article.setTitle("会员卡消费记录");
             article.setDescription("点击查看您的所有消费记录");
-            article.setPicUrl(PropertyHolder.SERVER + "/repository/images/expense.jpg");
+            article.setPicUrl(PropertyHolder.SERVER + "/repository/images/membership_expense.jpg");
             article.setUrl(PropertyHolder.SERVER + "/expense/expense_record.html?open_id=" + fromUserName);
             articleList.add(article);
 

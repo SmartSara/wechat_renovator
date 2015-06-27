@@ -57,7 +57,7 @@ public class EventService {
         Article article = new Article();
         article.setTitle("公司简介");
         article.setDescription("点击查看店铺地址、联系方式、营业时间");
-        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/logo.jpg");
+        article.setPicUrl(PropertyHolder.SERVER + "/repository/images/logo_ex.jpg");
         article.setUrl(PropertyHolder.SERVER + "/mall/index.html#/aboutus");
         articleList.add(article);
         newsMessage.setArticleCount(articleList.size());
